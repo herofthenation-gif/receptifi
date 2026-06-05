@@ -1,0 +1,1250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Receptifi — Your front desk, upgraded</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent: #3b82f6;
+    --accent-2: #60a5fa;
+    --accent-glow: rgba(59,130,246,.45);
+    --bg: #05070d;
+    --bg-2: #0a0e1a;
+    --ink: #e8eef9;
+    --ink-dim: #9aa5b8;
+    --ink-faint: rgba(232,238,249,.55);
+    --hair: rgba(255,255,255,.08);
+    --hair-strong: rgba(255,255,255,.14);
+    --glass: rgba(255,255,255,.04);
+    --glass-2: rgba(255,255,255,.06);
+    --radius: 12px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+
+  /* ── ambient backdrop ───────────────────────────────────── */
+  .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .ambient::before{content:"";position:absolute;inset:-20%;
+    background:
+      radial-gradient(40% 30% at 20% 15%, rgba(59,130,246,.22), transparent 60%),
+      radial-gradient(35% 28% at 85% 30%, rgba(99,102,241,.18), transparent 65%),
+      radial-gradient(45% 35% at 50% 100%, rgba(56,189,248,.12), transparent 70%);
+    filter:blur(40px);
+    animation:drift 22s ease-in-out infinite alternate;
+  }
+  .ambient::after{content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+  }
+  @keyframes drift{
+    0%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(2%,-2%,0) scale(1.05)}
+    100%{transform:translate3d(-2%,2%,0) scale(1)}
+  }
+  /* tiny particle field */
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .stars i{position:absolute;width:2px;height:2px;border-radius:50%;
+    background:#bcd2ff;opacity:.5;box-shadow:0 0 6px rgba(96,165,250,.6);
+    animation:tw 5s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:.7;transform:scale(1)}}
+
+  /* ── layout ─────────────────────────────────────────────── */
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+
+  /* nav */
+  nav.top{position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    background:rgba(5,7,13,.6);
+    border-bottom:1px solid var(--hair)}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;
+    height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+  .brand .mark{width:26px;height:26px;border-radius:7px;
+    background:linear-gradient(135deg,#3b82f6,#0ea5e9);
+    box-shadow:0 0 18px var(--accent-glow), inset 0 0 0 1px rgba(255,255,255,.2);
+    position:relative;display:grid;place-items:center}
+  .brand .mark::after{content:"";width:8px;height:8px;border-radius:50%;
+    background:#fff;box-shadow:0 0 8px #fff;}
+  .brand b{font-size:17px}
+  .nav-links{display:flex;align-items:center;gap:28px;color:var(--ink-dim);font-size:14px;font-weight:500}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;align-items:center;gap:10px}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;
+    padding:12px 20px;border-radius:10px;font-weight:600;font-size:14px;
+    letter-spacing:.005em;cursor:pointer;border:0;transition:all .25s ease;
+    white-space:nowrap}
+  .btn-primary{
+    background:linear-gradient(180deg,#3b82f6,#2563eb);
+    color:#fff;
+    box-shadow:0 0 0 1px rgba(96,165,250,.45), 0 6px 20px rgba(37,99,235,.35);}
+  .btn-primary:hover{transform:translateY(-1px);
+    box-shadow:0 0 0 1px rgba(147,197,253,.6), 0 10px 30px rgba(59,130,246,.55), 0 0 28px var(--accent-glow);}
+  .btn-ghost{background:transparent;color:var(--ink);
+    border:1px solid var(--hair-strong)}
+  .btn-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.25)}
+  .btn-sm{padding:9px 14px;font-size:13px}
+
+  /* section */
+  section{position:relative;padding:120px 0;z-index:2}
+  section + section{padding-top:0}
+  .divider{height:1px;max-width:1200px;margin:0 auto;
+    background:linear-gradient(90deg,transparent, rgba(96,165,250,.35), transparent);
+    box-shadow:0 0 18px rgba(96,165,250,.18)}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;border-radius:999px;
+    background:rgba(59,130,246,.08);
+    border:1px solid rgba(59,130,246,.25);
+    color:var(--accent-2);font-size:12px;font-weight:500;
+    letter-spacing:.08em;text-transform:uppercase}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2);
+    box-shadow:0 0 8px var(--accent-2);animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+  h1,h2,h3{font-weight:700;letter-spacing:-.02em;margin:0}
+  h1{font-size:clamp(40px,6.4vw,80px);line-height:1.04;letter-spacing:-.035em}
+  h2{font-size:clamp(32px,4.4vw,52px);line-height:1.08;letter-spacing:-.028em}
+  h3{font-size:20px;font-weight:600;letter-spacing:-.01em}
+  p{color:var(--ink-dim);line-height:1.6;margin:0}
+
+  /* ── hero ───────────────────────────────────────────────── */
+  .hero{padding:80px 0 60px;text-align:center}
+  .hero .eyebrow{margin-bottom:28px}
+  .hero h1{max-width:900px;margin:0 auto 24px}
+  .hero h1 .grad{
+    background:linear-gradient(180deg, #ffffff 0%, #93c5fd 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .sub{max-width:640px;margin:0 auto 36px;font-size:19px;line-height:1.55}
+  .hero .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+  .hero .meta{display:flex;gap:24px;justify-content:center;margin-top:18px;
+    color:var(--ink-faint);font-size:13px;flex-wrap:wrap}
+  .hero .meta i{color:#4ade80;margin-right:6px}
+
+  /* phone mockup */
+  .stage{position:relative;margin:80px auto 0;max-width:520px;
+    perspective:1400px}
+  .phone{position:relative;width:100%;aspect-ratio: 9/16;
+    border-radius:42px;
+    background:linear-gradient(180deg,#0d1220,#070a14);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.04) inset,
+      0 60px 120px rgba(0,0,0,.6),
+      0 0 80px rgba(59,130,246,.18);
+    padding:14px;
+    transform:rotateX(8deg) rotateY(-4deg);
+    animation:float 8s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:rotateX(8deg) rotateY(-4deg) translateY(0)}
+    50%{transform:rotateX(6deg) rotateY(-2deg) translateY(-10px)}}
+  .phone .screen{height:100%;border-radius:30px;
+    background:radial-gradient(120% 60% at 50% 0%, #0f1729 0%, #06080f 60%);
+    overflow:hidden;position:relative;
+    display:flex;flex-direction:column}
+  .phone .notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    width:90px;height:24px;background:#000;border-radius:999px;z-index:5}
+  .phone-top{padding:48px 22px 14px;display:flex;align-items:center;justify-content:space-between;
+    color:var(--ink-faint);font-size:11px;font-weight:500;letter-spacing:.04em}
+  .call-card{margin:14px;padding:18px;border-radius:18px;
+    background:linear-gradient(180deg, rgba(59,130,246,.16), rgba(59,130,246,.04));
+    border:1px solid rgba(96,165,250,.25);
+    box-shadow:0 0 30px rgba(59,130,246,.18) inset;
+    color:var(--ink)}
+  .call-card .row{display:flex;align-items:center;gap:12px}
+  .av{width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg,#3b82f6,#0ea5e9);
+    display:grid;place-items:center;
+    box-shadow:0 0 16px var(--accent-glow)}
+  .av svg{width:18px;height:18px;color:#fff}
+  .call-card .name{font-weight:600;font-size:13px}
+  .call-card .sub{font-size:11px;color:var(--ink-faint)}
+  .call-card .live{margin-left:auto;display:flex;align-items:center;gap:5px;
+    font-size:10px;color:#4ade80;font-weight:600;letter-spacing:.08em}
+  .call-card .live i{width:6px;height:6px;border-radius:50%;background:#4ade80;
+    box-shadow:0 0 8px #4ade80;animation:pulse 1.6s ease-in-out infinite}
+  .msgs{padding:6px 14px;display:flex;flex-direction:column;gap:8px;flex:1;overflow:hidden}
+  .msg{font-size:11.5px;line-height:1.45;padding:9px 12px;border-radius:14px;max-width:82%;
+    animation:slideIn .5s ease-out backwards}
+  .msg.ai{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+    color:var(--ink);align-self:flex-start;border-bottom-left-radius:4px}
+  .msg.user{background:linear-gradient(180deg,#3b82f6,#2563eb);
+    color:#fff;align-self:flex-end;border-bottom-right-radius:4px;
+    box-shadow:0 4px 16px rgba(37,99,235,.35)}
+  .msg:nth-child(1){animation-delay:.2s}
+  .msg:nth-child(2){animation-delay:1s}
+  .msg:nth-child(3){animation-delay:2s}
+  .msg:nth-child(4){animation-delay:3s}
+  .msg:nth-child(5){animation-delay:4s}
+  @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .booking{margin:8px 14px 14px;padding:12px;border-radius:14px;
+    background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);
+    display:flex;align-items:center;gap:10px;color:#bbf7d0;font-size:12px;font-weight:500;
+    animation:slideIn .5s ease-out 4.6s backwards}
+  .booking .check{width:22px;height:22px;border-radius:50%;background:#4ade80;
+    display:grid;place-items:center;color:#052e16;flex-shrink:0}
+
+  /* floating chips next to phone */
+  .chip{position:absolute;padding:10px 14px;border-radius:12px;
+    background:rgba(15,23,42,.7);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--hair-strong);
+    color:var(--ink);font-size:12px;font-weight:500;
+    box-shadow:0 12px 32px rgba(0,0,0,.4);
+    display:flex;align-items:center;gap:10px;
+    animation:floatY 6s ease-in-out infinite}
+  .chip .ico{width:24px;height:24px;border-radius:7px;display:grid;place-items:center}
+  .chip .ico.blue{background:rgba(59,130,246,.18);color:var(--accent-2)}
+  .chip .ico.green{background:rgba(74,222,128,.18);color:#4ade80}
+  .chip .ico.purple{background:rgba(168,85,247,.18);color:#c084fc}
+  .chip span{color:var(--ink-dim);font-size:11px;display:block;margin-top:2px}
+  .chip b{display:block;font-weight:600;color:var(--ink)}
+  .chip.c1{top:14%;left:-12%;animation-delay:0s}
+  .chip.c2{top:48%;right:-14%;animation-delay:1.5s}
+  .chip.c3{bottom:14%;left:-10%;animation-delay:3s}
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @media(max-width:760px){.chip{display:none}}
+
+  /* ── voice intro bar ────────────────────────────────────── */
+  .voicebar{margin:24px auto 0;max-width:520px;
+    padding:14px 20px;border-radius:14px;
+    background:rgba(255,255,255,.03);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--hair-strong);
+    display:flex;align-items:center;gap:16px;text-align:left}
+  .voicebar .vbtn{width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;
+    background:linear-gradient(135deg,#3b82f6,#0ea5e9);
+    color:#fff;display:grid;place-items:center;flex-shrink:0;
+    box-shadow:0 0 24px var(--accent-glow);transition:transform .2s}
+  .voicebar .vbtn:hover{transform:scale(1.05)}
+  .voicebar .vbtn svg{width:18px;height:18px}
+  .voicebar .copy{flex:1;min-width:0}
+  .voicebar .copy b{display:block;font-size:13px;font-weight:600}
+  .voicebar .copy span{display:block;font-size:12px;color:var(--ink-faint);margin-top:2px}
+  .wave{display:flex;align-items:center;gap:3px;height:24px}
+  .wave i{display:block;width:3px;border-radius:2px;
+    background:linear-gradient(180deg,#60a5fa,#3b82f6);
+    height:6px;opacity:.55}
+  .voicebar.playing .wave i{animation:bars 1s ease-in-out infinite}
+  .wave i:nth-child(1){animation-delay:0s}
+  .wave i:nth-child(2){animation-delay:.1s}
+  .wave i:nth-child(3){animation-delay:.2s}
+  .wave i:nth-child(4){animation-delay:.3s}
+  .wave i:nth-child(5){animation-delay:.4s}
+  .wave i:nth-child(6){animation-delay:.5s}
+  .wave i:nth-child(7){animation-delay:.6s}
+  @keyframes bars{
+    0%,100%{height:6px;opacity:.55}
+    50%{height:22px;opacity:1}
+  }
+
+  /* ── section header ─────────────────────────────────────── */
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 64px}
+  .sec-head h2{margin-bottom:18px}
+  .sec-head p{font-size:17px}
+
+  /* ── what we do ─────────────────────────────────────────── */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:880px){.features{grid-template-columns:1fr}}
+  .feat{padding:32px;border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+    border:1px solid var(--hair);
+    backdrop-filter:blur(12px);
+    transition:all .35s cubic-bezier(.2,.7,.3,1);
+    position:relative;overflow:hidden}
+  .feat::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(140% 80% at 0% 0%, rgba(59,130,246,.12), transparent 50%);
+    opacity:0;transition:opacity .4s}
+  .feat:hover{transform:translateY(-4px);border-color:rgba(96,165,250,.3);
+    box-shadow:0 20px 50px rgba(0,0,0,.4), 0 0 40px rgba(59,130,246,.12)}
+  .feat:hover::before{opacity:1}
+  .feat .ico-wrap{width:46px;height:46px;border-radius:12px;
+    background:linear-gradient(135deg, rgba(59,130,246,.18), rgba(14,165,233,.06));
+    border:1px solid rgba(96,165,250,.25);
+    display:grid;place-items:center;margin-bottom:20px;
+    color:var(--accent-2);
+    box-shadow:0 0 18px rgba(59,130,246,.14)}
+  .feat h3{margin-bottom:10px}
+  .feat p{font-size:14.5px;line-height:1.6}
+
+  /* ── how it works ───────────────────────────────────────── */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+  @media(max-width:880px){.steps{grid-template-columns:1fr}}
+  .step{padding:36px 28px;border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+    border:1px solid var(--hair);
+    backdrop-filter:blur(12px);
+    position:relative}
+  .step .num{position:absolute;top:-14px;left:28px;
+    width:30px;height:30px;border-radius:9px;
+    background:linear-gradient(180deg,#3b82f6,#2563eb);
+    color:#fff;font-weight:700;font-size:13px;
+    display:grid;place-items:center;letter-spacing:.05em;
+    box-shadow:0 6px 16px rgba(37,99,235,.4), 0 0 20px var(--accent-glow);
+    font-family:'JetBrains Mono',monospace;}
+  .step h3{margin:10px 0 12px;font-size:19px}
+  .step p{font-size:14px}
+  .step .ico{width:60px;height:60px;border-radius:50%;
+    display:grid;place-items:center;margin-bottom:24px;
+    background:radial-gradient(circle, rgba(59,130,246,.18), transparent 70%);
+    color:var(--accent-2)}
+
+  /* who its for */
+  .who{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  @media(max-width:880px){.who{grid-template-columns:1fr;gap:32px}}
+  .who h2{margin-bottom:22px}
+  .who p{font-size:16px;margin-bottom:14px}
+  .who-list{margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+  .who-list li{display:flex;gap:12px;align-items:flex-start;color:var(--ink-dim);font-size:15px}
+  .who-list li .tick{flex-shrink:0;width:22px;height:22px;border-radius:50%;
+    background:rgba(74,222,128,.12);color:#4ade80;
+    border:1px solid rgba(74,222,128,.3);
+    display:grid;place-items:center;margin-top:1px}
+  .who-list li .tick svg{width:11px;height:11px}
+  .who-list li b{color:var(--ink);font-weight:600}
+  .future{margin-top:32px;padding:16px 18px;border-radius:12px;
+    background:rgba(255,255,255,.03);
+    border:1px solid var(--hair);font-size:13px;color:var(--ink-faint);
+    display:flex;align-items:center;gap:10px}
+  .future i{color:var(--accent-2)}
+
+  /* visual side — dental glassmorph */
+  .vis{position:relative;aspect-ratio:1/1;
+    border-radius:24px;
+    background:radial-gradient(60% 50% at 50% 30%, rgba(59,130,246,.18), transparent 65%),
+      linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+    border:1px solid var(--hair-strong);
+    overflow:hidden;
+    backdrop-filter:blur(20px)}
+  .vis .core{position:absolute;inset:0;display:grid;place-items:center}
+  .pulse{position:relative;width:120px;height:120px}
+  .pulse .r{position:absolute;inset:0;border-radius:50%;
+    border:1px solid rgba(96,165,250,.4);
+    animation:pulseRing 3s ease-out infinite}
+  .pulse .r:nth-child(2){animation-delay:1s}
+  .pulse .r:nth-child(3){animation-delay:2s}
+  @keyframes pulseRing{
+    0%{transform:scale(.6);opacity:1}
+    100%{transform:scale(2.4);opacity:0}
+  }
+  .pulse .core-dot{position:absolute;inset:30%;border-radius:50%;
+    background:linear-gradient(135deg,#3b82f6,#0ea5e9);
+    box-shadow:0 0 60px var(--accent-glow), inset 0 -2px 8px rgba(0,0,0,.2);
+    display:grid;place-items:center;color:#fff}
+  .pulse .core-dot svg{width:32px;height:32px}
+  .vis .stat{position:absolute;padding:14px 16px;border-radius:14px;
+    background:rgba(10,15,26,.72);backdrop-filter:blur(20px);
+    border:1px solid var(--hair-strong);
+    box-shadow:0 12px 32px rgba(0,0,0,.4)}
+  .vis .stat b{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em}
+  .vis .stat span{display:block;font-size:11.5px;color:var(--ink-faint);
+    text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+  .vis .stat.s1{top:8%;left:6%}
+  .vis .stat.s2{bottom:10%;right:6%}
+  .vis .stat.s3{bottom:38%;left:4%}
+
+  /* ── pricing ────────────────────────────────────────────── */
+  .pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:880px;margin:0 auto}
+  @media(max-width:760px){.pricing{grid-template-columns:1fr}}
+  .plan{position:relative;padding:36px;border-radius:18px;
+    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    border:1px solid var(--hair-strong);
+    backdrop-filter:blur(20px);
+    transition:all .4s cubic-bezier(.2,.7,.3,1);
+    overflow:hidden}
+  .plan::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(80% 60% at 50% 0%, rgba(59,130,246,.16), transparent 60%);
+    opacity:.4;transition:opacity .4s;pointer-events:none}
+  .plan:hover{transform:translateY(-4px);
+    border-color:rgba(96,165,250,.35);
+    box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 60px rgba(59,130,246,.18)}
+  .plan:hover::before{opacity:.8}
+  .plan.pro{border-color:rgba(96,165,250,.35);
+    background:linear-gradient(180deg, rgba(59,130,246,.10), rgba(59,130,246,.02));
+    box-shadow:0 0 0 1px rgba(96,165,250,.2), 0 12px 40px rgba(59,130,246,.18)}
+  .plan-badge{position:absolute;top:20px;right:20px;
+    padding:5px 10px;border-radius:999px;font-size:11px;font-weight:600;
+    background:rgba(59,130,246,.16);color:var(--accent-2);
+    border:1px solid rgba(96,165,250,.3);
+    letter-spacing:.06em;text-transform:uppercase}
+  .plan h3{font-size:16px;font-weight:500;color:var(--ink-dim);
+    text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px}
+  .plan .price{display:flex;align-items:baseline;gap:6px;margin-bottom:8px}
+  .plan .price b{font-size:56px;font-weight:700;letter-spacing:-.035em;
+    background:linear-gradient(180deg,#fff,#cbd5ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .plan .price span{color:var(--ink-faint);font-size:15px}
+  .plan .pitch{font-size:14px;color:var(--ink-dim);margin-bottom:28px;
+    padding-bottom:22px;border-bottom:1px solid var(--hair);min-height:50px}
+  .plan ul{list-style:none;padding:0;margin:0 0 30px;display:flex;flex-direction:column;gap:13px}
+  .plan li{display:flex;gap:12px;align-items:flex-start;color:var(--ink);font-size:14px;line-height:1.5}
+  .plan li .check{flex-shrink:0;width:18px;height:18px;border-radius:50%;
+    background:rgba(96,165,250,.18);color:var(--accent-2);
+    display:grid;place-items:center;margin-top:1px}
+  .plan li .check svg{width:10px;height:10px}
+  .plan .btn{width:100%;justify-content:center}
+
+  /* ── final CTA ──────────────────────────────────────────── */
+  .final{text-align:center;padding:140px 0;position:relative}
+  .final::before{content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(50% 80% at 50% 50%, rgba(59,130,246,.16), transparent 70%);
+    pointer-events:none}
+  .final .inner{position:relative;z-index:1;max-width:780px;margin:0 auto}
+  .final h2{font-size:clamp(36px,5vw,64px);margin-bottom:22px}
+  .final h2 .grad{
+    background:linear-gradient(180deg, #ffffff 0%, #93c5fd 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .final p{font-size:18px;margin-bottom:36px}
+  .final .urgency{display:inline-flex;align-items:center;gap:8px;margin-top:24px;
+    color:var(--ink-faint);font-size:13px}
+  .final .urgency .d{width:6px;height:6px;border-radius:50%;background:#f59e0b;
+    box-shadow:0 0 8px #f59e0b;animation:pulse 2s ease-in-out infinite}
+
+  /* ── footer ─────────────────────────────────────────────── */
+  footer{padding:48px 0 60px;border-top:1px solid var(--hair);
+    color:var(--ink-faint);font-size:13px;position:relative;z-index:2}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer .links{display:flex;gap:24px}
+  footer .links a:hover{color:var(--ink)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(24px);
+    transition:opacity .8s cubic-bezier(.2,.7,.3,1), transform .8s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ── chat widget ────────────────────────────────────────── */
+  .chat-fab{position:fixed;right:22px;bottom:22px;z-index:60;
+    width:58px;height:58px;border-radius:50%;border:0;cursor:pointer;
+    background:linear-gradient(135deg,#3b82f6,#0ea5e9);
+    color:#fff;display:grid;place-items:center;
+    box-shadow:0 12px 32px rgba(37,99,235,.45), 0 0 32px var(--accent-glow),
+      inset 0 0 0 1px rgba(255,255,255,.2);
+    transition:transform .25s cubic-bezier(.3,.7,.4,1);}
+  .chat-fab:hover{transform:translateY(-2px) scale(1.04)}
+  .chat-fab .icon-chat,.chat-fab .icon-close{transition:opacity .2s, transform .2s}
+  .chat-fab .icon-close{position:absolute;opacity:0;transform:rotate(-90deg) scale(.6)}
+  .chat-fab[data-open="1"] .icon-chat{opacity:0;transform:rotate(90deg) scale(.6)}
+  .chat-fab[data-open="1"] .icon-close{opacity:1;transform:rotate(0) scale(1)}
+  .chat-fab::after{content:"";position:absolute;inset:-3px;border-radius:50%;
+    background:radial-gradient(closest-side, var(--accent-glow), transparent);
+    z-index:-1;animation:pulseRing 3s ease-out infinite}
+  .chat-notify{position:absolute;top:-2px;right:-2px;width:14px;height:14px;
+    border-radius:50%;background:#ef4444;border:2px solid #05070d;
+    transition:opacity .2s,transform .2s}
+  .chat-fab[data-open="1"] .chat-notify,.chat-fab[data-seen="1"] .chat-notify{opacity:0;transform:scale(0)}
+
+  .chat-panel{position:fixed;right:22px;bottom:94px;z-index:60;
+    width:380px;max-width:calc(100vw - 28px);height:560px;max-height:calc(100vh - 120px);
+    border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+    background:rgba(10,15,26,.78);
+    backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(59,130,246,.18),
+      inset 0 0 0 1px rgba(255,255,255,.04);
+    opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;
+    transition:opacity .25s cubic-bezier(.2,.7,.3,1),
+               transform .25s cubic-bezier(.2,.7,.3,1)}
+  .chat-panel[data-open="1"]{opacity:1;transform:none;pointer-events:auto}
+
+  .chat-hd{padding:18px 18px 16px;border-bottom:1px solid var(--hair);
+    display:flex;align-items:center;gap:12px;
+    background:linear-gradient(180deg, rgba(59,130,246,.10), transparent)}
+  .chat-hd .av{width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg,#3b82f6,#0ea5e9);
+    display:grid;place-items:center;color:#fff;
+    box-shadow:0 0 18px var(--accent-glow)}
+  .chat-hd .av svg{width:18px;height:18px}
+  .chat-hd .nm{flex:1;min-width:0}
+  .chat-hd .nm b{display:block;font-size:14px;font-weight:600}
+  .chat-hd .nm span{display:flex;align-items:center;gap:6px;font-size:11.5px;
+    color:var(--ink-faint);margin-top:2px}
+  .chat-hd .nm span i{width:6px;height:6px;border-radius:50%;background:#4ade80;
+    box-shadow:0 0 8px #4ade80;animation:pulse 2s ease-in-out infinite}
+  .chat-hd .x{appearance:none;border:0;background:transparent;color:var(--ink-dim);
+    width:30px;height:30px;border-radius:8px;cursor:pointer;display:grid;place-items:center}
+  .chat-hd .x:hover{background:rgba(255,255,255,.06);color:var(--ink)}
+
+  .chat-body{flex:1;overflow-y:auto;padding:18px;
+    display:flex;flex-direction:column;gap:10px;
+    scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.12) transparent}
+  .chat-body::-webkit-scrollbar{width:6px}
+  .chat-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px}
+
+  .chat-msg{max-width:84%;padding:10px 14px;border-radius:16px;
+    font-size:14px;line-height:1.5;
+    animation:slideIn .35s ease-out backwards}
+  .chat-msg.bot{align-self:flex-start;border-bottom-left-radius:5px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+    color:var(--ink)}
+  .chat-msg.user{align-self:flex-end;border-bottom-right-radius:5px;
+    background:linear-gradient(180deg,#3b82f6,#2563eb);color:#fff;
+    box-shadow:0 4px 14px rgba(37,99,235,.3)}
+  .chat-msg p{color:inherit;margin:0}
+  .chat-msg p + p{margin-top:8px}
+
+  .chat-typing{display:flex;gap:4px;align-items:center;padding:14px 14px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;border-bottom-left-radius:5px;width:fit-content;
+    align-self:flex-start}
+  .chat-typing i{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);
+    animation:dot 1.2s ease-in-out infinite}
+  .chat-typing i:nth-child(2){animation-delay:.15s}
+  .chat-typing i:nth-child(3){animation-delay:.3s}
+  @keyframes dot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+
+  .chat-suggs{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;
+    animation:slideIn .4s ease-out backwards;animation-delay:.2s}
+  .chat-sugg{appearance:none;border:1px solid var(--hair-strong);
+    background:rgba(255,255,255,.04);color:var(--ink);
+    font:inherit;font-size:12.5px;font-weight:500;cursor:pointer;
+    padding:8px 12px;border-radius:999px;transition:all .2s}
+  .chat-sugg:hover{background:rgba(59,130,246,.15);border-color:rgba(96,165,250,.4);
+    color:var(--accent-2);transform:translateY(-1px)}
+
+  .chat-input-wrap{padding:12px;border-top:1px solid var(--hair);
+    display:flex;gap:8px;align-items:flex-end;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,.2))}
+  .chat-input{flex:1;min-width:0;
+    background:rgba(255,255,255,.05);border:1px solid var(--hair-strong);
+    color:var(--ink);font:inherit;font-size:14px;line-height:1.4;
+    padding:10px 14px;border-radius:12px;resize:none;
+    outline:none;transition:border-color .2s, background .2s;
+    max-height:120px;font-family:inherit}
+  .chat-input:focus{border-color:rgba(96,165,250,.5);background:rgba(255,255,255,.07)}
+  .chat-input::placeholder{color:var(--ink-faint)}
+  .chat-send{appearance:none;border:0;cursor:pointer;
+    width:38px;height:38px;border-radius:10px;
+    background:linear-gradient(180deg,#3b82f6,#2563eb);color:#fff;
+    display:grid;place-items:center;flex-shrink:0;
+    box-shadow:0 4px 14px rgba(37,99,235,.3);transition:transform .15s}
+  .chat-send:hover{transform:translateY(-1px)}
+  .chat-send:disabled{opacity:.4;cursor:not-allowed;transform:none}
+  .chat-foot{padding:0 14px 10px;font-size:10.5px;color:var(--ink-faint);
+    text-align:center;letter-spacing:.04em}
+  .chat-foot b{color:var(--ink-dim);font-weight:600}
+
+  /* ── insurance feature section ──────────────────────────── */
+  .insure{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+  @media(max-width:920px){.insure{grid-template-columns:1fr;gap:40px}}
+  .insure-pitch .eyebrow{margin-bottom:22px}
+  .insure-pitch h2{margin-bottom:18px}
+  .insure-pitch h2 .grad{
+    background:linear-gradient(180deg,#fff 0%, #93c5fd 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .insure-pitch p.lead{font-size:17px;margin-bottom:28px;max-width:520px}
+  .insure-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  @media(max-width:520px){.insure-grid{grid-template-columns:1fr}}
+  .insure-card{padding:18px;border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+    border:1px solid var(--hair);
+    backdrop-filter:blur(10px);transition:all .3s}
+  .insure-card:hover{border-color:rgba(96,165,250,.3);
+    box-shadow:0 0 30px rgba(59,130,246,.12)}
+  .insure-card .ico{width:32px;height:32px;border-radius:8px;
+    background:rgba(59,130,246,.14);
+    color:var(--accent-2);display:grid;place-items:center;margin-bottom:12px}
+  .insure-card h4{margin:0 0 6px;font-size:14px;font-weight:600;letter-spacing:-.005em}
+  .insure-card p{font-size:13px;line-height:1.5;color:var(--ink-dim);margin:0}
+
+  /* insurance call demo */
+  .demo{position:relative;padding:24px;border-radius:22px;
+    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    border:1px solid var(--hair-strong);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    box-shadow:0 30px 80px rgba(0,0,0,.4), 0 0 50px rgba(59,130,246,.12)}
+  .demo::before{content:"";position:absolute;inset:0;border-radius:22px;
+    background:radial-gradient(80% 50% at 50% 0%, rgba(59,130,246,.14), transparent 70%);
+    pointer-events:none}
+  .demo-hd{position:relative;display:flex;align-items:center;gap:12px;
+    padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--hair)}
+  .demo-hd .av{width:36px;height:36px;border-radius:50%;
+    background:linear-gradient(135deg,#3b82f6,#0ea5e9);
+    display:grid;place-items:center;color:#fff;
+    box-shadow:0 0 14px var(--accent-glow)}
+  .demo-hd .av svg{width:16px;height:16px}
+  .demo-hd .nm b{display:block;font-size:13px;font-weight:600}
+  .demo-hd .nm span{font-size:11px;color:var(--ink-faint)}
+  .demo-hd .tag{margin-left:auto;display:flex;align-items:center;gap:6px;
+    padding:5px 10px;border-radius:999px;
+    background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);
+    color:#86efac;font-size:11px;font-weight:600;letter-spacing:.04em}
+  .demo-hd .tag i{width:6px;height:6px;border-radius:50%;background:#4ade80;
+    box-shadow:0 0 8px #4ade80;animation:pulse 1.6s ease-in-out infinite}
+  .demo-msgs{position:relative;display:flex;flex-direction:column;gap:10px}
+  .dmsg{font-size:13.5px;line-height:1.5;padding:11px 14px;border-radius:16px;max-width:88%}
+  .dmsg.ai{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+    color:var(--ink);align-self:flex-start;border-bottom-left-radius:5px}
+  .dmsg.user{background:linear-gradient(180deg,#3b82f6,#2563eb);color:#fff;
+    align-self:flex-end;border-bottom-right-radius:5px;
+    box-shadow:0 4px 14px rgba(37,99,235,.3)}
+  .dmsg strong{font-weight:600}
+  .demo-record{position:relative;margin-top:16px;padding:14px;border-radius:14px;
+    background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.22)}
+  .demo-record .row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .demo-record .row .ico{width:22px;height:22px;border-radius:50%;background:#4ade80;
+    color:#052e16;display:grid;place-items:center;flex-shrink:0}
+  .demo-record .row b{font-size:12px;font-weight:600;color:#bbf7d0;letter-spacing:.04em;text-transform:uppercase}
+  .demo-record dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;
+    margin:0;font-size:13px}
+  .demo-record dt{color:var(--ink-faint);font-size:11.5px;
+    letter-spacing:.04em;text-transform:uppercase;align-self:center}
+  .demo-record dd{margin:0;color:var(--ink);font-weight:500;font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.01em}
+
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+<div class="stars" id="stars"></div>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"></div>
+      <b>Receptifi</b>
+    </div>
+    <div class="nav-links">
+      <a href="#what">Product</a>
+      <a href="#insurance">Insurance</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#who">Who it's for</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#demo" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="#demo" class="btn btn-primary btn-sm">Book a Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><i class="dot"></i> AI Voice Receptionist for Service Businesses</div>
+    <h1>Your front desk,<br/><span class="grad">upgraded.</span></h1>
+    <p class="sub">An AI voice receptionist that answers every call, books appointments,
+      and handles inquiries — 24 hours a day, 7 days a week. Built for busy practice owners and service businesses that can't afford to miss a call.</p>
+    <div class="cta-row">
+      <a href="#demo" class="btn btn-primary">Book a Demo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#how" class="btn btn-ghost">See it in action</a>
+    </div>
+
+    <!-- voice intro removed: TTS quality was robotic. Use a real recorded MP3 here when available. -->
+
+    <div class="meta">
+      <span><i>✓</i> 24/7 coverage</span>
+      <span><i>✓</i> Books directly to your calendar</span>
+      <span><i>✓</i> 2-week setup</span>
+    </div>
+
+    <!-- phone mockup -->
+    <div class="stage">
+      <div class="chip c1">
+        <div class="ico blue">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div><b>Call answered</b><span>0.3s pickup</span></div>
+      </div>
+      <div class="chip c2">
+        <div class="ico green">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </div>
+        <div><b>Appointment booked</b><span>Tues 2:30 PM</span></div>
+      </div>
+      <div class="chip c3">
+        <div class="ico purple">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div><b>Bilingual</b><span>English · Español</span></div>
+      </div>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="phone-top">
+            <span>9:41</span>
+            <span>Receptifi · Live</span>
+          </div>
+          <div class="call-card">
+            <div class="row">
+              <div class="av">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+              </div>
+              <div>
+                <div class="name">Incoming patient</div>
+                <div class="sub">+1 (415) 555·0192</div>
+              </div>
+              <div class="live"><i></i>LIVE</div>
+            </div>
+          </div>
+          <div class="msgs">
+            <div class="msg ai">Hi, this is the office of Dr. Chen — how can I help you today?</div>
+            <div class="msg user">My filling fell out, I need an appointment ASAP.</div>
+            <div class="msg ai">I'm sorry to hear that. I have an opening tomorrow at 2:30 PM, or today at 4:15 PM. Which works?</div>
+            <div class="msg user">Today at 4:15 please.</div>
+            <div class="msg ai">Booked. You'll get a text confirmation in a moment.</div>
+          </div>
+          <div class="booking">
+            <div class="check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div>Appointment booked · Today 4:15 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT WE DO -->
+<section id="what">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px"><i class="dot"></i> What we do</div>
+      <h2>An AI receptionist that actually sounds like one.</h2>
+      <p>Receptifi answers every call with a natural, professional voice — handling scheduling, FAQs, and overflow, so your team can focus on the people in front of them.</p>
+    </div>
+    <div class="features">
+      <div class="feat reveal">
+        <div class="ico-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>Answers in 0.3 seconds</h3>
+        <p>Every call, every time. Receptifi picks up before the second ring — no hold music, no voicemail, no walk-aways.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+        </div>
+        <h3>Books directly to your calendar</h3>
+        <p>Integrates with Dentrix, Open Dental, Google Calendar, OpenTable and others. Appointments land in your existing system instantly.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Handles real conversations</h3>
+        <p>Intake questions, pricing, hours, directions, reservations, follow-ups. Trained on your business — not a generic script.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+        </div>
+        <h3>Sounds human, not robotic</h3>
+        <p>Warm, professional tone — with pauses, intonation, and the ability to clarify when callers ramble or interrupt.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        </div>
+        <h3>Bilingual, on request</h3>
+        <p>Switches to fluent Spanish mid-call — without breaking stride. One receptionist, two languages, zero training.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2C20 17.5 12 22 12 22z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Secure by design</h3>
+        <p>Encrypted calls and transcripts, HIPAA-aware for healthcare, PCI-aware for payments. Compliance from day one — not bolted on later.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSURANCE VERIFICATION -->
+<section id="insurance">
+  <div class="wrap">
+    <div class="insure">
+      <div class="insure-pitch reveal">
+        <div class="eyebrow"><i class="dot"></i> Beyond booking</div>
+        <h2>From appointment booking to <span class="grad">insurance verification</span> — Receptifi handles it all.</h2>
+        <p class="lead">When a caller asks about coverage, Receptifi doesn't punt to voicemail. It collects the provider, member ID, and group number, confirms what happens next, and either warm-transfers to your staff or logs a ticket for your team to follow up — all in the same call.</p>
+
+        <div class="insure-grid">
+          <div class="insure-card">
+            <div class="ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h4>Collects the right details</h4>
+            <p>Provider, member ID, group number, date of birth, subscriber name — captured cleanly and read back to confirm.</p>
+          </div>
+          <div class="insure-card">
+            <div class="ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <h4>Confirms next steps</h4>
+            <p>Tells the caller exactly when to expect a verification callback, so no one is left wondering.</p>
+          </div>
+          <div class="insure-card">
+            <div class="ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            </div>
+            <h4>Routes intelligently</h4>
+            <p>Warm-transfers to the right team member during business hours, or logs a ticket for follow-up if you're closed.</p>
+          </div>
+          <div class="insure-card">
+            <div class="ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+            </div>
+            <h4>Hands you a clean record</h4>
+            <p>Structured ticket lands in your inbox with caller info, insurance details, and full transcript — ready for verification.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- live demo card -->
+      <div class="demo reveal">
+        <div class="demo-hd">
+          <div class="av">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+          </div>
+          <div class="nm">
+            <b>Receptifi · Insurance inquiry</b>
+            <span>Call from +1 (415) 555-0118 · 0:42</span>
+          </div>
+          <div class="tag"><i></i>LIVE</div>
+        </div>
+
+        <div class="demo-msgs">
+          <div class="dmsg user">Hi, do you take Delta Dental?</div>
+          <div class="dmsg ai">Yes, we accept Delta Dental. I can take down your information and have our insurance coordinator verify your coverage and benefits — would that work?</div>
+          <div class="dmsg user">Sure. My member ID is W-58231904, group 1124.</div>
+          <div class="dmsg ai">Got it — <strong>W-58231904</strong>, group <strong>1124</strong>. Can I have your full name and date of birth?</div>
+          <div class="dmsg user">Sarah Mitchell, May 14, 1989.</div>
+          <div class="dmsg ai">Perfect. Our coordinator will verify your benefits and call you back within one business day at this number. Anything else I can help with?</div>
+        </div>
+
+        <div class="demo-record">
+          <div class="row">
+            <div class="ico">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <b>Ticket created · Sent to Insurance Coordinator</b>
+          </div>
+          <dl>
+            <dt>Patient</dt><dd>Sarah Mitchell · 05/14/1989</dd>
+            <dt>Provider</dt><dd>Delta Dental PPO</dd>
+            <dt>Member ID</dt><dd>W-58231904</dd>
+            <dt>Group</dt><dd>1124</dd>
+            <dt>Callback</dt><dd>+1 (415) 555-0118</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section id="who">
+  <div class="wrap">
+    <div class="who">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:20px"><i class="dot"></i> Who it's for</div>
+        <h2>Built for service businesses that can't afford to miss a call.</h2>
+        <p>The average service business misses roughly 30% of incoming calls. Every missed call is a lost customer — and most won't call back.</p>
+        <p>Receptifi handles the overflow when your front desk is on another line, the after-hours inquiries, the lunch-break gap, and the new-customer questions that arrive at 9 PM.</p>
+        <ul class="who-list">
+          <li><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Dental practices.</b> Our primary focus today — solo, group, specialist and DSO, with deep dental workflows out of the box.</div></li>
+          <li><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Restaurants & hospitality.</b> Reservations, hours, dietary questions, waitlist — handled before the host can pick up.</div></li>
+          <li><div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Salons, spas & other service businesses.</b> Bookings, pricing, intake — Receptifi adapts to your script.</div></li>
+        </ul>
+        <div class="future">
+          <i>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </i>
+          Dental-first today — expanding to restaurants, salons and beyond.
+        </div>
+      </div>
+
+      <div class="vis reveal">
+        <div class="core">
+          <div class="pulse">
+            <div class="r"></div><div class="r"></div><div class="r"></div>
+            <div class="core-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="stat s1"><b>30%</b><span>Calls missed without AI</span></div>
+        <div class="stat s2"><b>24/7</b><span>Always-on coverage</span></div>
+        <div class="stat s3"><b>0.3s</b><span>Average pickup time</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px"><i class="dot"></i> How it works</div>
+      <h2>Three steps. No engineers required.</h2>
+      <p>Forward your line. Train Receptifi on your office in a 20-minute call. Go live.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="num">01</div>
+        <div class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Call comes in</h3>
+        <p>Your existing business number forwards to Receptifi after hours, when busy, or always — your choice.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">02</div>
+        <div class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+        </div>
+        <h3>AI answers naturally</h3>
+        <p>Receptifi greets the caller by your business name, listens, and handles the conversation — scheduling, FAQs, or routing to you.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">03</div>
+        <div class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>Appointment booked</h3>
+        <p>It writes directly to your scheduling system — practice management software, reservation platform, or calendar. You wake up to a full book.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="margin-bottom:20px"><i class="dot"></i> Pricing</div>
+      <h2>Simple, transparent pricing.</h2>
+      <p>One flat monthly rate. Unlimited calls. No setup fees, no per-minute surprises.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan reveal">
+        <h3>Standard</h3>
+        <div class="price"><b>$550</b><span>/ month</span></div>
+        <div class="pitch">A full-time AI receptionist that never sleeps, never calls in sick, and never puts a patient on hold.</div>
+        <ul>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>24/7 AI voice receptionist</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Unlimited inbound calls</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Direct calendar integration</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>SMS confirmations & reminders</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Call transcripts & summaries</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>HIPAA-compliant infrastructure</li>
+        </ul>
+        <a href="#demo" class="btn btn-ghost">Get Started</a>
+      </div>
+
+      <div class="plan pro reveal">
+        <div class="plan-badge">Most popular</div>
+        <h3>Bilingual</h3>
+        <div class="price"><b>$650</b><span>/ month</span></div>
+        <div class="pitch">Everything in Standard, plus a fluent English/Spanish receptionist that switches mid-call.</div>
+        <ul>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Everything in Standard</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Bilingual English/Spanish voice</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Auto language detection</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Bilingual SMS templates</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Priority onboarding</li>
+          <li><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>Dedicated success manager</li>
+        </ul>
+        <a href="#demo" class="btn btn-primary">Book a Demo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="demo">
+  <div class="wrap">
+    <div class="inner reveal">
+      <h2>Every missed call is a customer<br/><span class="grad">walking to your competitor.</span></h2>
+      <p>See Receptifi answer a real call in under 10 minutes. No commitment. No credit card.</p>
+      <div class="cta-row" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn btn-primary">Book a Demo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#" class="btn btn-ghost">Talk to sales</a>
+      </div>
+      <div class="urgency"><i class="d"></i> Onboarding slots for May 2026 are 80% full</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"></div>
+      <b>Receptifi</b>
+    </div>
+    <div class="links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Security</a>
+      <a href="#">Contact</a>
+    </div>
+    <div>© 2026 Receptifi · All rights reserved</div>
+  </div>
+</footer>
+
+<!-- React + Babel for Tweaks panel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<div id="tweaks-root"></div>
+
+<script>
+/* ── star particle field ─────────────────────────────────── */
+(function(){
+  const root = document.getElementById('stars');
+  const N = 36;
+  for (let i = 0; i < N; i++){
+    const s = document.createElement('i');
+    s.style.left = (Math.random()*100) + '%';
+    s.style.top = (Math.random()*100) + '%';
+    s.style.animationDelay = (Math.random()*5) + 's';
+    s.style.opacity = (.2 + Math.random()*.6);
+    s.style.transform = `scale(${.4 + Math.random()*.9})`;
+    root.appendChild(s);
+  }
+})();
+
+/* ── scroll reveal ───────────────────────────────────────── */
+(function(){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: .12, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ── AI voice intro removed ─────────────────────────────── */
+</script>
+
+<!-- Tweaks panel app is loaded via app.jsx above -->
+
+<!-- ─────────── Chat Widget ─────────── -->
+<button class="chat-fab" id="chatFab" aria-label="Open chat" data-open="0">
+  <span class="chat-notify" id="chatNotify"></span>
+  <svg class="icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel" data-open="0" role="dialog" aria-label="Receptifi assistant">
+  <div class="chat-hd">
+    <div class="av">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+    </div>
+    <div class="nm">
+      <b>Receptifi Assistant</b>
+      <span><i></i>Online · Replies instantly</span>
+    </div>
+    <button class="x" id="chatClose" aria-label="Close chat">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input-wrap">
+    <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask anything about Receptifi…"></textarea>
+    <button class="chat-send" id="chatSend" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </div>
+  <div class="chat-foot">Powered by AI · <b>Receptifi</b></div>
+</div>
+
+<script>
+/* ── Receptifi AI Chat Widget ─────────────────────────────── */
+(function(){
+  const fab    = document.getElementById('chatFab');
+  const panel  = document.getElementById('chatPanel');
+  const closeB = document.getElementById('chatClose');
+  const body   = document.getElementById('chatBody');
+  const input  = document.getElementById('chatInput');
+  const send   = document.getElementById('chatSend');
+  const notify = document.getElementById('chatNotify');
+
+  const SYSTEM = `You are the Receptifi Assistant — a friendly, professional AI on the Receptifi marketing website. Receptifi is an AI voice receptionist service that answers calls, books appointments, and handles inquiries 24/7 for service businesses. Dental offices are the primary focus today, with expansion into restaurants, salons and other service-based businesses.
+
+Facts to use accurately:
+- Beyond booking: handles **insurance verification inquiries** — collects provider, member ID, group number, DOB, then either warm-transfers to the office insurance coordinator or logs a structured ticket for follow-up (typically within one business day).
+- Standard plan: $550/month — 24/7 AI voice receptionist, unlimited inbound calls, calendar integration, insurance verification intake, SMS confirmations, transcripts, HIPAA-aware infrastructure.
+- Bilingual plan: $650/month — everything in Standard, plus a fluent English/Spanish receptionist that can switch mid-call, bilingual SMS templates, priority onboarding, dedicated success manager.
+- Setup is about 2 weeks. Onboarding is a ~20-minute call to train Receptifi on the business.
+- The phone number forwards to Receptifi — after hours, when busy, or always (the business chooses).
+- Integrates with practice management software (Dentrix, Open Dental and others), Google Calendar, and reservation systems.
+- No free trial today, but a live demo is available — encourage visitors to book one.
+- Average pickup is 0.3 seconds; the average service business misses ~30% of incoming calls.
+- HIPAA-aware for healthcare; PCI-aware for payment-related conversations.
+
+Tone: warm, confident, conversational — like a knowledgeable team member, not a FAQ page. Keep replies short (1–3 short paragraphs max), specific, and end with a gentle next step when natural ("Want me to set up a quick demo?", "I can walk you through pricing if you'd like."). Never invent features that aren't listed above. If asked something you don't know, say so and offer to connect them with the team.`;
+
+  const SUGGS = [
+    "How does Receptifi work?",
+    "What's the pricing?",
+    "Can it handle insurance verification?",
+    "Is there a bilingual option?",
+    "How do I get started?"
+  ];
+
+  const history = []; // user/assistant message pairs
+
+  function el(tag, cls, html){
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+
+  function escapeHTML(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function format(text){
+    // simple paragraph + bold + lists
+    const safe = escapeHTML(text);
+    return safe
+      .split(/\n{2,}/)
+      .map(p => '<p>' + p.replace(/\n/g, '<br/>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>') + '</p>')
+      .join('');
+  }
+
+  function addBot(text){
+    const m = el('div','chat-msg bot', format(text));
+    body.appendChild(m);
+    body.scrollTop = body.scrollHeight;
+    return m;
+  }
+
+  function addUser(text){
+    const m = el('div','chat-msg user', '<p>'+escapeHTML(text).replace(/\n/g,'<br/>')+'</p>');
+    body.appendChild(m);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function addSuggestions(items){
+    const wrap = el('div','chat-suggs');
+    items.forEach(label => {
+      const b = el('button','chat-sugg', escapeHTML(label));
+      b.type = 'button';
+      b.addEventListener('click', () => {
+        wrap.remove();
+        submit(label);
+      });
+      wrap.appendChild(b);
+    });
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function showTyping(){
+    const t = el('div','chat-typing','<i></i><i></i><i></i>');
+    t.id = 'chatTyping';
+    body.appendChild(t);
+    body.scrollTop = body.scrollHeight;
+  }
+  function hideTyping(){ document.getElementById('chatTyping')?.remove(); }
+
+  async function submit(text){
+    text = text.trim();
+    if (!text) return;
+    addUser(text);
+    history.push({ role: 'user', content: text });
+    input.value = '';
+    autosize();
+    send.disabled = true;
+    showTyping();
+
+    try {
+      // Compose a single prompt-style message list. window.claude.complete
+      // accepts {messages:[...]} or a plain string.
+      const messages = [{
+        role: 'user',
+        content: SYSTEM + '\n\n--- Conversation so far ---\n' +
+          history.map(m => (m.role === 'user' ? 'Visitor: ' : 'Assistant: ') + m.content).join('\n') +
+          '\n\nReply as the Receptifi Assistant. Keep it natural and concise.'
+      }];
+      const reply = await window.claude.complete({ messages });
+      hideTyping();
+      const answer = (reply || '').trim() || "I'm having trouble reaching the server right now — please try again in a moment, or book a demo and our team will follow up.";
+      addBot(answer);
+      history.push({ role: 'assistant', content: answer });
+    } catch (err) {
+      hideTyping();
+      addBot("Hmm, I couldn't reach the server. You can still book a demo and our team will follow up with you directly.");
+    } finally {
+      send.disabled = false;
+      input.focus();
+    }
+  }
+
+  function openChat(){
+    panel.dataset.open = '1';
+    fab.dataset.open = '1';
+    fab.setAttribute('aria-label','Close chat');
+    fab.dataset.seen = '1';
+    setTimeout(()=>input.focus(), 280);
+  }
+  function closeChat(){
+    panel.dataset.open = '0';
+    fab.dataset.open = '0';
+    fab.setAttribute('aria-label','Open chat');
+  }
+
+  fab.addEventListener('click', () => {
+    if (panel.dataset.open === '1') closeChat(); else openChat();
+  });
+  closeB.addEventListener('click', closeChat);
+
+  function autosize(){
+    input.style.height = 'auto';
+    input.style.height = Math.min(120, input.scrollHeight) + 'px';
+  }
+  input.addEventListener('input', autosize);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey){
+      e.preventDefault();
+      submit(input.value);
+    }
+  });
+  send.addEventListener('click', () => submit(input.value));
+
+  // initial greeting
+  setTimeout(() => {
+    addBot("Hi! I'm Receptifi's AI assistant 👋\n\nI can answer questions about how we work, pricing, the bilingual option, or how to get started. What would you like to know?");
+    addSuggestions(SUGGS);
+  }, 100);
+})();
+</script>
+
+</body>
+</html>
