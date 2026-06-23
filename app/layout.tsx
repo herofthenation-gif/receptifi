@@ -1,52 +1,68 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Script from "next/script";
-import "./globals.css";
+import { Analytics } from '@vercel/analytics/next'
+import type { Metadata, Viewport } from 'next'
+import { Plus_Jakarta_Sans, Geist_Mono, Playfair_Display } from 'next/font/google'
+import './globals.css'
+import { ChatWidget } from '@/components/chat-widget'
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+const jakarta = Plus_Jakarta_Sans({
+  variable: '--font-jakarta',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+})
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
+const playfair = Playfair_Display({
+  variable: '--font-playfair',
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+})
 
 export const metadata: Metadata = {
-  title: "Receptifi — Your front desk, upgraded",
+  title: 'Receptifi: The National Revenue Operations Engine',
   description:
-    "AI-powered voice receptionist, 24/7. Turning missed calls into booked appointments for dental offices and service businesses.",
-  openGraph: {
-    title: "Receptifi — Your front desk, upgraded",
-    description:
-      "AI-powered voice receptionist, 24/7. Turning missed calls into booked appointments for dental offices and service businesses.",
-    type: "website",
+    'Receptifi captures your leaking leads and scales your growth with web architecture, reputation management, and 24/7 US-based live response.',
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: '/apple-icon.png',
   },
-};
+}
+
+export const viewport: Viewport = {
+  colorScheme: 'light',
+  themeColor: '#FFFFFF',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://assets.calendly.com/assets/external/widget.css"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
+    <html
+      lang="en"
+      className={`${jakarta.variable} ${geistMono.variable} ${playfair.variable} bg-background`}
+    >
+      <body className="font-sans antialiased bg-background text-foreground">
         {children}
-        <Script
-          src="https://assets.calendly.com/assets/external/widget.js"
-          strategy="afterInteractive"
-        />
+        <ChatWidget />
+        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
-  );
+  )
 }

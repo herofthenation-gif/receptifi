@@ -6,8 +6,8 @@ import CalendlyButton from "../components/CalendlyButton";
 import Nav from "../components/Nav";
 
 export const metadata: Metadata = {
-  title: "Receptifi CRM — Lead Capture, Email Automation & Follow-Up on Autopilot",
-  description: "Every lead captured. Every follow-up sent. Every lead nurtured until they're ready to book — automatically. Receptifi CRM.",
+  title: "Receptifi Reviews — Automated Google Reviews on Autopilot",
+  description: "Turn your happy patients into 5-star Google reviews automatically. 50+ reviews in 60 days without asking a single patient yourself.",
 };
 
 const Chk = () => (
@@ -16,7 +16,13 @@ const Chk = () => (
   </svg>
 );
 
-export default function CRMMarketingPage() {
+const Star = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+
+export default function ReviewsPage() {
   return (
     <>
       <div className="ambient" aria-hidden="true" />
@@ -29,19 +35,23 @@ export default function CRMMarketingPage() {
         <div className="wrap">
           <div className="eyebrow" style={{ marginBottom: 28 }}>
             <span className="dot" />
-            LEAD CAPTURE &amp; AUTOMATION · RECEPTIFI CRM
+            GOOGLE REVIEWS ON AUTOPILOT · RECEPTIFI REVIEWS
           </div>
           <h1>
-            Your leads are going cold.<br />
-            <span className="grad">Every. Single. Day.</span>
+            87% of patients choose a business<br />
+            <span className="grad">based on reviews. Are yours winning?</span>
           </h1>
           <p className="sub">
-            Leads who don&apos;t hear back within 5 minutes are 10× less likely to convert. Receptifi CRM captures every lead, follows up automatically, and nurtures them until they book — so no opportunity ever falls through the cracks again.
+            Receptifi Reviews builds your Google reputation automatically — turning every happy patient into a 5-star review without you lifting a finger. No awkward asks. No chasing. It just runs.
           </p>
           <div className="cta-row">
             <CalendlyButton className="btn btn-primary" style={{ padding: "16px 38px", fontSize: 16 }}>
-              Book a Call — Fix Your Follow-Up →
+              Book a Call — Start Getting Reviews →
             </CalendlyButton>
+          </div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 4, marginTop: 20 }}>
+            <Star /><Star /><Star /><Star /><Star />
+            <span style={{ marginLeft: 10, fontSize: 14, color: "var(--ink-faint)" }}>Your next 50 reviews are waiting to be asked</span>
           </div>
         </div>
       </section>
@@ -50,14 +60,14 @@ export default function CRMMarketingPage() {
       <section style={{ paddingTop: 80 }}>
         <div className="wrap">
           <div className="sec-head reveal">
-            <h2>Here&apos;s what&apos;s happening to your leads right now.</h2>
+            <h2>Here&apos;s what your review situation is costing you.</h2>
           </div>
           <div className="pain-grid">
             {[
-              { icon: "📬", text: "A lead fills out your contact form on a Friday. Nobody follows up until Monday. They booked someone else Saturday morning." },
-              { icon: "🥶", text: "You have 30 leads from last quarter. Nobody has followed up consistently. Most have gone completely cold." },
-              { icon: "📊", text: "You're running Google Ads and Facebook Ads. Leads come in. Nobody nurtures them. Your cost-per-patient is through the roof." },
-              { icon: "🧠", text: "Your team tries to remember who to follow up with. Some get called. Most get forgotten. The best leads fall through the cracks." },
+              { icon: "⭐", text: "A new patient Googles you. They see 12 reviews. Your competitor has 180. They click the competitor." },
+              { icon: "😶", text: "You have 50 happy patients this month. You ask zero of them for a review. Your competitor's reputation grows. Yours doesn't." },
+              { icon: "😬", text: "One bad review from two years ago sits at the top of your profile. Happy patients never posted. It defines you." },
+              { icon: "🙈", text: "You know you should ask for reviews. But it feels awkward. So it never gets done. Month after month." },
             ].map(({ icon, text }, i) => (
               <div key={i} className="pain-card reveal">
                 <span className="pain-icon">{icon}</span>
@@ -72,14 +82,14 @@ export default function CRMMarketingPage() {
       <section style={{ paddingTop: 80 }}>
         <div className="wrap">
           <div className="sec-head reveal">
-            <h2>What your practice looks like with Receptifi CRM.</h2>
+            <h2>What your practice looks like with Receptifi Reviews.</h2>
           </div>
           <div className="desire-grid">
             {[
-              "Every lead captured automatically — from your website, ads, and phone calls — into one organized dashboard.",
-              "Instant follow-up within 60 seconds of a lead coming in, day or night. No lead goes cold.",
-              "Automated email and text sequences that nurture leads over days and weeks until they're ready to book.",
-              "Clear visibility on every lead — who's warm, who's booked, who needs a call — so nothing ever gets lost again.",
+              "Every happy patient automatically gets a review request via text or email — at exactly the right moment after their visit.",
+              "50+ five-star Google reviews in 60 days. Your profile looks dominant. New patients choose you without hesitation.",
+              "One unhappy patient? We identify them first and route their feedback privately — protecting your public reputation.",
+              "Your review system runs completely on autopilot. Set it up once. Reviews roll in forever.",
             ].map((text, i) => (
               <div key={i} className="desire-card reveal">
                 <div className="desire-check"><Chk /></div>
@@ -88,9 +98,9 @@ export default function CRMMarketingPage() {
             ))}
           </div>
           <div className="desire-sub reveal">
-            <p>Stop losing leads you already paid to get.</p>
+            <p>Your happy patients want to leave reviews. They just need someone to ask them at the right time.</p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "15px 36px", fontSize: 16 }}>
-              Book a Call — Fix Your Follow-Up →
+              Book a Call — Start Getting Reviews →
             </CalendlyButton>
           </div>
         </div>
@@ -101,41 +111,41 @@ export default function CRMMarketingPage() {
         <div className="wrap">
           <div className="sec-head reveal">
             <div className="eyebrow" style={{ marginBottom: 20 }}>
-              <span className="dot" /> What Receptifi CRM does
+              <span className="dot" /> What Receptifi Reviews does
             </div>
-            <h2>Your entire lead pipeline — automated.</h2>
+            <h2>A complete reputation engine — on autopilot.</h2>
           </div>
           <div className="service-features">
             {[
               {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2C20 17.5 12 22 12 22z"/><circle cx="12" cy="10" r="3"/></svg>,
-                title: "Instant lead capture",
-                desc: "Every form submission, ad click, and phone inquiry lands in your CRM automatically — no manual entry.",
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+                title: "Automated review requests",
+                desc: "Text and email requests sent automatically after each visit — at the exact moment patients are most likely to respond.",
               },
               {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-                title: "60-second follow-up",
-                desc: "Automated text and email sent within 60 seconds of a new lead — before they look at your competitor.",
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2C20 17.5 12 22 12 22z"/><circle cx="12" cy="10" r="3"/></svg>,
+                title: "Smart sentiment routing",
+                desc: "Happy patients get directed to Google. Unhappy patients get directed to your inbox — before they post publicly.",
+              },
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+                title: "Google Business optimization",
+                desc: "Your profile optimized for maximum visibility. Hours, categories, photos, and posts — all handled.",
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>,
-                title: "Drip email sequences",
-                desc: "Automated nurture sequences that follow up over 7, 14, and 30 days — keeping you top of mind until they book.",
-              },
-              {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>,
-                title: "Calendly booking integration",
-                desc: "Every follow-up includes a direct booking link. Leads go from email to booked appointment in one click.",
+                title: "Review velocity tracking",
+                desc: "Dashboard showing new reviews, response rates, and your star-rating trajectory week over week.",
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-                title: "Pipeline visibility",
-                desc: "See every lead — Cold, Warm, Booked, Closed — in a single dashboard. No spreadsheets. No sticky notes.",
+                title: "Multi-location support",
+                desc: "Running multiple locations? Receptifi Reviews manages reputation across all of them from one dashboard.",
               },
               {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>,
-                title: "Reporting & analytics",
-                desc: "See exactly how many leads came in, how many converted, and where the drop-off is — every week.",
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>,
+                title: "Website review display",
+                desc: "Your best reviews automatically displayed on your website — fresh social proof, always up to date.",
               },
             ].map(({ icon, title, desc }, i) => (
               <div key={i} className="feat reveal">
@@ -152,27 +162,27 @@ export default function CRMMarketingPage() {
       <section className="trust-section" style={{ paddingTop: 80 }}>
         <div className="wrap">
           <div className="sec-head reveal">
-            <h2>What happens when you stop letting leads go cold.</h2>
+            <h2>What happens when local businesses take reviews seriously.</h2>
           </div>
           <div className="testimonial-grid">
             <div className="testimonial-card reveal">
-              <div className="testimonial-stat">3× close rate</div>
-              <p>&ldquo;We used to close 1 in 10 leads. With Receptifi CRM following up automatically, we now close 3 in 10. Same leads, better system.&rdquo;</p>
+              <div className="testimonial-stat">12 → 67</div>
+              <p>&ldquo;We went from 12 Google reviews to 67 in 6 weeks. New patients now mention our reviews every week when they book.&rdquo;</p>
+              <span className="testimonial-placeholder">Dental practice, CA [PLACEHOLDER]</span>
+            </div>
+            <div className="testimonial-card reveal">
+              <div className="testimonial-stat">4.2 → 4.9</div>
+              <p>&ldquo;Our star rating went from 4.2 to 4.9 in 90 days. We&apos;re now the highest-rated practice in our city on Google.&rdquo;</p>
+              <span className="testimonial-placeholder">Solo practice owner [PLACEHOLDER]</span>
+            </div>
+            <div className="testimonial-card reveal">
+              <div className="testimonial-stat">+28%</div>
+              <p>&ldquo;New patient inquiries increased 28% in the 3 months after we started building reviews. People trust us before they even call.&rdquo;</p>
               <span className="testimonial-placeholder">Local service business [PLACEHOLDER]</span>
-            </div>
-            <div className="testimonial-card reveal">
-              <div className="testimonial-stat">$0 wasted</div>
-              <p>&ldquo;We were spending $2,000/month on ads and losing half the leads because nobody followed up fast enough. That&apos;s fixed now.&rdquo;</p>
-              <span className="testimonial-placeholder">Dental practice owner [PLACEHOLDER]</span>
-            </div>
-            <div className="testimonial-card reveal">
-              <div className="testimonial-stat">47 booked</div>
-              <p>&ldquo;We had 80 old leads sitting dormant in a spreadsheet. Receptifi CRM ran a reactivation sequence. 47 responded. 12 booked.&rdquo;</p>
-              <span className="testimonial-placeholder">Multi-location practice [PLACEHOLDER]</span>
             </div>
           </div>
           <div className="trust-cta reveal">
-            <p>Ready to stop losing leads you already paid for?</p>
+            <p>Ready to dominate your local reputation?</p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "15px 36px", fontSize: 16 }}>
               Book a Call — See If You Qualify →
             </CalendlyButton>
@@ -188,25 +198,25 @@ export default function CRMMarketingPage() {
           </div>
           <div className="objection-grid">
             <div className="objection-card reveal">
-              <p className="objection-q">&ldquo;We follow up with leads manually.&rdquo;</p>
+              <p className="objection-q">&ldquo;We already have some reviews.&rdquo;</p>
               <div className="objection-arrow">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
               </div>
-              <p className="objection-a">Manual follow-up gets forgotten, inconsistent, and delayed. Automated follow-up happens in 60 seconds, every time, without fail. The math isn&apos;t close.</p>
+              <p className="objection-a">&ldquo;Some&rdquo; isn&apos;t winning. If your competitor has 3× more reviews, patients choose them — regardless of quality. Volume and recency both matter.</p>
             </div>
             <div className="objection-card reveal">
-              <p className="objection-q">&ldquo;CRMs are complicated to set up and use.&rdquo;</p>
+              <p className="objection-q">&ldquo;Asking for reviews feels pushy.&rdquo;</p>
               <div className="objection-arrow">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
               </div>
-              <p className="objection-a">We set up everything for you — sequences, integrations, and pipeline — and train your team in one call. You log in and see your leads. That&apos;s it.</p>
+              <p className="objection-a">You don&apos;t ask — your system does. A well-timed, friendly text after a great appointment isn&apos;t pushy. 70% of patients say they&apos;d leave a review if asked.</p>
             </div>
             <div className="objection-card reveal">
-              <p className="objection-q">&ldquo;We don&apos;t have enough leads to need this.&rdquo;</p>
+              <p className="objection-q">&ldquo;Won&apos;t fake reviews get us in trouble?&rdquo;</p>
               <div className="objection-arrow">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
               </div>
-              <p className="objection-a">Most practices have more leads than they realize — they just don&apos;t follow up consistently enough to convert them. We start by reactivating your cold list.</p>
+              <p className="objection-a">Every review we generate comes from your real patients after their real visit. 100% authentic. 100% compliant with Google&apos;s guidelines.</p>
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 48 }} className="reveal">
@@ -223,7 +233,7 @@ export default function CRMMarketingPage() {
           <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto" }} className="reveal">
             <h2 className="guarantee-headline">We guarantee results or we keep working for free.</h2>
             <p className="guarantee-sub">
-              If Receptifi CRM doesn&apos;t improve your lead conversion rate within 90 days, we keep optimizing at no charge until it does. No contracts. No risk.
+              If you don&apos;t have significantly more Google reviews within 90 days, we keep running your system at no charge until you do. No contracts. No risk.
             </p>
           </div>
           <div className="safety-signals reveal">
@@ -246,16 +256,16 @@ export default function CRMMarketingPage() {
       <section className="urgency-section">
         <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
           <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }} className="reveal">
-            <h2>Every lead you don&apos;t follow up with today chooses someone else tomorrow.</h2>
+            <h2>While you wait, your competitors are getting more reviews every day.</h2>
             <p style={{ fontSize: 18, marginTop: 28, lineHeight: 1.7 }}>
-              Right now, there are leads in your pipeline — or in your head — who haven&apos;t heard from you in days. They&apos;re still looking. They&apos;re still comparing. And your competitor with an automated follow-up system is reaching them first, every single time.
+              Right now, your competitor&apos;s happy patients are getting review requests. They&apos;re clicking. They&apos;re posting. Their rating is climbing. And every new review they get makes it harder for you to catch up. The gap compounds every single day you don&apos;t act.
             </p>
-            <div className="urgency-stat">10× less likely</div>
+            <div className="urgency-stat">87% of patients</div>
             <p style={{ fontSize: 15, color: "var(--ink-faint)", marginBottom: 40 }}>
-              Leads who don&apos;t hear back within 5 minutes are 10× less likely to convert. How fast is your current follow-up?
+              87% of patients read online reviews before choosing a local business. What are they seeing when they look at yours?
             </p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "15px 36px", fontSize: 16 }}>
-              Fix Your Follow-Up — Book a Call Today →
+              Start Building Reviews — Book a Call Today →
             </CalendlyButton>
           </div>
         </div>
@@ -270,19 +280,19 @@ export default function CRMMarketingPage() {
           <div className="logic-steps">
             <div className="logic-step reveal">
               <div className="logic-step-ico">01</div>
-              <p>If you get <strong>30 leads per month</strong> and currently convert 20%&hellip;</p>
+              <p>If 3 extra patients per month choose you because of your <strong>5-star reputation</strong>&hellip;</p>
             </div>
             <div className="logic-step reveal">
               <div className="logic-step-ico">02</div>
-              <p>Improving that to 35% with consistent follow-up adds <strong>4–5 new patients</strong> per month&hellip;</p>
+              <p>At an average patient value of <strong>$500</strong>&hellip;</p>
             </div>
             <div className="logic-step reveal">
               <div className="logic-step-ico">03</div>
-              <p>At $500 per patient, that&apos;s <strong>$2,000–$2,500 per month</strong> — from leads you already had.</p>
+              <p>That&apos;s <strong>$1,500 per month</strong> in additional revenue — just from looking more trustworthy on Google.</p>
             </div>
           </div>
           <div className="logic-conclusion reveal">
-            <p>Receptifi CRM costs a fraction of that — and pays for itself the moment you close your first lead that would have gone cold.</p>
+            <p>Receptifi Reviews costs a fraction of that — and pays for itself the moment your first extra patient finds you because of your reviews.</p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "14px 32px", fontSize: 15 }}>
               Run the numbers — Book a Call →
             </CalendlyButton>
@@ -294,9 +304,9 @@ export default function CRMMarketingPage() {
       <section className="decision-section">
         <div className="wrap">
           <div className="decision-inner">
-            <h2>Stop leaving money<br /><span className="grad">on the table.</span></h2>
+            <h2>Your patients are happy.<br /><span className="grad">It&apos;s time the world knew it.</span></h2>
             <p className="sub">
-              You already have leads. You already have happy customers. The only thing missing is the system that captures, nurtures, and converts them automatically.
+              Every day you wait, your competitor gets another review. Another 5 stars. Another patient who chose them over you.
             </p>
             <CalendlyButton className="btn btn-primary decision-btn">
               Book Your Call Now →

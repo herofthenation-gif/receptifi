@@ -6,8 +6,8 @@ import CalendlyButton from "../components/CalendlyButton";
 import Nav from "../components/Nav";
 
 export const metadata: Metadata = {
-  title: "Receptifi CRM — Lead Capture, Email Automation & Follow-Up on Autopilot",
-  description: "Every lead captured. Every follow-up sent. Every lead nurtured until they're ready to book — automatically. Receptifi CRM.",
+  title: "Receptifi Web — Done-for-You Websites That Rank and Convert",
+  description: "A fast, modern website built for local search and converting visitors into booked appointments. Done-for-you, live in 2 weeks.",
 };
 
 const Chk = () => (
@@ -16,7 +16,7 @@ const Chk = () => (
   </svg>
 );
 
-export default function CRMMarketingPage() {
+export default function WebPage() {
   return (
     <>
       <div className="ambient" aria-hidden="true" />
@@ -29,18 +29,18 @@ export default function CRMMarketingPage() {
         <div className="wrap">
           <div className="eyebrow" style={{ marginBottom: 28 }}>
             <span className="dot" />
-            LEAD CAPTURE &amp; AUTOMATION · RECEPTIFI CRM
+            DONE-FOR-YOU WEBSITES · RECEPTIFI WEB
           </div>
           <h1>
-            Your leads are going cold.<br />
-            <span className="grad">Every. Single. Day.</span>
+            Your website is losing you patients<br />
+            <span className="grad">every single day.</span>
           </h1>
           <p className="sub">
-            Leads who don&apos;t hear back within 5 minutes are 10× less likely to convert. Receptifi CRM captures every lead, follows up automatically, and nurtures them until they book — so no opportunity ever falls through the cracks again.
+            A slow, outdated website doesn&apos;t just fail to convert — it actively sends patients to your competitors. Receptifi Web builds you a fast, modern site that ranks on Google and turns visitors into booked appointments. Done completely for you.
           </p>
           <div className="cta-row">
             <CalendlyButton className="btn btn-primary" style={{ padding: "16px 38px", fontSize: 16 }}>
-              Book a Call — Fix Your Follow-Up →
+              Book a Call — See Your New Site →
             </CalendlyButton>
           </div>
         </div>
@@ -50,14 +50,14 @@ export default function CRMMarketingPage() {
       <section style={{ paddingTop: 80 }}>
         <div className="wrap">
           <div className="sec-head reveal">
-            <h2>Here&apos;s what&apos;s happening to your leads right now.</h2>
+            <h2>Here&apos;s what your current website is costing you.</h2>
           </div>
           <div className="pain-grid">
             {[
-              { icon: "📬", text: "A lead fills out your contact form on a Friday. Nobody follows up until Monday. They booked someone else Saturday morning." },
-              { icon: "🥶", text: "You have 30 leads from last quarter. Nobody has followed up consistently. Most have gone completely cold." },
-              { icon: "📊", text: "You're running Google Ads and Facebook Ads. Leads come in. Nobody nurtures them. Your cost-per-patient is through the roof." },
-              { icon: "🧠", text: "Your team tries to remember who to follow up with. Some get called. Most get forgotten. The best leads fall through the cracks." },
+              { icon: "🐌", text: "Your website loads in 4+ seconds on mobile. 53% of visitors leave before it ever loads." },
+              { icon: "📄", text: "Someone Googles 'dentist near me.' You're on page 3. Your competitor is on page 1. They get the patient." },
+              { icon: "😬", text: "Your website looks like it was built in 2015. Patients assume your practice is the same quality." },
+              { icon: "💸", text: "You paid for Google Ads. Visitors clicked. They landed on your site. They left. $50 gone." },
             ].map(({ icon, text }, i) => (
               <div key={i} className="pain-card reveal">
                 <span className="pain-icon">{icon}</span>
@@ -72,14 +72,14 @@ export default function CRMMarketingPage() {
       <section style={{ paddingTop: 80 }}>
         <div className="wrap">
           <div className="sec-head reveal">
-            <h2>What your practice looks like with Receptifi CRM.</h2>
+            <h2>What your practice looks like with Receptifi Web.</h2>
           </div>
           <div className="desire-grid">
             {[
-              "Every lead captured automatically — from your website, ads, and phone calls — into one organized dashboard.",
-              "Instant follow-up within 60 seconds of a lead coming in, day or night. No lead goes cold.",
-              "Automated email and text sequences that nurture leads over days and weeks until they're ready to book.",
-              "Clear visibility on every lead — who's warm, who's booked, who needs a call — so nothing ever gets lost again.",
+              "A blazing-fast, mobile-first website that loads in under 2 seconds on any device — no bouncing, no lost patients.",
+              "Optimized for local search. You show up when patients Google your specialty + your city. Page 1, not page 3.",
+              "A site that actually converts — clear CTAs, easy booking, and trust signals that turn browsers into booked appointments.",
+              "You approve the design. We build it. You're live in 2 weeks with zero technical work on your end.",
             ].map((text, i) => (
               <div key={i} className="desire-card reveal">
                 <div className="desire-check"><Chk /></div>
@@ -88,9 +88,9 @@ export default function CRMMarketingPage() {
             ))}
           </div>
           <div className="desire-sub reveal">
-            <p>Stop losing leads you already paid to get.</p>
+            <p>Your website should be your best salesperson — working 24/7.</p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "15px 36px", fontSize: 16 }}>
-              Book a Call — Fix Your Follow-Up →
+              Book a Call — See What We Build →
             </CalendlyButton>
           </div>
         </div>
@@ -101,41 +101,41 @@ export default function CRMMarketingPage() {
         <div className="wrap">
           <div className="sec-head reveal">
             <div className="eyebrow" style={{ marginBottom: 20 }}>
-              <span className="dot" /> What Receptifi CRM does
+              <span className="dot" /> What Receptifi Web includes
             </div>
-            <h2>Your entire lead pipeline — automated.</h2>
+            <h2>Everything that makes patients choose you.</h2>
           </div>
           <div className="service-features">
             {[
               {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2C20 17.5 12 22 12 22z"/><circle cx="12" cy="10" r="3"/></svg>,
-                title: "Instant lead capture",
-                desc: "Every form submission, ad click, and phone inquiry lands in your CRM automatically — no manual entry.",
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>,
+                title: "Mobile-first design",
+                desc: "Built for the phone in the patient's hand. Fast, beautiful, and easy to navigate on any screen.",
               },
               {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-                title: "60-second follow-up",
-                desc: "Automated text and email sent within 60 seconds of a new lead — before they look at your competitor.",
-              },
-              {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>,
-                title: "Drip email sequences",
-                desc: "Automated nurture sequences that follow up over 7, 14, and 30 days — keeping you top of mind until they book.",
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
+                title: "Local SEO built in",
+                desc: "Keyword-optimized pages for your city, specialty, and services. Structured data for Google rankings.",
               },
               {
                 icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>,
                 title: "Calendly booking integration",
-                desc: "Every follow-up includes a direct booking link. Leads go from email to booked appointment in one click.",
+                desc: "Book-a-call button on every page. Visitors go from landing to booked appointment in 60 seconds.",
               },
               {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-                title: "Pipeline visibility",
-                desc: "See every lead — Cold, Warm, Booked, Closed — in a single dashboard. No spreadsheets. No sticky notes.",
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+                title: "Review showcase",
+                desc: "Your Google reviews displayed prominently. Social proof front and center, building trust on arrival.",
               },
               {
-                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>,
-                title: "Reporting & analytics",
-                desc: "See exactly how many leads came in, how many converted, and where the drop-off is — every week.",
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>,
+                title: "Analytics dashboard",
+                desc: "See exactly how many visitors came, what they looked at, and how many booked — every week.",
+              },
+              {
+                icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
+                title: "Done for you, start to finish",
+                desc: "Design, copywriting, development, hosting. You review and approve. We handle everything else.",
               },
             ].map(({ icon, title, desc }, i) => (
               <div key={i} className="feat reveal">
@@ -152,27 +152,27 @@ export default function CRMMarketingPage() {
       <section className="trust-section" style={{ paddingTop: 80 }}>
         <div className="wrap">
           <div className="sec-head reveal">
-            <h2>What happens when you stop letting leads go cold.</h2>
+            <h2>What happens when local businesses get a real website.</h2>
           </div>
           <div className="testimonial-grid">
             <div className="testimonial-card reveal">
-              <div className="testimonial-stat">3× close rate</div>
-              <p>&ldquo;We used to close 1 in 10 leads. With Receptifi CRM following up automatically, we now close 3 in 10. Same leads, better system.&rdquo;</p>
-              <span className="testimonial-placeholder">Local service business [PLACEHOLDER]</span>
-            </div>
-            <div className="testimonial-card reveal">
-              <div className="testimonial-stat">$0 wasted</div>
-              <p>&ldquo;We were spending $2,000/month on ads and losing half the leads because nobody followed up fast enough. That&apos;s fixed now.&rdquo;</p>
+              <div className="testimonial-stat">23 appts</div>
+              <p>&ldquo;Our new website booked 23 appointments in the first month. Our old one booked maybe 2. We should have done this years ago.&rdquo;</p>
               <span className="testimonial-placeholder">Dental practice owner [PLACEHOLDER]</span>
             </div>
             <div className="testimonial-card reveal">
-              <div className="testimonial-stat">47 booked</div>
-              <p>&ldquo;We had 80 old leads sitting dormant in a spreadsheet. Receptifi CRM ran a reactivation sequence. 47 responded. 12 booked.&rdquo;</p>
-              <span className="testimonial-placeholder">Multi-location practice [PLACEHOLDER]</span>
+              <div className="testimonial-stat">Page 1</div>
+              <p>&ldquo;We went from page 4 on Google to the top 3 results for &lsquo;dentist [city]&rsquo; within 60 days of launching our new site.&rdquo;</p>
+              <span className="testimonial-placeholder">Solo dental practice [PLACEHOLDER]</span>
+            </div>
+            <div className="testimonial-card reveal">
+              <div className="testimonial-stat">3.2× ROI</div>
+              <p>&ldquo;Our ad spend went from wasted clicks to booked appointments the moment our new site launched. Conversion rate tripled.&rdquo;</p>
+              <span className="testimonial-placeholder">Local service business [PLACEHOLDER]</span>
             </div>
           </div>
           <div className="trust-cta reveal">
-            <p>Ready to stop losing leads you already paid for?</p>
+            <p>Ready for a website that actually works?</p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "15px 36px", fontSize: 16 }}>
               Book a Call — See If You Qualify →
             </CalendlyButton>
@@ -188,25 +188,25 @@ export default function CRMMarketingPage() {
           </div>
           <div className="objection-grid">
             <div className="objection-card reveal">
-              <p className="objection-q">&ldquo;We follow up with leads manually.&rdquo;</p>
+              <p className="objection-q">&ldquo;We already have a website.&rdquo;</p>
               <div className="objection-arrow">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
               </div>
-              <p className="objection-a">Manual follow-up gets forgotten, inconsistent, and delayed. Automated follow-up happens in 60 seconds, every time, without fail. The math isn&apos;t close.</p>
+              <p className="objection-a">Having a website and having a website that converts are two very different things. If it&apos;s not booking appointments, it&apos;s costing you money.</p>
             </div>
             <div className="objection-card reveal">
-              <p className="objection-q">&ldquo;CRMs are complicated to set up and use.&rdquo;</p>
+              <p className="objection-q">&ldquo;It sounds expensive.&rdquo;</p>
               <div className="objection-arrow">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
               </div>
-              <p className="objection-a">We set up everything for you — sequences, integrations, and pipeline — and train your team in one call. You log in and see your leads. That&apos;s it.</p>
+              <p className="objection-a">One additional new patient per month covers the cost of Receptifi Web entirely. Most clients see that in the first two weeks.</p>
             </div>
             <div className="objection-card reveal">
-              <p className="objection-q">&ldquo;We don&apos;t have enough leads to need this.&rdquo;</p>
+              <p className="objection-q">&ldquo;Building a new site takes forever.&rdquo;</p>
               <div className="objection-arrow">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
               </div>
-              <p className="objection-a">Most practices have more leads than they realize — they just don&apos;t follow up consistently enough to convert them. We start by reactivating your cold list.</p>
+              <p className="objection-a">We go from kickoff call to live website in 2 weeks. You review once. We handle design, copy, development, and launch.</p>
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 48 }} className="reveal">
@@ -223,11 +223,11 @@ export default function CRMMarketingPage() {
           <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto" }} className="reveal">
             <h2 className="guarantee-headline">We guarantee results or we keep working for free.</h2>
             <p className="guarantee-sub">
-              If Receptifi CRM doesn&apos;t improve your lead conversion rate within 90 days, we keep optimizing at no charge until it does. No contracts. No risk.
+              If your new website doesn&apos;t generate more booked appointments within 90 days, we keep optimizing at no cost until it does. No contracts. No risk.
             </p>
           </div>
           <div className="safety-signals reveal">
-            {["No long-term contracts", "90-day results guarantee", "Setup handled by our team"].map((s) => (
+            {["No long-term contracts", "90-day results guarantee", "Done completely by our team"].map((s) => (
               <div key={s} className="safety-signal">
                 <div className="s-check"><Chk /></div>
                 {s}
@@ -246,16 +246,16 @@ export default function CRMMarketingPage() {
       <section className="urgency-section">
         <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
           <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }} className="reveal">
-            <h2>Every lead you don&apos;t follow up with today chooses someone else tomorrow.</h2>
+            <h2>Every day with a bad website is a day you&apos;re invisible on Google.</h2>
             <p style={{ fontSize: 18, marginTop: 28, lineHeight: 1.7 }}>
-              Right now, there are leads in your pipeline — or in your head — who haven&apos;t heard from you in days. They&apos;re still looking. They&apos;re still comparing. And your competitor with an automated follow-up system is reaching them first, every single time.
+              Right now, patients are Googling your specialty and city. Your competitor with the fast, modern site is on page 1. You&apos;re on page 3 — or worse. They click. They book. They become loyal patients. All because their website was better than yours.
             </p>
-            <div className="urgency-stat">10× less likely</div>
+            <div className="urgency-stat">53% bounce rate</div>
             <p style={{ fontSize: 15, color: "var(--ink-faint)", marginBottom: 40 }}>
-              Leads who don&apos;t hear back within 5 minutes are 10× less likely to convert. How fast is your current follow-up?
+              53% of mobile visitors leave a site that takes over 3 seconds to load. How fast does yours load?
             </p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "15px 36px", fontSize: 16 }}>
-              Fix Your Follow-Up — Book a Call Today →
+              Fix Your Website — Book a Call Today →
             </CalendlyButton>
           </div>
         </div>
@@ -270,19 +270,19 @@ export default function CRMMarketingPage() {
           <div className="logic-steps">
             <div className="logic-step reveal">
               <div className="logic-step-ico">01</div>
-              <p>If you get <strong>30 leads per month</strong> and currently convert 20%&hellip;</p>
+              <p>If your website converts even <strong>2 extra patients per month</strong>&hellip;</p>
             </div>
             <div className="logic-step reveal">
               <div className="logic-step-ico">02</div>
-              <p>Improving that to 35% with consistent follow-up adds <strong>4–5 new patients</strong> per month&hellip;</p>
+              <p>At an average patient value of <strong>$800</strong>&hellip;</p>
             </div>
             <div className="logic-step reveal">
               <div className="logic-step-ico">03</div>
-              <p>At $500 per patient, that&apos;s <strong>$2,000–$2,500 per month</strong> — from leads you already had.</p>
+              <p>That&apos;s <strong>$1,600 per month</strong> in additional revenue from your website alone.</p>
             </div>
           </div>
           <div className="logic-conclusion reveal">
-            <p>Receptifi CRM costs a fraction of that — and pays for itself the moment you close your first lead that would have gone cold.</p>
+            <p>Receptifi Web costs a fraction of that — and the first two extra patients you book pay for the entire thing.</p>
             <CalendlyButton className="btn btn-primary" style={{ padding: "14px 32px", fontSize: 15 }}>
               Run the numbers — Book a Call →
             </CalendlyButton>
@@ -294,9 +294,9 @@ export default function CRMMarketingPage() {
       <section className="decision-section">
         <div className="wrap">
           <div className="decision-inner">
-            <h2>Stop leaving money<br /><span className="grad">on the table.</span></h2>
+            <h2>Your new website is<br /><span className="grad">2 weeks away.</span></h2>
             <p className="sub">
-              You already have leads. You already have happy customers. The only thing missing is the system that captures, nurtures, and converts them automatically.
+              Every day you wait is another day patients Google you, see an outdated site, and book with your competitor instead.
             </p>
             <CalendlyButton className="btn btn-primary decision-btn">
               Book Your Call Now →

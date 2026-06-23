@@ -17,4 +17,7 @@ export interface Lead {
   notes: string | null;
   created_at: string;
   booked_at: string | null;
+  outreach_touch: number | null;
+  outreach_sent_at: string | null;
+  outreach_replied: boolean | null;
 }

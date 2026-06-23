@@ -3,13 +3,13 @@
 import { useRetellCall } from "./useRetellCall";
 
 export default function HeroCallButton() {
-  const { status, agentTalking, error, start, stop } = useRetellCall();
+  const { status, agentTalking, start, stop } = useRetellCall();
 
   const active = status === "active";
   const connecting = status === "connecting";
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+    <>
       <button
         onClick={active ? stop : start}
         disabled={connecting || status === "ending"}
@@ -40,14 +40,11 @@ export default function HeroCallButton() {
               <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
               <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" />
             </svg>
-            Talk to Our AI Receptionist
+            Hear It In Action
           </>
         )}
       </button>
-      {error && (
-        <span style={{ fontSize: 12, color: "#fca5a5" }}>{error}</span>
-      )}
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-    </div>
+    </>
   );
 }

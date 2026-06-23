@@ -58,8 +58,7 @@ export default function DemoPage() {
             </span>
           </h1>
           <p style={{ fontSize: 18, color: "var(--ink-dim)", lineHeight: 1.6, margin: "0 0 40px", maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
-            No scripts. No hold music. Just your new front desk —<br />
-            available right now, 24/7.
+            No scripts. No hold music. Just your new front desk, available right now, 24/7.
           </p>
 
           {/* ── Lead capture gate ── */}
@@ -146,7 +145,7 @@ export default function DemoPage() {
                 )}
                 {active && (
                   <p style={{ fontSize: 15, color: agentTalking ? "#4ade80" : "var(--ink-dim)", margin: 0, transition: "color 0.3s" }}>
-                    {agentTalking ? "AI is speaking…" : "Go ahead — say hi or ask a question"}
+                    {agentTalking ? "AI is speaking…" : "Go ahead. Say hi or ask a question."}
                   </p>
                 )}
                 {ending && (
@@ -185,7 +184,7 @@ export default function DemoPage() {
               {/* Mic permission note */}
               {idle && !error && (
                 <p style={{ marginTop: 12, fontSize: 12, color: "var(--ink-faint)" }}>
-                  Your browser will ask for microphone access — required for the call.
+                  Your browser will ask for microphone access. This is required for the call.
                 </p>
               )}
             </div>
