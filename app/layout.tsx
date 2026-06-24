@@ -2,7 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Plus_Jakarta_Sans, Geist_Mono, Playfair_Display } from 'next/font/google'
 import './globals.css'
-import { ChatWidget } from '@/components/chat-widget'
+import { ChatLoader } from '@/components/chat-loader'
 
 const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
@@ -60,7 +60,7 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
-        <ChatWidget />
+        <ChatLoader />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

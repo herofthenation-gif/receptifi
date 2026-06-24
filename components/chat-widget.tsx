@@ -100,7 +100,7 @@ export function ChatWidget() {
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-6 right-6 z-50 flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-105 hover:bg-primary/90 active:scale-95"
+        className="fixed bottom-5 right-4 z-50 flex size-13 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-105 hover:bg-primary/90 active:scale-95 sm:bottom-6 sm:right-6 sm:size-14"
       >
         {open ? (
           <X className="size-5" />
@@ -111,7 +111,7 @@ export function ChatWidget() {
 
       {/* ── Chat panel ── */}
       <div
-        className={`fixed bottom-24 right-6 z-50 flex w-[22rem] flex-col overflow-hidden rounded-[1.5rem] border border-border bg-background shadow-soft-lg transition-all duration-300 sm:w-[24rem] ${
+        className={`fixed bottom-20 right-4 z-50 flex w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-[1.5rem] border border-border bg-background shadow-soft-lg transition-all duration-300 sm:bottom-24 sm:right-6 sm:w-[24rem] ${
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none translate-y-4 opacity-0"

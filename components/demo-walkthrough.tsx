@@ -261,7 +261,7 @@ function CrmPanel({ iteration }: { iteration: number }) {
 /* ─── Step 3: Review Panel ───────────────────────────────────── */
 function ReviewPanel({ iteration }: { iteration: number }) {
   return (
-    <div key={iteration} className="mx-auto grid w-full max-w-lg grid-cols-2 gap-4">
+    <div key={iteration} className="mx-auto grid w-full max-w-lg grid-cols-1 gap-4 sm:grid-cols-2">
       {/* Left: review request */}
       <div>
         <p className="anim-fade-in mb-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">

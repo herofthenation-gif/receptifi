@@ -69,12 +69,12 @@ export function Hero({ onWatchClick }: { onWatchClick?: () => void }) {
   const visible = Array.from({ length: 4 }, (_, i) => pool[(feedIdx + i) % pool.length])
 
   return (
-    <section className="relative overflow-hidden pt-36 pb-24 sm:pt-52 sm:pb-36">
+    <section className="relative overflow-hidden pt-24 pb-16 sm:pt-52 sm:pb-36">
 
       {/* Drifting color orbs — slow, alive background */}
-      <div aria-hidden className="anim-drift-a pointer-events-none absolute -top-24 -left-20 -z-10 h-[42rem] w-[42rem] rounded-full bg-primary/7 blur-[130px]" />
-      <div aria-hidden className="anim-drift-b pointer-events-none absolute -top-16 -right-20 -z-10 h-[38rem] w-[38rem] rounded-full bg-primary/5 blur-[110px]" />
-      <div aria-hidden className="anim-drift-c pointer-events-none absolute bottom-0 left-1/2 -z-10 h-[30rem] w-[30rem] rounded-full bg-primary/4 blur-[100px]" />
+      <div aria-hidden className="anim-drift-a pointer-events-none absolute -top-24 -left-20 -z-10 h-[28rem] w-[28rem] rounded-full bg-primary/7 blur-[70px] sm:h-[42rem] sm:w-[42rem] sm:blur-[130px]" />
+      <div aria-hidden className="anim-drift-b pointer-events-none absolute -top-16 -right-20 -z-10 h-[24rem] w-[24rem] rounded-full bg-primary/5 blur-[60px] sm:h-[38rem] sm:w-[38rem] sm:blur-[110px]" />
+      <div aria-hidden className="anim-drift-c pointer-events-none absolute bottom-0 left-1/2 -z-10 h-[20rem] w-[20rem] rounded-full bg-primary/4 blur-[50px] sm:h-[30rem] sm:w-[30rem] sm:blur-[100px]" />
 
       {/* Slowly rotating concentric arcs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden">
@@ -94,14 +94,14 @@ export function Hero({ onWatchClick }: { onWatchClick?: () => void }) {
         <div className="flex flex-col items-center text-center">
 
           {/* ── Brand name — the largest element on the page ── */}
-          <h1 className="font-sans text-[4.5rem] font-extrabold uppercase leading-none tracking-[0.1em] text-foreground sm:text-[6.5rem] lg:text-[8.5rem]">
+          <h1 className="font-sans text-5xl font-extrabold uppercase leading-none tracking-[0.1em] text-foreground sm:text-7xl lg:text-[8.5rem]">
             Recept<span className="text-primary">ifi</span>
           </h1>
 
           {/* ── Cycling service line ── */}
-          <div className="mt-5 h-10 overflow-hidden">
+          <div className="mt-4 h-9 overflow-hidden sm:mt-5 sm:h-10">
             <p
-              className="font-sans text-2xl font-medium italic text-muted-foreground sm:text-3xl"
+              className="font-sans text-xl font-medium italic text-muted-foreground sm:text-2xl"
               style={{
                 opacity:   show ? 1 : 0,
                 transform: show ? "translateY(0)" : "translateY(10px)",

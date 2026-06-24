@@ -191,10 +191,16 @@
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
   }
-  .anim-drift-a { animation: drift-a 26s ease-in-out infinite; }
-  .anim-drift-b { animation: drift-b 34s ease-in-out infinite; }
-  .anim-drift-c { animation: drift-c 22s ease-in-out infinite; }
-  .anim-ring-spin { animation: ring-spin 90s linear infinite; transform-origin: center; }
+  .anim-drift-a { animation: drift-a 26s ease-in-out infinite; will-change: transform; }
+  .anim-drift-b { animation: drift-b 34s ease-in-out infinite; will-change: transform; }
+  .anim-drift-c { animation: drift-c 22s ease-in-out infinite; will-change: transform; }
+  .anim-ring-spin { animation: ring-spin 90s linear infinite; transform-origin: center; will-change: transform; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-drift-a, .anim-drift-b, .anim-drift-c, .anim-ring-spin,
+    .anim-fade-up, .anim-fade-in, .anim-progress,
+    .animate-marquee, .animate-ping, .animate-bounce { animation: none !important; }
+  }
 
   /* Pulse for live dot */
   @keyframes ping-soft {
