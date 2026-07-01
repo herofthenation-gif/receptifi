@@ -86,6 +86,8 @@ export default function CRMPage() {
   const [saving, setSaving] = useState(false);
   const [editingNote, setEditingNote] = useState<string | null>(null);
   const [noteText, setNoteText] = useState("");
+  const [editingEmail, setEditingEmail] = useState<string | null>(null);
+  const [emailText, setEmailText] = useState("");
   const [filter, setFilter] = useState<LeadStatus | "all">("all");
   const [search, setSearch] = useState("");
   const [showImport, setShowImport] = useState(false);
@@ -126,6 +128,13 @@ export default function CRMPage() {
     await supabase.from("leads").update({ notes: noteText }).eq("id", id);
     setLeads((prev) => prev.map((l) => l.id === id ? { ...l, notes: noteText } : l));
     setEditingNote(null);
+  }
+
+  async function saveEmail(id: string) {
+    const email = emailText.trim() || null;
+    await supabase.from("leads").update({ email }).eq("id", id);
+    setLeads((prev) => prev.map((l) => l.id === id ? { ...l, email } : l));
+    setEditingEmail(null);
   }
 
   async function deleteLead(id: string) {
@@ -300,9 +309,34 @@ export default function CRMPage() {
                     {lead.business_name || <span style={{ color: "var(--hair-strong)" }}>—</span>}
                   </td>
                   <td style={{ padding: "14px 16px", fontSize: 13 }}>
-                    {lead.email && <div style={{ color: "var(--ink-dim)" }}>{lead.email}</div>}
+                    {editingEmail === lead.id ? (
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <input
+                          autoFocus
+                          type="email"
+                          value={emailText}
+                          onChange={(e) => setEmailText(e.target.value)}
+                          onKeyDown={(e) => e.key === "Enter" && saveEmail(lead.id)}
+                          placeholder="email@example.com"
+                          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(96,165,250,0.4)", color: "var(--ink)", fontSize: 12, padding: "5px 8px", borderRadius: 7, fontFamily: "inherit", outline: "none", width: 150 }}
+                        />
+                        <button onClick={() => saveEmail(lead.id)} style={{ padding: "4px 10px", borderRadius: 6, border: 0, background: "rgba(59,130,246,0.2)", color: "var(--accent-2)", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>Save</button>
+                        <button onClick={() => setEditingEmail(null)} style={{ padding: "4px 10px", borderRadius: 6, border: 0, background: "rgba(255,255,255,0.06)", color: "var(--ink-dim)", fontSize: 11, cursor: "pointer" }}>Cancel</button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => { setEditingEmail(lead.id); setEmailText(lead.email ?? ""); }}
+                        title="Click to edit email"
+                        style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left", display: "block", width: "100%" }}
+                      >
+                        {lead.email ? (
+                          <div style={{ color: "var(--ink-dim)" }}>{lead.email}</div>
+                        ) : (
+                          <div style={{ color: "var(--hair-strong)" }}>+ Add email</div>
+                        )}
+                      </button>
+                    )}
                     {lead.phone && <div style={{ color: "var(--ink-faint)", marginTop: 2 }}>{lead.phone}</div>}
-                    {!lead.email && !lead.phone && <span style={{ color: "var(--hair-strong)" }}>—</span>}
                   </td>
                   <td style={{ padding: "14px 16px" }}>
                     <StatusSelect value={lead.status} onChange={(v) => updateStatus(lead.id, v)} />
@@ -573,4 +607,5 @@ alter table public.leads
 
 -- Allow full access via the anon key (internal CRM tool)
 alter table public.leads enable row level security;
-create policy if not exists "crm_all" on public.leads for all using (true) with check (true);`;
+drop policy if exists "crm_all" on public.leads;
+create policy "crm_all" on public.leads for all using (true) with check (true);`;
