@@ -5,6 +5,8 @@ const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
 
 const SKIP_DOMAINS = [
   "example.com",
+  "domain.com",
+  "yourdomain.com",
   "sentry.io",
   "wixpress.com",
   "squarespace.com",
@@ -20,6 +22,28 @@ const SKIP_DOMAINS = [
   "doctorallia.com",
   "webmd.com",
   "w3.org",
+];
+
+// Retina asset naming (logo@2x.png, hero@3x.jpg) and other static-file
+// references regex-match the email pattern since the file extension looks
+// like a TLD. Reject anything ending in a known non-TLD extension.
+const FILE_EXTENSIONS = [
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "svg",
+  "webp",
+  "ico",
+  "pdf",
+  "css",
+  "js",
+  "woff",
+  "woff2",
+  "ttf",
+  "eot",
+  "mp4",
+  "webm",
 ];
 
 const HEADERS = {
@@ -47,6 +71,8 @@ function extractEmails(html: string): string[] {
     const domain = lower.split("@")[1];
     if (!domain) continue;
     if (SKIP_DOMAINS.some((skip) => domain === skip || domain.includes(skip))) continue;
+    const tld = domain.split(".").pop() ?? "";
+    if (FILE_EXTENSIONS.includes(tld)) continue;
     if (!results.includes(lower)) results.push(lower);
   }
   return results;
