@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import type { GeneratedSite } from "@/lib/outreach/site-generator";
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -31,6 +32,14 @@ export interface Lead {
   priority_tier: number | null;
   source: string | null;
   outreach_last_error: string | null;
+  address: string | null;
+  website_status: "none" | "outdated" | "good" | null;
+  site_quality_score: number | null;
+  offer_type: "web" | "reviews" | "crm" | "voice" | null;
+  preview_slug: string | null;
+  generated_site: GeneratedSite | null;
+  quality_checked_at: string | null;
+  unsubscribed_at: string | null;
 }
 
 export interface GooglePlacesPeriod {

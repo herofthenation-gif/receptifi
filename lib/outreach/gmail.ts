@@ -39,15 +39,30 @@ async function listRecentMessageIds(accessToken: string): Promise<string[]> {
   return (json.messages ?? []).map((m) => m.id);
 }
 
-async function getFromHeader(accessToken: string, messageId: string): Promise<string | null> {
+interface MessageMeta {
+  from: string | null;
+  subject: string | null;
+  snippet: string | null;
+}
+
+async function getMessageMeta(accessToken: string, messageId: string): Promise<MessageMeta | null> {
   const url = new URL(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}`);
   url.searchParams.set("format", "metadata");
   url.searchParams.append("metadataHeaders", "From");
+  url.searchParams.append("metadataHeaders", "Subject");
   const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
   if (!res.ok) return null;
-  const json = (await res.json()) as { payload?: { headers?: { name: string; value: string }[] } };
-  return json.payload?.headers?.find((h) => h.name === "From")?.value ?? null;
+  const json = (await res.json()) as {
+    snippet?: string;
+    payload?: { headers?: { name: string; value: string }[] };
+  };
+  const header = (name: string) => json.payload?.headers?.find((h) => h.name === name)?.value ?? null;
+  return { from: header("From"), subject: header("Subject"), snippet: json.snippet ?? null };
 }
+
+// CAN-SPAM opt-out: the signature says reply "unsubscribe" — catch the
+// common phrasings people actually type.
+const UNSUBSCRIBE_RE = /unsubscribe|opt.?out|\bstop\s+email|remove\s+me|take\s+me\s+off|do\s+not\s+(?:contact|email)|don'?t\s+(?:contact|email)\s+me/i;
 
 function extractEmailAddress(fromHeader: string): string | null {
   const match = fromHeader.match(EMAIL_RE);
@@ -57,6 +72,7 @@ function extractEmailAddress(fromHeader: string): string | null {
 export interface ReplyCheckResult {
   checked: number;
   matched: number;
+  unsubscribed: number;
 }
 
 /**
@@ -67,7 +83,7 @@ export interface ReplyCheckResult {
  */
 export async function checkGmailReplies(): Promise<ReplyCheckResult> {
   if (!process.env.GMAIL_CLIENT_ID || !process.env.GMAIL_CLIENT_SECRET || !process.env.GMAIL_REFRESH_TOKEN) {
-    return { checked: 0, matched: 0 };
+    return { checked: 0, matched: 0, unsubscribed: 0 };
   }
 
   const { data: activeLeads, error } = await supabaseAdmin
@@ -77,7 +93,7 @@ export async function checkGmailReplies(): Promise<ReplyCheckResult> {
     .or("outreach_replied.is.null,outreach_replied.eq.false")
     .gte("outreach_touch", 1);
 
-  if (error || !activeLeads?.length) return { checked: 0, matched: 0 };
+  if (error || !activeLeads?.length) return { checked: 0, matched: 0, unsubscribed: 0 };
 
   const emailToLeadId = new Map<string, string>();
   for (const lead of activeLeads) {
@@ -88,14 +104,21 @@ export async function checkGmailReplies(): Promise<ReplyCheckResult> {
   const messageIds = await listRecentMessageIds(accessToken);
 
   let matched = 0;
+  let unsubscribed = 0;
   for (const id of messageIds) {
-    const fromHeader = await getFromHeader(accessToken, id);
-    const fromEmail = fromHeader ? extractEmailAddress(fromHeader) : null;
+    const meta = await getMessageMeta(accessToken, id);
+    const fromEmail = meta?.from ? extractEmailAddress(meta.from) : null;
     const leadId = fromEmail ? emailToLeadId.get(fromEmail) : undefined;
-    if (!leadId) continue;
-    await supabaseAdmin.from("leads").update({ outreach_replied: true }).eq("id", leadId);
+    if (!leadId || !meta) continue;
+
+    const optOut = UNSUBSCRIBE_RE.test(`${meta.subject ?? ""} ${meta.snippet ?? ""}`);
+    await supabaseAdmin
+      .from("leads")
+      .update(optOut ? { outreach_replied: true, unsubscribed_at: new Date().toISOString() } : { outreach_replied: true })
+      .eq("id", leadId);
     matched++;
+    if (optOut) unsubscribed++;
   }
 
-  return { checked: messageIds.length, matched };
+  return { checked: messageIds.length, matched, unsubscribed };
 }

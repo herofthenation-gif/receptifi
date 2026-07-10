@@ -14,7 +14,18 @@ function daysSinceUtc(dateStr: string): number {
   return Math.floor((todayUtc - sentUtc) / 86_400_000);
 }
 
+// A lead with a website but no site-quality check yet would get the generic
+// voice pitch even though it may really need web/reviews/crm. Sort those last
+// so they only consume cap when nothing classified is waiting — the sourcing
+// cron backfills classification daily.
+function awaitingClassification(lead: Lead): boolean {
+  return !!lead.website && lead.offer_type == null;
+}
+
 function comparePriority(a: DueLead, b: DueLead): number {
+  const unclassifiedA = Number(awaitingClassification(a.lead));
+  const unclassifiedB = Number(awaitingClassification(b.lead));
+  if (unclassifiedA !== unclassifiedB) return unclassifiedA - unclassifiedB;
   const tierA = a.lead.priority_tier ?? 3;
   const tierB = b.lead.priority_tier ?? 3;
   if (tierA !== tierB) return tierA - tierB;
@@ -36,10 +47,8 @@ export async function getDueLeads(cap: number): Promise<DueLead[]> {
     .or("outreach_replied.is.null,outreach_replied.eq.false")
     .not("status", "in", "(booked,closed)")
     .or("outreach_touch.is.null,outreach_touch.lt.3")
-    // Only "dental" has real outreach copy today (see lib/outreach/email-templates.ts).
-    // Null vertical covers manually-added CRM leads (the form doesn't set one, and the
-    // CRM's original purpose was dental). Every other vertical waits for its own template.
-    .or("vertical.is.null,vertical.eq.dental");
+    // CAN-SPAM: an opt-out is permanent, regardless of touch or status.
+    .is("unsubscribed_at", null);
 
   if (error) throw new Error(`getDueLeads: ${error.message}`);
 

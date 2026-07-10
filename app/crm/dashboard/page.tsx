@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { supabase, type Lead, type LeadStatus } from "@/lib/supabase";
+import { getVertical } from "@/lib/outreach/config";
 
 // ── CSV import types ─────────────────────────────────────
 interface CsvRow {
@@ -42,6 +43,44 @@ const STATUS: Record<LeadStatus, { label: string; color: string; bg: string; bor
 const STATUSES: LeadStatus[] = ["cold", "warm", "booked", "closed"];
 
 const EMPTY_FORM = { name: "", business_name: "", phone: "", email: "", status: "cold" as LeadStatus, notes: "" };
+
+// Scoped to this page only — the marketing site has its own (light) theme
+// tokens in globals.css and must not be touched. These were referenced
+// throughout this file but never actually defined anywhere, so every badge
+// and glass-card effect below was silently falling back to plain black-on-
+// white. Values match the dark theme this page was originally designed for.
+const CRM_THEME = {
+  "--bg": "#05070d",
+  "--ink": "#e8eef9",
+  "--ink-dim": "#9aa5b8",
+  "--ink-faint": "rgba(232,238,249,.55)",
+  "--hair": "rgba(255,255,255,.08)",
+  "--hair-strong": "rgba(255,255,255,.14)",
+  "--accent-2": "#60a5fa",
+} as CSSProperties;
+
+// ── Offer type config ────────────────────────────────────
+const OFFER: Record<string, { label: string; color: string; bg: string; border: string }> = {
+  web:     { label: "Web",     color: "#a78bfa", bg: "rgba(167,139,250,0.10)", border: "rgba(167,139,250,0.28)" },
+  reviews: { label: "Reviews", color: "#fbbf24", bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.28)"  },
+  crm:     { label: "CRM",     color: "#4ade80", bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.28)"  },
+  voice:   { label: "Voice",   color: "#60a5fa", bg: "rgba(96,165,250,0.10)",  border: "rgba(96,165,250,0.28)"  },
+};
+
+function OfferBadge({ lead }: { lead: Lead }) {
+  if (lead.offer_type && OFFER[lead.offer_type]) {
+    const o = OFFER[lead.offer_type];
+    return (
+      <span style={{ display: "inline-flex", alignItems: "center", padding: "3px 9px", borderRadius: 999, fontSize: 11, fontWeight: 600, color: o.color, background: o.bg, border: `1px solid ${o.border}` }}>
+        {o.label}
+      </span>
+    );
+  }
+  if (lead.website) {
+    return <span style={{ fontSize: 11, color: "var(--ink-faint)", fontStyle: "italic" }}>Awaiting classification</span>;
+  }
+  return <span style={{ color: "var(--hair-strong)", fontSize: 12 }}>—</span>;
+}
 
 // ── Sub-components ───────────────────────────────────────
 function Badge({ status }: { status: LeadStatus }) {
@@ -88,7 +127,8 @@ export default function CRMPage() {
   const [noteText, setNoteText] = useState("");
   const [editingEmail, setEditingEmail] = useState<string | null>(null);
   const [emailText, setEmailText] = useState("");
-  const [filter, setFilter] = useState<LeadStatus | "all">("all");
+  const [filter, setFilter] = useState<LeadStatus | "all" | "unsubscribed">("all");
+  const [verticalFilter, setVerticalFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
   const [showImport, setShowImport] = useState(false);
   const [importRows, setImportRows] = useState<CsvRow[]>([]);
@@ -182,23 +222,28 @@ export default function CRMPage() {
   }
 
   const visible = leads.filter((l) => {
-    if (filter !== "all" && l.status !== filter) return false;
+    if (filter === "unsubscribed") { if (!l.unsubscribed_at) return false; }
+    else if (filter !== "all" && l.status !== filter) return false;
+    if (verticalFilter !== "all" && (l.vertical ?? "generic") !== verticalFilter) return false;
     if (search) {
       const q = search.toLowerCase();
       return (
         l.name.toLowerCase().includes(q) ||
         (l.email ?? "").toLowerCase().includes(q) ||
         (l.business_name ?? "").toLowerCase().includes(q) ||
-        (l.phone ?? "").includes(q)
+        (l.phone ?? "").includes(q) ||
+        (l.city ?? "").toLowerCase().includes(q)
       );
     }
     return true;
   });
 
   const counts = STATUSES.reduce((acc, s) => ({ ...acc, [s]: leads.filter((l) => l.status === s).length }), {} as Record<LeadStatus, number>);
+  const unsubscribedCount = leads.filter((l) => l.unsubscribed_at).length;
+  const verticalsPresent = Array.from(new Set(leads.map((l) => l.vertical ?? "generic"))).sort();
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--ink)", fontFamily: "Inter, sans-serif" }}>
+    <div style={{ ...CRM_THEME, minHeight: "100vh", background: "var(--bg)", color: "var(--ink)", fontFamily: "Inter, sans-serif" }}>
       {/* ambient */}
       <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", background: "radial-gradient(40% 30% at 20% 10%, rgba(59,130,246,0.18), transparent 60%), radial-gradient(35% 28% at 80% 20%, rgba(99,102,241,0.12), transparent 65%)" }} />
 
@@ -237,7 +282,8 @@ export default function CRMPage() {
         {/* ── Stat pills ── */}
         <div style={{ display: "flex", gap: 12, margin: "28px 0", flexWrap: "wrap" }}>
           {[{ key: "all" as const, label: "All leads", count: leads.length, color: "var(--accent-2)", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)" },
-            ...STATUSES.map((s) => ({ key: s, label: STATUS[s].label, count: counts[s] ?? 0, color: STATUS[s].color, bg: STATUS[s].bg, border: STATUS[s].border }))
+            ...STATUSES.map((s) => ({ key: s, label: STATUS[s].label, count: counts[s] ?? 0, color: STATUS[s].color, bg: STATUS[s].bg, border: STATUS[s].border })),
+            { key: "unsubscribed" as const, label: "Unsubscribed", count: unsubscribedCount, color: "#ef4444", bg: "rgba(239,68,68,0.08)", border: "rgba(239,68,68,0.28)" },
           ].map(({ key, label, count, color, bg, border }) => (
             <button
               key={key}
@@ -250,16 +296,28 @@ export default function CRMPage() {
           ))}
         </div>
 
-        {/* ── Search ── */}
-        <div style={{ marginBottom: 20, position: "relative" }}>
-          <svg style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "var(--ink-faint)", pointerEvents: "none" }} width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
-          <input
-            type="text"
-            placeholder="Search leads by name, email, business, or phone…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{ width: "100%", background: "rgba(255,255,255,0.04)", border: "1px solid var(--hair-strong)", color: "var(--ink)", fontFamily: "inherit", fontSize: 14, padding: "11px 14px 11px 40px", borderRadius: 10, outline: "none" }}
-          />
+        {/* ── Search + vertical filter ── */}
+        <div style={{ marginBottom: 20, display: "flex", gap: 10 }}>
+          <div style={{ position: "relative", flex: 1 }}>
+            <svg style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "var(--ink-faint)", pointerEvents: "none" }} width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
+            <input
+              type="text"
+              placeholder="Search leads by name, email, business, phone, or city…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{ width: "100%", background: "rgba(255,255,255,0.04)", border: "1px solid var(--hair-strong)", color: "var(--ink)", fontFamily: "inherit", fontSize: 14, padding: "11px 14px 11px 40px", borderRadius: 10, outline: "none", boxSizing: "border-box" }}
+            />
+          </div>
+          <select
+            value={verticalFilter}
+            onChange={(e) => setVerticalFilter(e.target.value)}
+            style={{ appearance: "none", background: "rgba(255,255,255,0.04)", border: "1px solid var(--hair-strong)", color: "var(--ink)", fontFamily: "inherit", fontSize: 14, padding: "11px 16px", borderRadius: 10, outline: "none", cursor: "pointer", minWidth: 160 }}
+          >
+            <option value="all">All verticals</option>
+            {verticalsPresent.map((v) => (
+              <option key={v} value={v}>{getVertical(v).label}</option>
+            ))}
+          </select>
         </div>
 
         {/* ── Table ── */}
@@ -270,18 +328,18 @@ export default function CRMPage() {
           </div>
         )}
 
-        <div style={{ borderRadius: 16, border: "1px solid var(--hair-strong)", overflow: "hidden", background: "rgba(255,255,255,0.025)", backdropFilter: "blur(12px)" }}>
+        <div style={{ borderRadius: 16, border: "1px solid var(--hair-strong)", overflowX: "auto", background: "rgba(255,255,255,0.025)", backdropFilter: "blur(12px)" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ background: "rgba(255,255,255,0.03)", borderBottom: "1px solid var(--hair)" }}>
-                {["Name", "Business", "Contact", "Status", "Outreach", "Notes", "Created", ""].map((h) => (
+                {["Name", "Business", "Vertical", "Offer", "Contact", "Status", "Outreach", "Notes", "Created", ""].map((h) => (
                   <th key={h} style={{ padding: "13px 16px", textAlign: "left", fontSize: 11, fontWeight: 600, color: "var(--ink-faint)", letterSpacing: "0.07em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={8} style={{ padding: 48, textAlign: "center", color: "var(--ink-faint)" }}>
+                <tr><td colSpan={10} style={{ padding: 48, textAlign: "center", color: "var(--ink-faint)" }}>
                   <div style={{ display: "inline-flex", gap: 6 }}>
                     {[0, 0.15, 0.3].map((d, i) => (
                       <span key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent-2)", animation: `dot 1.2s ease-in-out ${d}s infinite` }} />
@@ -289,7 +347,7 @@ export default function CRMPage() {
                   </div>
                 </td></tr>
               ) : visible.length === 0 ? (
-                <tr><td colSpan={8} style={{ padding: 64, textAlign: "center", color: "var(--ink-faint)", fontSize: 14 }}>
+                <tr><td colSpan={10} style={{ padding: 64, textAlign: "center", color: "var(--ink-faint)", fontSize: 14 }}>
                   {leads.length === 0 ? "No leads yet — add your first one above." : "No leads match your filter."}
                 </td></tr>
               ) : visible.map((lead, i) => (
@@ -307,6 +365,18 @@ export default function CRMPage() {
                   </td>
                   <td style={{ padding: "14px 16px", fontSize: 13, color: "var(--ink-dim)" }}>
                     {lead.business_name || <span style={{ color: "var(--hair-strong)" }}>—</span>}
+                    {lead.city && <div style={{ fontSize: 11, color: "var(--ink-faint)", marginTop: 2 }}>{lead.city}</div>}
+                    {lead.preview_slug && (
+                      <a href={`/preview/${lead.preview_slug}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: "var(--accent-2)", marginTop: 2, display: "inline-block" }}>
+                        View site ↗
+                      </a>
+                    )}
+                  </td>
+                  <td style={{ padding: "14px 16px", fontSize: 12, color: "var(--ink-dim)", whiteSpace: "nowrap" }}>
+                    {getVertical(lead.vertical).label}
+                  </td>
+                  <td style={{ padding: "14px 16px" }}>
+                    <OfferBadge lead={lead} />
                   </td>
                   <td style={{ padding: "14px 16px", fontSize: 13 }}>
                     {editingEmail === lead.id ? (
@@ -342,7 +412,12 @@ export default function CRMPage() {
                     <StatusSelect value={lead.status} onChange={(v) => updateStatus(lead.id, v)} />
                   </td>
                   <td style={{ padding: "14px 16px", whiteSpace: "nowrap" }}>
-                    {lead.outreach_replied ? (
+                    {lead.unsubscribed_at ? (
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "4px 10px", borderRadius: 999, fontSize: 11, fontWeight: 600, color: "#ef4444", background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.28)" }}>
+                        <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#ef4444" }} />
+                        Unsubscribed
+                      </span>
+                    ) : lead.outreach_replied ? (
                       <span style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "4px 10px", borderRadius: 999, fontSize: 11, fontWeight: 600, color: "#4ade80", background: "rgba(74,222,128,0.1)", border: "1px solid rgba(74,222,128,0.28)" }}>
                         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#4ade80" }} />
                         Replied
@@ -392,6 +467,11 @@ export default function CRMPage() {
                   </td>
                   <td style={{ padding: "14px 16px", fontSize: 12, color: "var(--ink-faint)", whiteSpace: "nowrap" }}>
                     {new Date(lead.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                    {lead.source && (
+                      <div style={{ fontSize: 10, marginTop: 2, textTransform: "capitalize" }}>
+                        {lead.source.replace(/_/g, " ")}
+                      </div>
+                    )}
                   </td>
                   <td style={{ padding: "14px 16px" }}>
                     <button

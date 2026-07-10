@@ -5,7 +5,7 @@ import { getDueLeads } from "@/lib/outreach/due-emails";
 import { sendColdEmail } from "@/lib/outreach/resend-client";
 import { buildOutreachEmail } from "@/lib/outreach/email-templates";
 import { personalizeOpening } from "@/lib/outreach/personalize";
-import { DEFAULT_DAILY_CAP } from "@/lib/outreach/config";
+import { DEFAULT_DAILY_CAP, PREVIEW_BASE_URL } from "@/lib/outreach/config";
 
 export const maxDuration = 60;
 
@@ -14,6 +14,8 @@ interface SendResultEntry {
   touch: number;
   to: string;
   subject: string;
+  vertical: string | null;
+  offerType: string;
   status: "sent" | "error" | "preview";
   error?: string;
 }
@@ -37,18 +39,29 @@ export async function GET(req: Request) {
 
   for (const { lead, touch } of due) {
     const businessName = lead.business_name ?? lead.name;
+    const ctx = {
+      vertical: lead.vertical,
+      offerType: lead.offer_type,
+      previewUrl: lead.preview_slug ? `${PREVIEW_BASE_URL}/${lead.preview_slug}` : null,
+    };
     const opening =
       touch === 1
         ? personalizeOpening({
             hasWebsite: !!lead.website,
             reviewCount: lead.review_count,
             hours: lead.hours_json,
+            rating: lead.rating,
+            vertical: lead.vertical,
+            city: lead.city,
+            offerType: lead.offer_type,
+            qualitySignals: lead.generated_site?.qualitySignals ?? null,
           })
         : "";
-    const { subject, text } = buildOutreachEmail(touch, businessName, opening);
+    const { subject, text } = buildOutreachEmail(touch, businessName, opening, ctx);
+    const offerType = lead.offer_type ?? "voice";
 
     if (dryRun) {
-      results.push({ businessName, touch, to: lead.email!, subject, status: "preview" });
+      results.push({ businessName, touch, to: lead.email!, subject, vertical: lead.vertical, offerType, status: "preview" });
       continue;
     }
 
@@ -58,10 +71,10 @@ export async function GET(req: Request) {
         .from("leads")
         .update({ outreach_touch: touch, outreach_sent_at: today, outreach_last_error: null })
         .eq("id", lead.id);
-      results.push({ businessName, touch, to: lead.email!, subject, status: "sent" });
+      results.push({ businessName, touch, to: lead.email!, subject, vertical: lead.vertical, offerType, status: "sent" });
     } else {
       await supabaseAdmin.from("leads").update({ outreach_last_error: sendResult.error }).eq("id", lead.id);
-      results.push({ businessName, touch, to: lead.email!, subject, status: "error", error: sendResult.error });
+      results.push({ businessName, touch, to: lead.email!, subject, vertical: lead.vertical, offerType, status: "error", error: sendResult.error });
     }
   }
 
@@ -69,6 +82,7 @@ export async function GET(req: Request) {
     dryRun,
     repliesChecked: replyCheck.checked,
     repliesMatched: replyCheck.matched,
+    unsubscribed: replyCheck.unsubscribed,
     queued: due.length,
     results,
   });
