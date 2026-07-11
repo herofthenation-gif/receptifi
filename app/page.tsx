@@ -1,8 +1,9 @@
 import { Navbar } from "@/components/navbar"
 import { HomepageShell } from "@/components/homepage-shell"
 import { Marquee } from "@/components/marquee"
+import { AiClarity } from "@/components/ai-clarity"
 import { Services } from "@/components/services"
-import { RoiCalculator } from "@/components/roi-calculator"
+import { SelfAssessment } from "@/components/self-assessment"
 import { WhoThisIsFor } from "@/components/who-this-is-for"
 import { SiteFooter } from "@/components/site-footer"
 
@@ -14,13 +15,15 @@ export default function Page() {
       <HomepageShell />
       {/* Marquee ticker */}
       <Marquee />
+      {/* Why Receptifi — cuts through AI hype before the services pitch */}
+      <AiClarity />
       {/* Services — premium off-white so white cards lift off the surface */}
       <div className="bg-section-alt">
         <Services />
       </div>
-      {/* ROI Calculator — pure white */}
+      {/* Self-Assessment — pure white */}
       <div className="bg-background">
-        <RoiCalculator />
+        <SelfAssessment />
       </div>
       {/* Who This Is For */}
       <WhoThisIsFor />

@@ -202,14 +202,14 @@ export function Services() {
         {/* Section header */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="mb-6 block font-sans text-xs uppercase tracking-[0.18em] text-primary">
-            The Platform
+            What We Find
           </span>
           <h2 className="text-balance font-serif text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            One system to attract, capture, and retain revenue.
+            Four places local businesses lose revenue without knowing it.
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-            Four integrated layers working as a single engine, built to seal
-            every leak in your funnel.
+            The audit checks all four. We fix whichever ones are actually
+            costing you.
           </p>
         </div>
 

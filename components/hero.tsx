@@ -6,10 +6,10 @@ import { ArrowRight, Globe, LayoutDashboard, Phone, Play, Star, TrendingUp } fro
 
 /* ─── Cycling service phrases ────────────────────────────────── */
 const phrases = [
-  "We answer every call.",
-  "We build your website.",
-  "We collect your reviews.",
-  "We track every lead.",
+  "Missed calls are costing you patients.",
+  "An outdated site is costing you bookings.",
+  "Weak reviews are costing you the search.",
+  "Slow follow-up is costing you leads.",
 ]
 
 /* ─── Live activity pool ─────────────────────────────────────── */
@@ -114,7 +114,7 @@ export function Hero({ onWatchClick }: { onWatchClick?: () => void }) {
 
           {/* ── Summary ── */}
           <p className="mt-3 font-sans text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-            The complete revenue system for local service businesses
+            See what not using AI is costing your business
           </p>
 
           {/* ── Live activity feed ── */}

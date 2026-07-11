@@ -226,7 +226,7 @@ export function WhoThisIsFor() {
 
         {/* Bottom note */}
         <p className="mt-10 text-center text-sm text-muted-foreground">
-          Not in one of these categories?{" "}
+          Not in one of these categories? Or just curious how AI could help your business but not sure where to start?{" "}
           <a href="/book" className="font-semibold text-primary underline underline-offset-2 hover:no-underline">
             Book a call
           </a>{" "}
