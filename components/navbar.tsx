@@ -51,7 +51,7 @@ export function Navbar() {
             nativeButton={false}
             className="rounded-full bg-primary px-5 font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary/90"
           >
-            Book Demo
+            Book a Free Audit
           </Button>
         </div>
 
@@ -83,7 +83,7 @@ export function Navbar() {
               nativeButton={false}
               className="mt-3 w-full rounded-full bg-primary font-semibold text-primary-foreground"
             >
-              Book Demo
+              Book a Free Audit
             </Button>
           </div>
         </div>

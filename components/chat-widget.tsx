@@ -9,9 +9,9 @@ type Message = { role: "user" | "assistant"; content: string }
 
 /* ─── FAQ quick-reply chips ─────────────────────────────────── */
 const faqs = [
-  "Do you handle insurance questions?",
-  "How long does setup take?",
-  "Can it speak Spanish?",
+  "What happens on the free audit call?",
+  "Do you fix websites too?",
+  "How fast can you start?",
 ]
 
 /* ─── Simple markdown-ish renderer ──────────────────────────── */
@@ -38,7 +38,7 @@ export function ChatWidget() {
     {
       role: "assistant",
       content:
-        "Hi! I'm the Receptifi assistant. I can answer questions about pricing, how it works, or anything else. What would you like to know?",
+        "Hi! I'm the Receptifi assistant. We're an AI-driven consulting practice — free audit call, then we fix whatever's actually costing you customers. Ask me anything.",
     },
   ])
   const bottomRef = useRef<HTMLDivElement>(null)
