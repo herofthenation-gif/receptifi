@@ -54,7 +54,7 @@ function outdatedSiteObservation(signals: QualitySignals | null): string {
     if (signals.copyrightYear != null && !signals.freshCopyright)
       return `The footer still says ${signals.copyrightYear}`;
     if (!signals.bookingWidget) return "There's no way to book from it";
-    if (!signals.https) return "It's not even secure — browsers flag it";
+    if (!signals.https) return "It's not even secure, browsers flag it";
   }
   return "It's working against you, not for you";
 }
@@ -86,7 +86,7 @@ export function personalizeOpening(input: PersonalizeInput): string {
   }
 
   if (offer === "crm") {
-    return `Good rating, solid website — but no way to book online. Every ${v.person} who can't book right then calls the next result.`;
+    return `Good rating, solid website, but no way to book online. Every ${v.person} who can't book right then calls the next result.`;
   }
 
   // voice — the original hours-based openers, in the vertical's language.

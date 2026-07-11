@@ -53,7 +53,7 @@ const CONTENT: Record<string, VerticalContent> = {
   dental: {
     tagline: (city) => `Modern dental care for ${city} families`,
     about: (name, city) =>
-      `${name} provides comprehensive dental care for families in ${city}. From routine cleanings to complete smile makeovers, our team makes every visit comfortable — and getting an appointment easy.`,
+      `${name} provides comprehensive dental care for families in ${city}. From routine cleanings to complete smile makeovers, our team makes every visit comfortable, and getting an appointment easy.`,
     services: [
       { name: "Cleanings & Exams", blurb: "Preventive care that keeps small problems small." },
       { name: "Cosmetic Dentistry", blurb: "Whitening, veneers, and smile design." },
@@ -74,7 +74,7 @@ const CONTENT: Record<string, VerticalContent> = {
   med_spa: {
     tagline: (city) => `${city}'s destination for confident, natural results`,
     about: (name, city) =>
-      `${name} brings medical-grade aesthetics to ${city} — customized treatments delivered by licensed professionals in a calm, private setting.`,
+      `${name} brings medical-grade aesthetics to ${city}, customized treatments delivered by licensed professionals in a calm, private setting.`,
     services: [
       { name: "Injectables", blurb: "Botox and fillers with a natural finish." },
       { name: "Skin Treatments", blurb: "Facials, peels, and laser resurfacing." },
@@ -84,7 +84,7 @@ const CONTENT: Record<string, VerticalContent> = {
   veterinary: {
     tagline: (city) => `Compassionate care for ${city}'s pets`,
     about: (name, city) =>
-      `${name} treats your pets like family. Full-service veterinary care for the animals of ${city} — wellness, urgent care, and everything in between.`,
+      `${name} treats your pets like family. Full-service veterinary care for the animals of ${city}: wellness, urgent care, and everything in between.`,
     services: [
       { name: "Wellness Exams", blurb: "Annual checkups, vaccines, and prevention." },
       { name: "Dental Care", blurb: "Cleanings and oral health for dogs and cats." },
@@ -104,7 +104,7 @@ const CONTENT: Record<string, VerticalContent> = {
   barbershop: {
     tagline: (city) => `Sharp fades. No waiting around. ${city}.`,
     about: (name, city) =>
-      `${name} keeps ${city} sharp — classic barbering, modern fades, and hot towel shaves from barbers who take the craft seriously.`,
+      `${name} keeps ${city} sharp: classic barbering, modern fades, and hot towel shaves from barbers who take the craft seriously.`,
     services: [
       { name: "Haircuts & Fades", blurb: "Clean lines, every time." },
       { name: "Beard Work", blurb: "Trims, shape-ups, and hot towel shaves." },
@@ -134,7 +134,7 @@ const CONTENT: Record<string, VerticalContent> = {
   plumbing: {
     tagline: (city) => `${city}'s plumbers for fast, honest work`,
     about: (name, city) =>
-      `${name} handles ${city}'s plumbing — from dripping faucets to full repipes — with upfront quotes and workmanship we stand behind.`,
+      `${name} handles ${city}'s plumbing, from dripping faucets to full repipes, with upfront quotes and workmanship we stand behind.`,
     services: [
       { name: "Emergency Repairs", blurb: "Burst pipes and backups, handled fast." },
       { name: "Drain Cleaning", blurb: "Clear lines without the mess." },
@@ -144,7 +144,7 @@ const CONTENT: Record<string, VerticalContent> = {
   auto_repair: {
     tagline: (city) => `Honest auto repair in ${city}`,
     about: (name, city) =>
-      `${name} is the shop ${city} drivers trust — clear estimates, quality parts, and mechanics who explain the fix before they make it.`,
+      `${name} is the shop ${city} drivers trust: clear estimates, quality parts, and mechanics who explain the fix before they make it.`,
     services: [
       { name: "Diagnostics", blurb: "Find the real problem, not a guess." },
       { name: "Brakes & Suspension", blurb: "Safety systems done right." },
@@ -154,7 +154,7 @@ const CONTENT: Record<string, VerticalContent> = {
   physical_therapy: {
     tagline: (city) => `Get back to full strength in ${city}`,
     about: (name, city) =>
-      `${name} builds personalized recovery plans for ${city} patients — one-on-one sessions focused on getting you back to what you love.`,
+      `${name} builds personalized recovery plans for ${city} patients, one-on-one sessions focused on getting you back to what you love.`,
     services: [
       { name: "Injury Rehab", blurb: "Post-surgery and sports injury recovery." },
       { name: "Pain Management", blurb: "Move without the ache." },
@@ -174,7 +174,7 @@ const CONTENT: Record<string, VerticalContent> = {
   restaurant: {
     tagline: (city) => `${city}'s table worth talking about`,
     about: (name, city) =>
-      `${name} serves ${city} food made with care — fresh ingredients, honest portions, and a room you'll want to come back to.`,
+      `${name} serves ${city} food made with care: fresh ingredients, honest portions, and a room you'll want to come back to.`,
     services: [
       { name: "Dine In", blurb: "Reserve a table, skip the wait." },
       { name: "Takeout", blurb: "Order ahead, ready when you are." },
@@ -184,7 +184,7 @@ const CONTENT: Record<string, VerticalContent> = {
   insurance_agency: {
     tagline: (city) => `Coverage that fits ${city} life`,
     about: (name, city) =>
-      `${name} helps ${city} families and businesses get properly covered — auto, home, life, and commercial — with a local agent who picks up the phone when it matters.`,
+      `${name} helps ${city} families and businesses get properly covered: auto, home, life, and commercial, with a local agent who picks up the phone when it matters.`,
     services: [
       { name: "Free Policy Review", blurb: "Find gaps and overpayments in minutes." },
       { name: "Auto & Home", blurb: "Bundled coverage, better rates." },
@@ -194,7 +194,7 @@ const CONTENT: Record<string, VerticalContent> = {
   home_services: {
     tagline: (city) => `${city}'s go-to for repairs done right`,
     about: (name, city) =>
-      `${name} handles the home projects ${city} homeowners don't have time for — skilled work, clean job sites, and quotes before we start.`,
+      `${name} handles the home projects ${city} homeowners don't have time for: skilled work, clean job sites, and quotes before we start.`,
     services: [
       { name: "Repairs & Installs", blurb: "From door hinges to drywall." },
       { name: "Home Improvement", blurb: "Small upgrades, big difference." },

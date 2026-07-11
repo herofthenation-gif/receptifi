@@ -42,5 +42,5 @@ export function decideOffer({ quality, rating, reviewCount }: OfferInput): Offer
     return { offerType: "crm", reasoning: `good site (${quality.score}/6), strong reviews, but no booking/lead-capture signal` };
   }
 
-  return { offerType: "voice", reasoning: `solid presence (${quality.score}/6, rating ${rating}, ${reviewCount} reviews) — after-hours calls are the gap` };
+  return { offerType: "voice", reasoning: `solid presence (${quality.score}/6, rating ${rating}, ${reviewCount} reviews), after-hours calls are the gap` };
 }

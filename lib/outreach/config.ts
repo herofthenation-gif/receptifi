@@ -122,5 +122,8 @@ export const PHYSICAL_ADDRESS =
 // Public base URL for generated preview sites (the Web-offer email CTA).
 export const PREVIEW_BASE_URL = `https://${WEBSITE}/preview`;
 
+// Booking link for the paid audit call — price is discussed on the call, not in the email.
+export const CALENDLY_URL = "https://calendly.com/karmello-koba1ba/30min";
+
 // How many city x vertical combos the sourcing cron consumes per run.
 export const SOURCING_BATCH_SIZE = 5;
