@@ -105,7 +105,7 @@ export const CITIES: City[] = [
 // Touch 2 goes out 3 days after touch 1; touch 3 goes out 4 days after touch 2.
 export const TOUCH_DELAYS: Record<2 | 3, number> = { 2: 3, 3: 4 };
 
-export const DEFAULT_DAILY_CAP = 30;
+export const DEFAULT_DAILY_CAP = 100;
 
 // Proven sender identity (already sending successfully via Resend — keep verbatim).
 export const FROM_NAME = "Karmello";

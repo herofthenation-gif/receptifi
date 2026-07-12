@@ -1,8 +1,9 @@
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import type { Lead } from "@/lib/supabase";
 import { assertCronAuth } from "@/lib/outreach/cron-auth";
-import { searchPlacesText } from "@/lib/outreach/google-places";
+import { searchPlacesText, type PlacesResult } from "@/lib/outreach/google-places";
 import { scrapeContactEmail } from "@/lib/outreach/email-scraper";
+import { mapWithConcurrency } from "@/lib/outreach/concurrency";
 import { nextCombos, advanceCursor } from "@/lib/outreach/cursor";
 import { computePriorityTier } from "@/lib/outreach/priority";
 import { SOURCING_BATCH_SIZE } from "@/lib/outreach/config";
@@ -13,7 +14,13 @@ import { buildGeneratedSite, buildPreviewSlug } from "@/lib/outreach/site-genera
 // Firecrawl scrapes (15s timeout each) dominate the classification budget.
 export const maxDuration = 300;
 
-const MAX_EMAIL_SCRAPES_PER_RUN = 10;
+// Plain fetches, run concurrently, so raising this covers a full day's fresh
+// batch (SOURCING_BATCH_SIZE combos return roughly 60-100 results/day).
+const MAX_EMAIL_SCRAPES_PER_RUN = 80;
+// Separate sweep over the pre-existing backlog (leads with a website that
+// were never attempted, e.g. sourced back when the per-run cap was 10).
+const BACKFILL_BATCH_SIZE = 60;
+const SCRAPE_CONCURRENCY = 20;
 // Firecrawl calls per run. Leads without a website classify instantly and
 // don't count against this.
 const MAX_QUALITY_SCRAPES_PER_RUN = 10;
@@ -123,14 +130,65 @@ async function classifyLeads(): Promise<{ classified: ClassificationEntry[]; err
   return { classified, errors };
 }
 
+/**
+ * Sweeps the pre-existing backlog: leads with a website that never got a
+ * scrape attempt (sourced before this column existed, or skipped past the
+ * old 10/run cap). email_scrape_attempted_at is set regardless of outcome
+ * so a failure is recorded once, not retried forever.
+ */
+async function backfillEmailScrape(): Promise<{ attempted: number; found: number; errors: string[] }> {
+  const errors: string[] = [];
+
+  const { data, error } = await supabaseAdmin
+    .from("leads")
+    .select("id, website")
+    .not("website", "is", null)
+    .is("email", null)
+    .is("email_scrape_attempted_at", null)
+    .order("priority_tier", { ascending: true })
+    .limit(BACKFILL_BATCH_SIZE);
+
+  if (error) {
+    errors.push(`backfill fetch: ${error.message}`);
+    return { attempted: 0, found: 0, errors };
+  }
+
+  const backlog = (data ?? []) as Pick<Lead, "id" | "website">[];
+  let found = 0;
+
+  await mapWithConcurrency(backlog, SCRAPE_CONCURRENCY, async (lead) => {
+    let email: string | null = null;
+    try {
+      email = await scrapeContactEmail(lead.website!);
+    } catch (err) {
+      errors.push(`backfill scrape ${lead.id}: ${(err as Error).message}`);
+    }
+    if (email) found++;
+
+    const { error: updateError } = await supabaseAdmin
+      .from("leads")
+      .update({ email, email_scrape_attempted_at: new Date().toISOString() })
+      .eq("id", lead.id);
+    if (updateError) errors.push(`backfill update ${lead.id}: ${updateError.message}`);
+  });
+
+  return { attempted: backlog.length, found, errors };
+}
+
+interface Candidate {
+  cityName: string;
+  region: string;
+  verticalKey: string;
+  r: PlacesResult;
+}
+
 export async function GET(req: Request) {
   const authError = assertCronAuth(req);
   if (authError) return authError;
 
   const combos = await nextCombos(SOURCING_BATCH_SIZE);
-  let inserted = 0;
-  let scraped = 0;
   const errors: string[] = [];
+  const candidates: Candidate[] = [];
 
   for (const { city, vertical } of combos) {
     let results;
@@ -143,58 +201,73 @@ export async function GET(req: Request) {
 
     for (const r of results) {
       if (r.businessStatus && r.businessStatus !== "OPERATIONAL") continue;
-
-      const hasWebsite = !!r.websiteUri;
-      let email: string | null = null;
-      if (hasWebsite && scraped < MAX_EMAIL_SCRAPES_PER_RUN) {
-        email = await scrapeContactEmail(r.websiteUri!);
-        scraped++;
-      }
-
-      const priorityTier = computePriorityTier({
-        hasWebsite,
-        rating: r.rating ?? null,
-        reviewCount: r.userRatingCount ?? null,
-      });
-
-      const { error } = await supabaseAdmin.from("leads").upsert(
-        {
-          name: r.displayName,
-          business_name: r.displayName,
-          phone: r.nationalPhoneNumber ?? null,
-          email,
-          website: r.websiteUri ?? null,
-          address: r.formattedAddress || null,
-          rating: r.rating ?? null,
-          review_count: r.userRatingCount ?? null,
-          status: "cold",
-          source: "google_places",
-          vertical: vertical.key,
-          city: city.name,
-          region: city.region,
-          hours_json: r.regularOpeningHours?.periods ?? null,
-          priority_tier: priorityTier,
-          place_id: r.placeId,
-        },
-        { onConflict: "place_id", ignoreDuplicates: true }
-      );
-
-      if (!error) inserted++;
-      else errors.push(`upsert ${r.displayName}: ${error.message}`);
+      candidates.push({ cityName: city.name, region: city.region, verticalKey: vertical.key, r });
     }
+  }
+
+  // Scrape emails concurrently for today's fresh batch, capped per run.
+  const toScrape = candidates.filter((c) => !!c.r.websiteUri).slice(0, MAX_EMAIL_SCRAPES_PER_RUN);
+  const scrapedEmails = await mapWithConcurrency(toScrape, SCRAPE_CONCURRENCY, (c) =>
+    scrapeContactEmail(c.r.websiteUri!)
+  );
+  const emailByPlaceId = new Map(toScrape.map((c, i) => [c.r.placeId, scrapedEmails[i]]));
+  const attemptedIds = new Set(toScrape.map((c) => c.r.placeId));
+
+  let inserted = 0;
+  for (const { cityName, region, verticalKey, r } of candidates) {
+    const hasWebsite = !!r.websiteUri;
+    const email = emailByPlaceId.get(r.placeId) ?? null;
+    const priorityTier = computePriorityTier({
+      hasWebsite,
+      rating: r.rating ?? null,
+      reviewCount: r.userRatingCount ?? null,
+    });
+
+    const { error } = await supabaseAdmin.from("leads").upsert(
+      {
+        name: r.displayName,
+        business_name: r.displayName,
+        phone: r.nationalPhoneNumber ?? null,
+        email,
+        email_scrape_attempted_at: attemptedIds.has(r.placeId) ? new Date().toISOString() : null,
+        website: r.websiteUri ?? null,
+        address: r.formattedAddress || null,
+        rating: r.rating ?? null,
+        review_count: r.userRatingCount ?? null,
+        status: "cold",
+        source: "google_places",
+        vertical: verticalKey,
+        city: cityName,
+        region,
+        hours_json: r.regularOpeningHours?.periods ?? null,
+        priority_tier: priorityTier,
+        place_id: r.placeId,
+      },
+      { onConflict: "place_id", ignoreDuplicates: true }
+    );
+
+    if (!error) inserted++;
+    else errors.push(`upsert ${r.displayName}: ${error.message}`);
   }
 
   await advanceCursor(combos.length);
 
-  // Offer classification runs after sourcing so today's inserts are eligible
-  // before this afternoon's send-outreach cron picks leads.
+  // Backfill sweep over the pre-existing backlog, then offer classification
+  // (which runs after sourcing so today's inserts are eligible before this
+  // afternoon's send-outreach cron picks leads).
+  const backfill = await backfillEmailScrape();
+  errors.push(...backfill.errors);
+
   const classification = await classifyLeads();
   errors.push(...classification.errors);
 
   return Response.json({
     combosProcessed: combos.map((c) => `${c.vertical.key}/${c.city.name}`),
     inserted,
-    emailsScraped: scraped,
+    emailsScraped: scrapedEmails.filter(Boolean).length,
+    emailScrapeAttempted: toScrape.length,
+    backfillAttempted: backfill.attempted,
+    backfillFound: backfill.found,
     classified: classification.classified,
     errors,
   });

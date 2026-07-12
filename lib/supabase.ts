@@ -40,6 +40,7 @@ export interface Lead {
   generated_site: GeneratedSite | null;
   quality_checked_at: string | null;
   unsubscribed_at: string | null;
+  email_scrape_attempted_at: string | null;
 }
 
 export interface GooglePlacesPeriod {
