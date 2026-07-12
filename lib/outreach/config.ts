@@ -105,7 +105,11 @@ export const CITIES: City[] = [
 // Touch 2 goes out 3 days after touch 1; touch 3 goes out 4 days after touch 2.
 export const TOUCH_DELAYS: Record<2 | 3, number> = { 2: 3, 3: 4 };
 
-export const DEFAULT_DAILY_CAP = 100;
+// 90/day keeps outreach at 2,700/month, leaving ~300/month headroom on
+// Resend's free tier (3,000 transactional emails/month total) for the
+// site's own lead-notification and nurture-sequence emails, which share
+// the same account/quota. Revisit if Resend is upgraded off the free tier.
+export const DEFAULT_DAILY_CAP = 90;
 
 // Proven sender identity (already sending successfully via Resend — keep verbatim).
 export const FROM_NAME = "Karmello";
