@@ -41,6 +41,9 @@ const VOICE_STATS: Record<string, string> = {
   restaurant: "Restaurants miss a big share of calls during service. Every unanswered ring is a table booking somewhere else.",
   insurance_agency: "People shopping coverage call down the list. Whoever answers first writes the policy.",
   home_services: "Trades miss about 1 in 3 calls while on a job. Those callers don't wait, they dial the next company on the list.",
+  electrical: "Trades miss about 1 in 3 calls while on a job. Those callers don't wait, they dial the next company on the list.",
+  garage_door: "A stuck garage door gets fixed today, by whoever answers. Miss the call and that job is gone.",
+  restoration: "Water damage calls are emergencies. Nobody leaves a voicemail with a flooded kitchen, they dial the next company.",
 };
 
 const VOICE_STAT_FALLBACK = "Most local businesses miss about a third of inbound calls. Every one is a customer who never calls back.";

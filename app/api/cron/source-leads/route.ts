@@ -6,7 +6,7 @@ import { scrapeContactEmail } from "@/lib/outreach/email-scraper";
 import { mapWithConcurrency } from "@/lib/outreach/concurrency";
 import { nextCombos, advanceCursor } from "@/lib/outreach/cursor";
 import { computePriorityTier } from "@/lib/outreach/priority";
-import { SOURCING_BATCH_SIZE } from "@/lib/outreach/config";
+import { FOCUS_VERTICAL_KEYS, SOURCING_BATCH_SIZE } from "@/lib/outreach/config";
 import { assessSiteQuality } from "@/lib/outreach/site-quality";
 import { decideOffer } from "@/lib/outreach/offer";
 import { buildGeneratedSite, buildPreviewSlug } from "@/lib/outreach/site-generator";
@@ -139,21 +139,29 @@ async function classifyLeads(): Promise<{ classified: ClassificationEntry[]; err
 async function backfillEmailScrape(): Promise<{ attempted: number; found: number; errors: string[] }> {
   const errors: string[] = [];
 
-  const { data, error } = await supabaseAdmin
-    .from("leads")
-    .select("id, website")
-    .not("website", "is", null)
-    .is("email", null)
-    .is("email_scrape_attempted_at", null)
-    .order("priority_tier", { ascending: true })
-    .limit(BACKFILL_BATCH_SIZE);
+  // Focus-vertical backlog first; only spend leftover budget on the rest.
+  const backlog: Pick<Lead, "id" | "website">[] = [];
+  for (const focusOnly of [true, false]) {
+    const remaining = BACKFILL_BATCH_SIZE - backlog.length;
+    if (remaining <= 0) break;
 
-  if (error) {
-    errors.push(`backfill fetch: ${error.message}`);
-    return { attempted: 0, found: 0, errors };
+    const query = supabaseAdmin
+      .from("leads")
+      .select("id, website")
+      .not("website", "is", null)
+      .is("email", null)
+      .is("email_scrape_attempted_at", null)
+      .filter("vertical", focusOnly ? "in" : "not.in", `(${FOCUS_VERTICAL_KEYS.join(",")})`)
+      .order("priority_tier", { ascending: true })
+      .limit(remaining);
+
+    const { data, error } = await query;
+    if (error) {
+      errors.push(`backfill fetch (focus=${focusOnly}): ${error.message}`);
+      continue;
+    }
+    backlog.push(...((data ?? []) as Pick<Lead, "id" | "website">[]));
   }
-
-  const backlog = (data ?? []) as Pick<Lead, "id" | "website">[];
   let found = 0;
 
   await mapWithConcurrency(backlog, SCRAPE_CONCURRENCY, async (lead) => {

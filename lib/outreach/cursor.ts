@@ -1,5 +1,5 @@
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { CITIES, VERTICALS, type City, type Vertical } from "./config";
+import { FOCUS_VERTICALS, SOURCING_CITIES, type City, type Vertical } from "./config";
 
 export interface Combo {
   city: City;
@@ -9,10 +9,18 @@ export interface Combo {
 // Deterministic order from the static config arrays — a single persisted
 // integer pointer is enough to guarantee even coverage over time without
 // per-combo "last queried" bookkeeping.
-const COMBOS: Combo[] = CITIES.flatMap((city) => VERTICALS.map((vertical) => ({ city, vertical })));
+//
+// City-major over the focused trades matrix: with 5 focus verticals and
+// SOURCING_BATCH_SIZE = 5, each daily run sweeps one full city across every
+// trade, IE cities first. 35 cities = one complete pass in ~5 weeks.
+const COMBOS: Combo[] = SOURCING_CITIES.flatMap((city) =>
+  FOCUS_VERTICALS.map((vertical) => ({ city, vertical }))
+);
 export const TOTAL_COMBOS = COMBOS.length;
 
-const CURSOR_KEY = "source_cursor";
+// v2: matrix switched from all-verticals to the trades focus. The old
+// persisted index pointed into a different combo ordering, so start fresh.
+const CURSOR_KEY = "source_cursor_v2_trades";
 
 interface CursorState {
   index: number;

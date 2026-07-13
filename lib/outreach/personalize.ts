@@ -8,6 +8,10 @@ const SUNDAY = 0;
 const SATURDAY = 6;
 const WEEKDAYS = [1, 2, 3, 4, 5]; // Monday..Friday
 
+// Verticals whose calls are missed mid-job, not after hours. Closing-time
+// openers read wrong for them (many list 24/7 hours on Google).
+const TRADE_KEYS = new Set(["hvac", "plumbing", "electrical", "garage_door", "restoration", "home_services", "auto_repair"]);
+
 export interface PersonalizeInput {
   hasWebsite: boolean;
   reviewCount: number | null;
@@ -96,6 +100,14 @@ export function personalizeOpening(input: PersonalizeInput): string {
     }
     const count = reviewCount ?? 0;
     return `${count} reviews and no website. Every ${v.person} searching right now can't find you.`;
+  }
+
+  if (TRADE_KEYS.has(v.key)) {
+    const month = new Date().getMonth(); // 5..8 = June..September
+    if (v.key === "hvac" && month >= 5 && month <= 8) {
+      return "It's AC season. When a unit dies in this heat, the homeowner calls down the Google list and books whoever picks up first.";
+    }
+    return `You're on jobs all day. Every call that rings out while your hands are full is ${article(v.unit)} ${v.unit} for whoever picks up next.`;
   }
 
   const periods = hours ?? [];

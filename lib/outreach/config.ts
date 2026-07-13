@@ -29,7 +29,27 @@ export const VERTICALS: Vertical[] = [
   { key: "restaurant", label: "Restaurant", queryTerm: "restaurant", person: "guest", personPlural: "guests", unit: "reservation" },
   { key: "insurance_agency", label: "Insurance Agency", queryTerm: "insurance agency", person: "shopper", personPlural: "shoppers", unit: "policy" },
   { key: "home_services", label: "Home Services", queryTerm: "handyman service", person: "homeowner", personPlural: "homeowners", unit: "job" },
+  { key: "electrical", label: "Electrical", queryTerm: "electrician", person: "customer", personPlural: "customers", unit: "job" },
+  { key: "garage_door", label: "Garage Door", queryTerm: "garage door repair", person: "homeowner", personPlural: "homeowners", unit: "job" },
+  { key: "restoration", label: "Water Damage Restoration", queryTerm: "water damage restoration", person: "homeowner", personPlural: "homeowners", unit: "job" },
 ];
+
+// ---- Niche focus: emergency home trades -------------------------------------
+// Sourcing targets these verticals only (send-side still renders copy for any
+// vertical already in the leads table). Why trades over the broad 15-vertical
+// rotation:
+//   - They miss calls all day (owner on a job), not just after hours: the
+//     exact pain the voice/CRM stack fixes, felt as immediate lost revenue.
+//   - High ticket ($5k-15k jobs; restoration is insurance-funded): one saved
+//     call pays for the audit engagement.
+//   - Simple contractor sites expose owner-read info@ emails (higher scrape
+//     yield than form-gated dental/med-spa sites).
+//   - Summer in SoCal = HVAC emergency season; urgency is built into the pitch.
+export const FOCUS_VERTICAL_KEYS = ["hvac", "plumbing", "electrical", "garage_door", "restoration"] as const;
+
+export const FOCUS_VERTICALS: Vertical[] = FOCUS_VERTICAL_KEYS.map(
+  (key) => VERTICALS.find((v) => v.key === key)!
+);
 
 // Fallback language for manually-added leads with no vertical set.
 const DEFAULT_VERTICAL: Vertical = {
@@ -59,6 +79,9 @@ export interface City {
 }
 
 // Starter SoCal city list. Add more cities here to widen sourcing.
+// Grouped by county; SOURCING_CITIES below controls the order sourcing
+// actually visits them (Inland Empire first: home turf, walk-in follow-up
+// possible, and peak HVAC season hits hardest there).
 export const CITIES: City[] = [
   // LA County
   { name: "Los Angeles", region: "LA" },
@@ -100,6 +123,12 @@ export const CITIES: City[] = [
   { name: "Temecula", region: "IE" },
   { name: "Victorville", region: "IE" },
 ];
+
+// Sourcing visit order: IE first, then the rest of the matrix.
+const REGION_ORDER: Record<Region, number> = { IE: 0, LA: 1, OC: 2, SD: 3 };
+export const SOURCING_CITIES: City[] = [...CITIES].sort(
+  (a, b) => REGION_ORDER[a.region] - REGION_ORDER[b.region]
+);
 
 // Days between cold-outreach touches (matches outreach/send_emails.py).
 // Touch 2 goes out 3 days after touch 1; touch 3 goes out 4 days after touch 2.
