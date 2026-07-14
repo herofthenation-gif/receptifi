@@ -22,6 +22,46 @@ const SKIP_DOMAINS = [
   "doctorallia.com",
   "webmd.com",
   "w3.org",
+  // Website builders / hosts that embed their own support address in the
+  // sites they serve (a Webador-built lead site got support@webador.com
+  // scraped as the business's contact on 2026-07-14 — cold email opened a
+  // Webador support ticket). The bare-name entries rely on the substring
+  // match below to cover every TLD (webador.com, webador.nl, ...).
+  "webador",
+  "wix.com",
+  "weebly",
+  "jimdo",
+  "duda.co",
+  "webflow",
+  "webnode",
+  "site123",
+  "strikingly",
+  "shopify",
+  "ionos",
+  "one.com",
+  "hostinger",
+  "hostgator",
+  "bluehost",
+  "networksolutions",
+  "register.com",
+  "web.com",
+  "vistaprint",
+  "hibu.com",
+  "thryv",
+  "gohighlevel",
+  "leadconnectorhq",
+  "mailchimp",
+];
+
+// Addresses that deliver nowhere useful even on the business's own domain.
+const SKIP_LOCAL_PARTS = [
+  "noreply",
+  "no-reply",
+  "donotreply",
+  "do-not-reply",
+  "postmaster",
+  "mailer-daemon",
+  "abuse",
 ];
 
 // Retina asset naming (logo@2x.png, hero@3x.jpg) and other static-file
@@ -68,9 +108,10 @@ function extractEmails(html: string): string[] {
   const results: string[] = [];
   for (const raw of found) {
     const lower = raw.toLowerCase();
-    const domain = lower.split("@")[1];
+    const [localPart, domain] = lower.split("@");
     if (!domain) continue;
     if (SKIP_DOMAINS.some((skip) => domain === skip || domain.includes(skip))) continue;
+    if (SKIP_LOCAL_PARTS.some((skip) => localPart === skip || localPart.startsWith(`${skip}+`))) continue;
     const tld = domain.split(".").pop() ?? "";
     if (FILE_EXTENSIONS.includes(tld)) continue;
     if (!results.includes(lower)) results.push(lower);
