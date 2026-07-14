@@ -10,6 +10,7 @@ import { FOCUS_VERTICAL_KEYS, SOURCING_BATCH_SIZE } from "@/lib/outreach/config"
 import { assessSiteQuality } from "@/lib/outreach/site-quality";
 import { decideOffer } from "@/lib/outreach/offer";
 import { buildGeneratedSite, buildPreviewSlug } from "@/lib/outreach/site-generator";
+import { sendFailureAlert } from "@/lib/outreach/alerts";
 
 // Firecrawl scrapes (15s timeout each) dominate the classification budget.
 export const maxDuration = 300;
@@ -194,6 +195,21 @@ export async function GET(req: Request) {
   const authError = assertCronAuth(req);
   if (authError) return authError;
 
+  try {
+    return await runSourceLeads();
+  } catch (err) {
+    const message = (err as Error).message;
+    // Per-lead scrape/upsert failures are already collected non-fatally in
+    // `errors`; this only fires when the whole run dies (no leads sourced).
+    await sendFailureAlert(
+      "source-leads crashed",
+      `The source-leads cron threw before completing. No new leads were sourced today.\n\n${message}`
+    );
+    return Response.json({ error: message }, { status: 500 });
+  }
+}
+
+async function runSourceLeads() {
   const combos = await nextCombos(SOURCING_BATCH_SIZE);
   const errors: string[] = [];
   const candidates: Candidate[] = [];

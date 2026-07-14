@@ -6,6 +6,7 @@ import { sendColdEmail } from "@/lib/outreach/resend-client";
 import { buildOutreachEmail } from "@/lib/outreach/email-templates";
 import { personalizeOpening } from "@/lib/outreach/personalize";
 import { DEFAULT_DAILY_CAP, PREVIEW_BASE_URL } from "@/lib/outreach/config";
+import { sendFailureAlert } from "@/lib/outreach/alerts";
 
 export const maxDuration = 60;
 
@@ -24,6 +25,19 @@ export async function GET(req: Request) {
   const authError = assertCronAuth(req);
   if (authError) return authError;
 
+  try {
+    return await runSendOutreach();
+  } catch (err) {
+    const message = (err as Error).message;
+    await sendFailureAlert(
+      "send-outreach crashed",
+      `The send-outreach cron threw before completing. No emails may have gone out today.\n\n${message}`
+    );
+    return Response.json({ error: message }, { status: 500 });
+  }
+}
+
+async function runSendOutreach() {
   // Step A: check for replies first so a same-day reply suppresses today's send.
   const replyCheck = await checkGmailReplies();
 
@@ -76,6 +90,18 @@ export async function GET(req: Request) {
       await supabaseAdmin.from("leads").update({ outreach_last_error: sendResult.error }).eq("id", lead.id);
       results.push({ businessName, touch, to: lead.email!, subject, vertical: lead.vertical, offerType, status: "error", error: sendResult.error });
     }
+  }
+
+  const errored = results.filter((r) => r.status === "error");
+  if (errored.length > 0) {
+    const sample = errored
+      .slice(0, 5)
+      .map((r) => `- ${r.businessName} (touch ${r.touch}): ${r.error}`)
+      .join("\n");
+    await sendFailureAlert(
+      `${errored.length}/${results.length} sends failed`,
+      `send-outreach ran on ${today} but ${errored.length} of ${results.length} sends errored.\n\n${sample}\n\nFailed sends don't advance the touch, so re-running after a fix is safe:\ncurl https://www.receptifi.net/api/cron/send-outreach -H "Authorization: Bearer $CRON_SECRET"`
+    );
   }
 
   return Response.json({
