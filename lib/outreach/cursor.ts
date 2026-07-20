@@ -10,9 +10,11 @@ export interface Combo {
 // integer pointer is enough to guarantee even coverage over time without
 // per-combo "last queried" bookkeeping.
 //
-// City-major over the focused trades matrix: with 5 focus verticals and
-// SOURCING_BATCH_SIZE = 5, each daily run sweeps one full city across every
-// trade, IE cities first. 35 cities = one complete pass in ~5 weeks.
+// City-major over the focused trades matrix: with 5 focus verticals, each
+// daily run sweeps SOURCING_BATCH_SIZE / 5 full cities across every trade,
+// IE cities first (35 cities = one pass in ~17 days at SOURCING_BATCH_SIZE
+// = 10, raised from 5 on 2026-07-20 once a full pass showed every focus
+// lead with a website had already had an email-scrape attempt).
 const COMBOS: Combo[] = SOURCING_CITIES.flatMap((city) =>
   FOCUS_VERTICALS.map((vertical) => ({ city, vertical }))
 );

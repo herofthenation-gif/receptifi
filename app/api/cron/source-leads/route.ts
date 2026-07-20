@@ -16,7 +16,9 @@ import { sendFailureAlert } from "@/lib/outreach/alerts";
 export const maxDuration = 300;
 
 // Plain fetches, run concurrently, so raising this covers a full day's fresh
-// batch (SOURCING_BATCH_SIZE combos return roughly 60-100 results/day).
+// batch (SOURCING_BATCH_SIZE combos return roughly 120-200 results/day as of
+// the 2026-07-20 bump to 10). Anything over this cap still gets inserted,
+// just falls to the backfillEmailScrape() sweep on a later run.
 const MAX_EMAIL_SCRAPES_PER_RUN = 80;
 // Separate sweep over the pre-existing backlog (leads with a website that
 // were never attempted, e.g. sourced back when the per-run cap was 10).

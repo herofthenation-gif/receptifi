@@ -159,4 +159,10 @@ export const PREVIEW_BASE_URL = `https://${WEBSITE}/preview`;
 export const CALENDLY_URL = "https://calendly.com/karmello-koba1ba/30min";
 
 // How many city x vertical combos the sourcing cron consumes per run.
-export const SOURCING_BATCH_SIZE = 5;
+// Raised 5 -> 10 on 2026-07-20: at 5/day the 5-focus-vertical x 34-city
+// rotation took 34 days to complete one lap, and by then every focus lead
+// with a website had already had an email-scrape attempt (0 untried left,
+// 478 failed, 135 succeeded — a ~22% yield, which is expected for trades
+// sites that favor contact forms over a published email). More combos/day
+// is the actual lever on lead supply now, not re-scraping the same sites.
+export const SOURCING_BATCH_SIZE = 10;
