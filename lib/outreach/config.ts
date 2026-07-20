@@ -51,6 +51,26 @@ export const FOCUS_VERTICALS: Vertical[] = FOCUS_VERTICAL_KEYS.map(
   (key) => VERTICALS.find((v) => v.key === key)!
 );
 
+// ---- High-ticket track: run alongside the trades focus, not instead of it --
+// 2026-07-20: Karmello wants a second stream of leads who can plausibly pay
+// $6-7k for a build + retainer, not just the $3k one-time audit the trades
+// leads get pitched. Trades leads are chosen for maximum pain (no website,
+// <50 reviews) precisely because that skews toward businesses too small for
+// a retainer. This track instead sources verticals that already spend on
+// marketing as a matter of course (ad-funded client acquisition, high
+// per-conversion value), so a missed call is worth fixing at that price:
+//   - legal_intake: a missed case can be worth more than the entire engagement
+//   - med_spa: high per-visit ticket, already paying monthly vendors
+//   - real_estate: a missed buyer call is a lost commission, not a lost visit
+// Copy is unaffected: buildOutreachEmail() already has vertical-aware
+// language for all three (email-templates.ts) and never mentions price;
+// pricing tier is a live-call decision, not something sourcing encodes.
+export const HIGH_TICKET_VERTICAL_KEYS = ["legal_intake", "med_spa", "real_estate"] as const;
+
+export const HIGH_TICKET_VERTICALS: Vertical[] = HIGH_TICKET_VERTICAL_KEYS.map(
+  (key) => VERTICALS.find((v) => v.key === key)!
+);
+
 // Fallback language for manually-added leads with no vertical set.
 const DEFAULT_VERTICAL: Vertical = {
   key: "generic",
@@ -166,3 +186,9 @@ export const CALENDLY_URL = "https://calendly.com/karmello-koba1ba/30min";
 // sites that favor contact forms over a published email). More combos/day
 // is the actual lever on lead supply now, not re-scraping the same sites.
 export const SOURCING_BATCH_SIZE = 10;
+
+// Conservative pilot pace for the high-ticket track (3 verticals x 34 cities
+// = 102 combos; a full pass takes ~20 days at this rate). Kept separate from
+// SOURCING_BATCH_SIZE so ramping trades sourcing later doesn't silently speed
+// this up too. Raise once Karmello has worked a first batch of these leads.
+export const HIGH_TICKET_SOURCING_BATCH_SIZE = 5;

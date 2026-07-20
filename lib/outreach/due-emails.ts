@@ -45,7 +45,9 @@ export async function getDueLeads(cap: number): Promise<DueLead[]> {
     .select("*")
     .not("email", "is", null)
     .or("outreach_replied.is.null,outreach_replied.eq.false")
-    .not("status", "in", "(booked,closed)")
+    // needs_review holds high-ticket leads out of the send queue until
+    // Karmello approves them from the /crm/dashboard review queue.
+    .not("status", "in", "(booked,closed,needs_review)")
     .or("outreach_touch.is.null,outreach_touch.lt.3")
     // CAN-SPAM: an opt-out is permanent, regardless of touch or status.
     .is("unsubscribed_at", null);

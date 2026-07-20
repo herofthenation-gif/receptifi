@@ -34,13 +34,17 @@ function parseCsv(text: string): CsvRow[] {
 
 // ── Status config ────────────────────────────────────────
 const STATUS: Record<LeadStatus, { label: string; color: string; bg: string; border: string }> = {
+  needs_review: { label: "Needs Review", color: "#f472b6", bg: "rgba(244,114,182,0.10)", border: "rgba(244,114,182,0.30)" },
   cold:   { label: "Cold",   color: "#9aa5b8", bg: "rgba(154,165,184,0.10)", border: "rgba(154,165,184,0.25)" },
   warm:   { label: "Warm",   color: "#fbbf24", bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.30)"  },
   booked: { label: "Booked", color: "#60a5fa", bg: "rgba(96,165,250,0.12)",  border: "rgba(96,165,250,0.30)"  },
   closed: { label: "Closed", color: "#4ade80", bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.28)"  },
 };
 
-const STATUSES: LeadStatus[] = ["cold", "warm", "booked", "closed"];
+// needs_review leads (high-ticket track) sit outside the normal cold-to-closed
+// flow: approving one means setting it to "cold" so it enters send-outreach's
+// due queue; rejecting means "closed" so it's dropped for good.
+const STATUSES: LeadStatus[] = ["needs_review", "cold", "warm", "booked", "closed"];
 
 const EMPTY_FORM = { name: "", business_name: "", phone: "", email: "", status: "cold" as LeadStatus, notes: "" };
 

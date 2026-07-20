@@ -4,9 +4,9 @@ import { assertCronAuth } from "@/lib/outreach/cron-auth";
 import { searchPlacesText, type PlacesResult } from "@/lib/outreach/google-places";
 import { scrapeContactEmail } from "@/lib/outreach/email-scraper";
 import { mapWithConcurrency } from "@/lib/outreach/concurrency";
-import { nextCombos, advanceCursor } from "@/lib/outreach/cursor";
+import { nextCombos, advanceCursor, nextHighTicketCombos, advanceHighTicketCursor } from "@/lib/outreach/cursor";
 import { computePriorityTier } from "@/lib/outreach/priority";
-import { FOCUS_VERTICAL_KEYS, SOURCING_BATCH_SIZE } from "@/lib/outreach/config";
+import { FOCUS_VERTICAL_KEYS, SOURCING_BATCH_SIZE, HIGH_TICKET_SOURCING_BATCH_SIZE, HIGH_TICKET_VERTICAL_KEYS } from "@/lib/outreach/config";
 import { assessSiteQuality } from "@/lib/outreach/site-quality";
 import { decideOffer } from "@/lib/outreach/offer";
 import { buildGeneratedSite, buildPreviewSlug } from "@/lib/outreach/site-generator";
@@ -212,7 +212,9 @@ export async function GET(req: Request) {
 }
 
 async function runSourceLeads() {
-  const combos = await nextCombos(SOURCING_BATCH_SIZE);
+  const tradesCombos = await nextCombos(SOURCING_BATCH_SIZE);
+  const highTicketCombos = await nextHighTicketCombos(HIGH_TICKET_SOURCING_BATCH_SIZE);
+  const combos = [...tradesCombos, ...highTicketCombos];
   const errors: string[] = [];
   const candidates: Candidate[] = [];
 
@@ -239,6 +241,8 @@ async function runSourceLeads() {
   const emailByPlaceId = new Map(toScrape.map((c, i) => [c.r.placeId, scrapedEmails[i]]));
   const attemptedIds = new Set(toScrape.map((c) => c.r.placeId));
 
+  const highTicketKeys: readonly string[] = HIGH_TICKET_VERTICAL_KEYS;
+
   let inserted = 0;
   for (const { cityName, region, verticalKey, r } of candidates) {
     const hasWebsite = !!r.websiteUri;
@@ -248,6 +252,11 @@ async function runSourceLeads() {
       rating: r.rating ?? null,
       reviewCount: r.userRatingCount ?? null,
     });
+
+    // High-ticket leads land as needs_review, not cold: getDueLeads()
+    // excludes needs_review, so nothing gets emailed until Karmello approves
+    // it (flips status to cold) from the /crm/dashboard review queue.
+    const status = highTicketKeys.includes(verticalKey) ? "needs_review" : "cold";
 
     const { error } = await supabaseAdmin.from("leads").upsert(
       {
@@ -260,7 +269,7 @@ async function runSourceLeads() {
         address: r.formattedAddress || null,
         rating: r.rating ?? null,
         review_count: r.userRatingCount ?? null,
-        status: "cold",
+        status,
         source: "google_places",
         vertical: verticalKey,
         city: cityName,
@@ -276,7 +285,8 @@ async function runSourceLeads() {
     else errors.push(`upsert ${r.displayName}: ${error.message}`);
   }
 
-  await advanceCursor(combos.length);
+  await advanceCursor(tradesCombos.length);
+  await advanceHighTicketCursor(highTicketCombos.length);
 
   // Backfill sweep over the pre-existing backlog, then offer classification
   // (which runs after sourcing so today's inserts are eligible before this
