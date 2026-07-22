@@ -8,7 +8,7 @@ import { Logo } from "@/components/logo"
 const links = [
   { label: "Platform", href: "/platform" },
   { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
+  { label: "How We Work", href: "/case-studies" },
 ]
 
 export function Navbar() {
