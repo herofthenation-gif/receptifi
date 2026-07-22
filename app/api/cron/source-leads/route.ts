@@ -20,6 +20,11 @@ export const maxDuration = 300;
 // the 2026-07-20 bump to 10). Anything over this cap still gets inserted,
 // just falls to the backfillEmailScrape() sweep on a later run.
 const MAX_EMAIL_SCRAPES_PER_RUN = 80;
+// Trades' ~120-200 candidates/day would otherwise fill this list before the
+// high-ticket track's (smaller, later-in-array) candidates get a look in,
+// starving it of emails indefinitely. Reserve a slice so it always gets
+// scraped regardless of trades volume that day.
+const HIGH_TICKET_EMAIL_SCRAPE_RESERVE = 25;
 // Separate sweep over the pre-existing backlog (leads with a website that
 // were never attempted, e.g. sourced back when the per-run cap was 10).
 const BACKFILL_BATCH_SIZE = 60;
@@ -142,9 +147,19 @@ async function classifyLeads(): Promise<{ classified: ClassificationEntry[]; err
 async function backfillEmailScrape(): Promise<{ attempted: number; found: number; errors: string[] }> {
   const errors: string[] = [];
 
-  // Focus-vertical backlog first; only spend leftover budget on the rest.
+  // Trades backlog first, then high-ticket, then everything else, only
+  // spending leftover budget on the next bucket. Without the middle bucket,
+  // high-ticket backlog would sit behind trades AND every other stray
+  // vertical indefinitely (see HIGH_TICKET_EMAIL_SCRAPE_RESERVE above).
+  const allFocusKeys = [...FOCUS_VERTICAL_KEYS, ...HIGH_TICKET_VERTICAL_KEYS];
+  const buckets: Array<{ verticals: readonly string[] } | { exclude: readonly string[] }> = [
+    { verticals: FOCUS_VERTICAL_KEYS },
+    { verticals: HIGH_TICKET_VERTICAL_KEYS },
+    { exclude: allFocusKeys },
+  ];
+
   const backlog: Pick<Lead, "id" | "website">[] = [];
-  for (const focusOnly of [true, false]) {
+  for (const bucket of buckets) {
     const remaining = BACKFILL_BATCH_SIZE - backlog.length;
     if (remaining <= 0) break;
 
@@ -154,13 +169,14 @@ async function backfillEmailScrape(): Promise<{ attempted: number; found: number
       .not("website", "is", null)
       .is("email", null)
       .is("email_scrape_attempted_at", null)
-      .filter("vertical", focusOnly ? "in" : "not.in", `(${FOCUS_VERTICAL_KEYS.join(",")})`)
       .order("priority_tier", { ascending: true })
       .limit(remaining);
+    if ("verticals" in bucket) query.filter("vertical", "in", `(${bucket.verticals.join(",")})`);
+    else query.filter("vertical", "not.in", `(${bucket.exclude.join(",")})`);
 
     const { data, error } = await query;
     if (error) {
-      errors.push(`backfill fetch (focus=${focusOnly}): ${error.message}`);
+      errors.push(`backfill fetch: ${error.message}`);
       continue;
     }
     backlog.push(...((data ?? []) as Pick<Lead, "id" | "website">[]));
@@ -233,15 +249,24 @@ async function runSourceLeads() {
     }
   }
 
+  const highTicketKeys: readonly string[] = HIGH_TICKET_VERTICAL_KEYS;
+
   // Scrape emails concurrently for today's fresh batch, capped per run.
-  const toScrape = candidates.filter((c) => !!c.r.websiteUri).slice(0, MAX_EMAIL_SCRAPES_PER_RUN);
+  // High-ticket gets a reserved slice first so trades' larger volume can't
+  // crowd it out entirely; trades takes whatever's left of the shared cap.
+  const withWebsite = candidates.filter((c) => !!c.r.websiteUri);
+  const highTicketToScrape = withWebsite
+    .filter((c) => highTicketKeys.includes(c.verticalKey))
+    .slice(0, HIGH_TICKET_EMAIL_SCRAPE_RESERVE);
+  const tradesToScrape = withWebsite
+    .filter((c) => !highTicketKeys.includes(c.verticalKey))
+    .slice(0, Math.max(0, MAX_EMAIL_SCRAPES_PER_RUN - highTicketToScrape.length));
+  const toScrape = [...highTicketToScrape, ...tradesToScrape];
   const scrapedEmails = await mapWithConcurrency(toScrape, SCRAPE_CONCURRENCY, (c) =>
     scrapeContactEmail(c.r.websiteUri!)
   );
   const emailByPlaceId = new Map(toScrape.map((c, i) => [c.r.placeId, scrapedEmails[i]]));
   const attemptedIds = new Set(toScrape.map((c) => c.r.placeId));
-
-  const highTicketKeys: readonly string[] = HIGH_TICKET_VERTICAL_KEYS;
 
   let inserted = 0;
   for (const { cityName, region, verticalKey, r } of candidates) {
