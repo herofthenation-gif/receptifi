@@ -1,6 +1,8 @@
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import type { Lead } from "@/lib/supabase";
-import { TOUCH_DELAYS } from "./config";
+import { TOUCH_DELAYS, HIGH_TICKET_VERTICAL_KEYS } from "./config";
+
+const HIGH_TICKET_KEYS = new Set<string>(HIGH_TICKET_VERTICAL_KEYS);
 
 export interface DueLead {
   lead: Lead;
@@ -22,6 +24,22 @@ function awaitingClassification(lead: Lead): boolean {
   return !!lead.website && lead.offer_type == null;
 }
 
+// Trades leads are chosen for maximum pain (few reviews = more urgent, more
+// likely to bite on a $3k one-time audit), so fewer reviews sends first.
+// High-ticket leads (see HIGH_TICKET_VERTICAL_KEYS) are chosen for the
+// opposite reason: an established, high-volume practice is the better fit
+// for a $6-7k build + retainer, so within that track more reviews sends
+// first. A missing review count always sorts last within its track, unknown
+// isn't a signal either way. Without this split, the two tracks shared one
+// ascending sort tuned only for trades, which meant every high-ticket lead
+// queued behind whichever trades lead had the fewest reviews (see
+// [[project-high-ticket-track]]).
+function reviewPriorityKey(lead: Lead): number {
+  const reviews = lead.review_count;
+  if (reviews == null) return Infinity;
+  return HIGH_TICKET_KEYS.has(lead.vertical ?? "") ? -reviews : reviews;
+}
+
 function comparePriority(a: DueLead, b: DueLead): number {
   const unclassifiedA = Number(awaitingClassification(a.lead));
   const unclassifiedB = Number(awaitingClassification(b.lead));
@@ -29,9 +47,7 @@ function comparePriority(a: DueLead, b: DueLead): number {
   const tierA = a.lead.priority_tier ?? 3;
   const tierB = b.lead.priority_tier ?? 3;
   if (tierA !== tierB) return tierA - tierB;
-  const reviewsA = a.lead.review_count ?? 9999;
-  const reviewsB = b.lead.review_count ?? 9999;
-  return reviewsA - reviewsB;
+  return reviewPriorityKey(a.lead) - reviewPriorityKey(b.lead);
 }
 
 /**

@@ -154,11 +154,17 @@ export const SOURCING_CITIES: City[] = [...CITIES].sort(
 // Touch 2 goes out 3 days after touch 1; touch 3 goes out 4 days after touch 2.
 export const TOUCH_DELAYS: Record<2 | 3, number> = { 2: 3, 3: 4 };
 
-// 90/day keeps outreach at 2,700/month, leaving ~300/month headroom on
-// Resend's free tier (3,000 transactional emails/month total) for the
-// site's own lead-notification and nurture-sequence emails, which share
-// the same account/quota. Revisit if Resend is upgraded off the free tier.
-export const DEFAULT_DAILY_CAP = 90;
+// Resend's free tier hard-caps at 100 emails/DAY (not just 3,000/month) —
+// confirmed 2026-07-23 against resend.com/pricing. 90 was already sitting
+// right at that wall (Resend send logs show 90/day on 7/22 and 7/23 with no
+// other traffic on top). Bumped to 95, leaving only a 5/day buffer for the
+// site's own lead-notification and nurture emails, which share this
+// account. This is NOT the "raise the cap" fix — with two tracks now
+// competing for the same daily budget (see [[project-high-ticket-track]]),
+// a real increase needs Resend Pro ($20/mo, 50,000/month, no meaningful
+// daily throttle) upgraded manually in the Resend dashboard (API key alone
+// can't change billing). Once upgraded, raise this significantly.
+export const DEFAULT_DAILY_CAP = 95;
 
 // Proven sender identity (already sending successfully via Resend — keep verbatim).
 export const FROM_NAME = "Karmello";
