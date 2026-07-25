@@ -6,7 +6,7 @@ import { ArrowRight, Globe, LayoutDashboard, Phone, Play, Star, TrendingUp } fro
 
 /* ─── Cycling service phrases ────────────────────────────────── */
 const phrases = [
-  "Missed calls are costing you patients.",
+  "Missed calls are costing you jobs.",
   "An outdated site is costing you bookings.",
   "Weak reviews are costing you the search.",
   "Slow follow-up is costing you leads.",
@@ -21,16 +21,16 @@ type ActivityItem = {
 }
 
 const pool: ActivityItem[] = [
-  { icon: "phone", event: "Call answered",       detail: "Bright Smile Dental · New patient booked",   time: "just now"  },
-  { icon: "star",  event: "Review submitted",    detail: "Sarah M. · 5 stars on Google",               time: "2 min ago" },
-  { icon: "crm",   event: "Lead captured",       detail: "Martinez HVAC · CRM updated",                time: "4 min ago" },
-  { icon: "web",   event: "Website booking",     detail: "Apex Roofing · Estimate request logged",     time: "7 min ago" },
-  { icon: "phone", event: "After-hours call",    detail: "Riverside Dental · Appointment confirmed",   time: "10 min ago"},
-  { icon: "star",  event: "Rating improved",     detail: "Elite Med Spa · 4.9 stars (was 4.6)",        time: "14 min ago"},
-  { icon: "crm",   event: "Follow-up sent",      detail: "James R. · Booking link delivered",          time: "18 min ago"},
-  { icon: "phone", event: "New intake call",     detail: "Summit Law Group · Intake form completed",   time: "23 min ago"},
-  { icon: "web",   event: "Form submission",     detail: "Peak Plumbing · Contact form captured",      time: "26 min ago"},
-  { icon: "star",  event: "Review published",    detail: "Castro Chiropractic · 5-star review live",   time: "31 min ago"},
+  { icon: "phone", event: "Emergency call booked", detail: "Coastline HVAC · Job booked",                    time: "just now"  },
+  { icon: "star",  event: "Review submitted",      detail: "Apex Garage Door · 5 stars on Google",           time: "2 min ago" },
+  { icon: "crm",   event: "Lead captured",         detail: "Martinez Plumbing · CRM updated",                time: "4 min ago" },
+  { icon: "web",   event: "Estimate request",      detail: "ProDry Restoration · Request logged",            time: "7 min ago" },
+  { icon: "phone", event: "After-hours call",      detail: "Sparks Electric · Job booked",                   time: "10 min ago"},
+  { icon: "star",  event: "Rating improved",       detail: "Baron's Air Conditioning · 4.9 stars (was 4.6)", time: "14 min ago"},
+  { icon: "crm",   event: "Follow-up sent",        detail: "SecureLift Garage Door · Booking link delivered",time: "18 min ago"},
+  { icon: "phone", event: "Call answered",         detail: "Bright Smile Dental · New patient booked",       time: "23 min ago"},
+  { icon: "web",   event: "Form submission",       detail: "Peak Plumbing · Contact form captured",          time: "26 min ago"},
+  { icon: "star",  event: "Review published",      detail: "Elite Med Spa · 5-star review live",             time: "31 min ago"},
 ]
 
 const iconMap = { phone: Phone, star: Star, crm: LayoutDashboard, web: Globe }

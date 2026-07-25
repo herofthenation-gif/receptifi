@@ -8,6 +8,8 @@ import {
   Utensils,
   Shield,
   Hammer,
+  Zap,
+  Droplets,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
@@ -132,14 +134,24 @@ type Industry = {
 
 const industries: Industry[] = [
   {
-    Icon: Stethoscope,
-    name: "Dental Practices",
-    note: "New patients call after hours. Every missed call books with a competitor down the street.",
-  },
-  {
     Icon: Wrench,
     name: "HVAC and Plumbing",
     note: "Emergency calls come in while your techs are on jobs. Aria answers every one.",
+  },
+  {
+    Icon: Zap,
+    name: "Electrical and Garage Door",
+    note: "A breaker trips or a door won't open at 6pm. Whoever answers the phone first gets the job.",
+  },
+  {
+    Icon: Droplets,
+    name: "Water Damage and Restoration",
+    note: "Damage doesn't wait for business hours. Every minute on hold is a minute closer to a bigger claim.",
+  },
+  {
+    Icon: Stethoscope,
+    name: "Dental Practices",
+    note: "New patients call after hours. Every missed call books with a competitor down the street.",
   },
   {
     Icon: Landmark,
@@ -174,7 +186,7 @@ const industries: Industry[] = [
   {
     Icon: Hammer,
     name: "Home Services",
-    note: "Roofing, electrical, landscaping. If you miss the call, a competitor picks up the job.",
+    note: "Roofing, landscaping, general contracting. If you miss the call, a competitor picks up the job.",
   },
 ]
 
