@@ -125,16 +125,15 @@ export function Hero({ onWatchClick }: { onWatchClick?: () => void }) {
               <div className="flex items-center justify-between border-b border-border bg-muted/30 px-6 py-3.5">
                 <div className="flex items-center gap-2">
                   <span className="relative flex size-2">
-                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75" />
-                    <span className="relative inline-flex size-2 rounded-full bg-green-500" />
+                    <span className="relative inline-flex size-2 rounded-full bg-muted-foreground/40" />
                   </span>
                   <span className="font-sans text-[10px] uppercase tracking-widest text-muted-foreground">
-                    Live System Activity
+                    Example: What The Audit Catches
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 text-green-700">
+                <div className="flex items-center gap-1.5 text-muted-foreground/70">
                   <TrendingUp className="size-3" />
-                  <span className="font-sans text-[10px] font-bold">99.9% uptime</span>
+                  <span className="font-sans text-[10px] font-bold">Illustrative, not live data</span>
                 </div>
               </div>
 
@@ -176,7 +175,7 @@ export function Hero({ onWatchClick }: { onWatchClick?: () => void }) {
               size="lg"
               className="group h-14 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
             >
-              Book a Revenue Audit
+              Book a Free Audit
               <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-0.5" />
             </Button>
 

@@ -16,6 +16,7 @@ export const config: VercelConfig = {
     { source: "/voice", destination: "/services", permanent: true },
     { source: "/web", destination: "/services", permanent: true },
     { source: "/reviews", destination: "/services", permanent: true },
+    { source: "/crm", destination: "/services", permanent: true },
     { source: "/demo", destination: "/book", permanent: true },
     { source: "/grow", destination: "/", permanent: true },
   ],

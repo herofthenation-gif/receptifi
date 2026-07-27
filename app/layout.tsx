@@ -21,9 +21,9 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Receptifi: The National Revenue Operations Engine',
+  title: 'Receptifi: AI Consultant for Local Service Businesses',
   description:
-    'Receptifi captures your leaking leads and scales your growth with web architecture, reputation management, and 24/7 US-based live response.',
+    'A one-time audit of your calls, site, reviews, and booking flow, then a written plan for what to fix first. No retainer, no contract.',
   icons: {
     icon: [
       {

@@ -140,7 +140,7 @@ export default function CaseStudiesPage() {
             href="/book"
             className="mt-10 inline-flex h-14 items-center gap-2 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
           >
-            Get My Free Revenue Audit
+            Book a Free Audit
             <ArrowRight className="size-4" />
           </a>
         </div>

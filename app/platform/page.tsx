@@ -5,7 +5,7 @@ import { ArrowRight, TrendingUp, Shield } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "The Platform | Receptifi",
-  description: "Four integrated services: live answering, website, reviews, and lead tracking. One connected revenue operations system for local businesses.",
+  description: "What the audit checks: phone coverage, website, reviews, and lead follow-up. A written plan for whichever ones are costing you customers.",
 }
 
 const layers = [
@@ -14,28 +14,28 @@ const layers = [
     tag: "Answer",
     title: "We Answer Your Phones",
     body: "Real US-based receptionists answer every call, 24 hours a day, 7 days a week. They greet your callers by your business name, qualify the lead, and book the appointment before it ever reaches voicemail. You stop losing customers to a phone that just rings.",
-    stat: { value: "99.9%", label: "Live Answer Rate" },
+    stat: { value: "24/7", label: "Coverage, No Voicemail" },
   },
   {
     number: "02",
     tag: "Attract",
     title: "We Build Your Website",
     body: "We design and build a fast, professional website that works hard to turn visitors into booked appointments. Not a template. A high-performance digital storefront built specifically around your business and your customers.",
-    stat: { value: "3×", label: "More Leads from the Same Traffic" },
+    stat: { value: "Built to Book", label: "Not Just to Look Good" },
   },
   {
     number: "03",
     tag: "Trust",
     title: "We Grow Your Reviews",
     body: "Google reviews are the first thing new customers see. We automate the entire review process so that happy customers leave reviews automatically, and your business rises above the competition in search results.",
-    stat: { value: "5×", label: "Review Volume in 90 Days" },
+    stat: { value: "Automatic", label: "Review Requests, Every Job" },
   },
   {
     number: "04",
     tag: "Retain",
     title: "We Track Every Lead",
     body: "Every call, form, and inquiry lands in one clean dashboard. You can see every lead, where they came from, what they need, and whether they booked. Nothing falls through the cracks. Every opportunity is accounted for.",
-    stat: { value: "0", label: "Leads Lost to the Cracks" },
+    stat: { value: "One Place", label: "Every Lead, Tracked" },
   },
 ]
 
@@ -76,7 +76,7 @@ export default function PlatformPage() {
               Four tools. One system. Zero leaks.
             </h1>
             <p className="mt-7 text-pretty text-lg leading-relaxed text-muted-foreground">
-              Each service works on its own. Together, they seal every leak in your revenue pipeline. Start with one or deploy the full system. Either way, you grow.
+              The audit tells us which of these four are actually costing you customers. We fix those first, then build the rest into your plan, one engagement, not four separate contracts.
             </p>
           </div>
         </div>
@@ -88,14 +88,14 @@ export default function PlatformPage() {
           <div className="mb-12 flex items-start justify-between gap-6 flex-wrap">
             <div>
               <span className="mb-3 block font-mono text-xs uppercase tracking-[0.18em] text-primary">
-                Individual Services
+                What We Check
               </span>
               <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Each one available on its own.
+                Four places revenue leaks without you noticing.
               </h2>
             </div>
             <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-              You do not have to buy the whole system. Start with the service that fixes your biggest problem today and add more when you are ready.
+              The audit checks all four for your specific business. We fix whichever ones are actually losing you customers, built into one plan, not sold as separate add-ons.
             </p>
           </div>
 
@@ -115,7 +115,7 @@ export default function PlatformPage() {
                         {layer.tag}
                       </span>
                       <span className="rounded-full border border-border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                        Available standalone
+                        Checked in every audit
                       </span>
                     </div>
                     <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -168,7 +168,7 @@ export default function PlatformPage() {
                   </div>
                   <div>
                     <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-                      {combo.tag} Stack
+                      {combo.tag} Pairing
                     </span>
                     <h3 className="mt-1 font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                       {combo.title}
@@ -215,10 +215,10 @@ export default function PlatformPage() {
       <section className="bg-section-alt py-24 sm:py-36">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 text-center">
           <h2 className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Not sure where to start?
+            Not sure what&rsquo;s actually broken?
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Book a free call and we will tell you exactly which service or combination fits your business right now.
+            Book a free audit and we will tell you exactly what&rsquo;s costing you customers, and what fixing it would mean for your revenue.
           </p>
           <a
             href="/book"
@@ -226,7 +226,7 @@ export default function PlatformPage() {
             rel="noopener noreferrer"
             className="mt-10 inline-flex h-14 items-center gap-2 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
           >
-            Book a Free Strategy Call
+            Book a Free Audit
             <ArrowRight className="size-4" />
           </a>
         </div>

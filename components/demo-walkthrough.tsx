@@ -58,7 +58,7 @@ function WebsitePanel({ iteration }: { iteration: number }) {
             <span className="size-2.5 rounded-full bg-green-400" />
           </div>
           <div className="flex flex-1 items-center justify-center rounded-md bg-background px-3 py-1">
-            <span className="font-mono text-[10px] text-muted-foreground">brightsmilediental.com</span>
+            <span className="font-mono text-[10px] text-muted-foreground">anchorplumbing.com</span>
           </div>
         </div>
 
@@ -69,7 +69,7 @@ function WebsitePanel({ iteration }: { iteration: number }) {
             className="anim-fade-in mb-4 flex items-center justify-between"
             style={{ animationDelay: "0.25s" }}
           >
-            <span className="text-sm font-bold text-foreground">Bright Smile Dental</span>
+            <span className="text-sm font-bold text-foreground">Anchor Plumbing</span>
             <div className="flex items-center gap-2">
               <span className="hidden text-xs text-muted-foreground sm:block">Services</span>
               <span className="hidden text-xs text-muted-foreground sm:block">About</span>
@@ -82,10 +82,10 @@ function WebsitePanel({ iteration }: { iteration: number }) {
           {/* Hero copy */}
           <div className="anim-fade-up" style={{ animationDelay: "0.5s" }}>
             <p className="font-serif text-lg font-bold leading-snug text-foreground">
-              Dallas&apos;s Most Trusted Family Dentist
+              Moreno Valley&apos;s Most Trusted Plumber
             </p>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-              New patients welcome. Same-day appointments available.
+              Same-day service. Emergency calls welcome.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ function WebsitePanel({ iteration }: { iteration: number }) {
             <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               Call us anytime
             </p>
-            <p className="mt-0.5 text-xl font-bold tracking-tight text-primary">(214) 555-0182</p>
+            <p className="mt-0.5 text-xl font-bold tracking-tight text-primary">(951) 555-0182</p>
           </div>
         </div>
       </div>
@@ -135,11 +135,11 @@ function WebsitePanel({ iteration }: { iteration: number }) {
 /* ─── Step 1: AI Call Panel ──────────────────────────────────── */
 function CallPanel({ iteration }: { iteration: number }) {
   const messages = [
-    { from: "ai",     text: "Thank you for calling Bright Smile Dental. How can I help you today?" },
-    { from: "caller", text: "Hi, I would like to schedule a new patient appointment." },
-    { from: "ai",     text: "Of course. I can book that right now. Does Thursday at 2:30 PM work?" },
-    { from: "caller", text: "Perfect, Thursday works great." },
-    { from: "ai",     text: "Done. You are confirmed for Thursday at 2:30 PM. See you then." },
+    { from: "ai",     text: "Thank you for calling Anchor Plumbing. How can I help you today?" },
+    { from: "caller", text: "Hi, my water heater is leaking, can someone come out today?" },
+    { from: "ai",     text: "Of course. I can get someone out today. Does 2:30 this afternoon work?" },
+    { from: "caller", text: "Perfect, that works." },
+    { from: "ai",     text: "Done. You are confirmed for 2:30 PM today. See you then." },
   ]
 
   return (
@@ -153,7 +153,7 @@ function CallPanel({ iteration }: { iteration: number }) {
           </span>
           <span className="font-mono text-[10px] uppercase tracking-widest text-primary">Aria · Live</span>
         </div>
-        <span className="font-mono text-[10px] text-muted-foreground">New Patient Inquiry</span>
+        <span className="font-mono text-[10px] text-muted-foreground">Emergency Service Call</span>
       </div>
 
       {/* Chat bubbles */}
@@ -184,8 +184,8 @@ function CallPanel({ iteration }: { iteration: number }) {
       >
         <CheckCircle2 className="size-5 shrink-0 text-green-600" />
         <div>
-          <p className="text-sm font-semibold text-green-800">Appointment confirmed</p>
-          <p className="font-mono text-[11px] text-green-700">Sarah M. · Thursday 2:30 PM</p>
+          <p className="text-sm font-semibold text-green-800">Job booked</p>
+          <p className="font-mono text-[11px] text-green-700">Sarah M. · Today 2:30 PM</p>
         </div>
       </div>
     </div>
@@ -196,10 +196,10 @@ function CallPanel({ iteration }: { iteration: number }) {
 function CrmPanel({ iteration }: { iteration: number }) {
   const fields = [
     { label: "Name",        value: "Sarah Mitchell" },
-    { label: "Phone",       value: "(214) 555-0182" },
-    { label: "Service",     value: "New Patient Exam" },
+    { label: "Phone",       value: "(951) 555-0182" },
+    { label: "Service",     value: "Water Heater Repair" },
     { label: "Source",      value: "Inbound Call via Aria" },
-    { label: "Assigned to", value: "Dr. Williams" },
+    { label: "Assigned to", value: "Field Tech: Marcus" },
   ]
 
   return (
@@ -271,7 +271,7 @@ function ReviewPanel({ iteration }: { iteration: number }) {
         <div className="anim-fade-up rounded-2xl border border-border bg-background p-4">
           <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Text Message</p>
           <p className="mt-2 text-sm leading-relaxed text-foreground">
-            Hi Sarah! Thanks for visiting Bright Smile Dental. How did we do? Tap to leave a quick review.
+            Hi Sarah! Thanks for choosing Anchor Plumbing. How did we do? Tap to leave a quick review.
           </p>
           <div className="mt-3 block rounded-xl bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground">
             Leave a Review
@@ -373,13 +373,13 @@ export function DemoWalkthrough() {
         {/* Section header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <span className="mb-4 block font-sans text-xs uppercase tracking-[0.18em] text-primary">
-            The Full Stack in Action
+            What Gets Built
           </span>
           <h2 className="text-balance font-serif text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl">
             Your website brings them in. Aria answers. The CRM tracks it. Then the reviews write themselves.
           </h2>
           <p className="mt-5 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Four services working as one system. Every step runs automatically so you never have to chase a lead, return a call, or ask for a review again.
+            This is what the audit builds once it finds what&rsquo;s broken. It runs on its own, so you never have to chase a lead, return a call, or ask for a review again.
           </p>
         </div>
 
@@ -483,8 +483,8 @@ export function DemoWalkthrough() {
               <Zap className="size-4 text-primary-foreground" />
             </div>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              <span className="font-semibold text-foreground">Each service works on its own.</span>{" "}
-              Together as a full stack, they create a revenue loop that runs 24 hours a day, 7 days a week, and saves the average local business owner 12 or more hours every week.
+              <span className="font-semibold text-foreground">Whichever pieces your audit flags get built into your plan.</span>{" "}
+              Together, they run 24 hours a day, 7 days a week, and save the average local business owner 12 or more hours every week.
             </p>
           </div>
 
