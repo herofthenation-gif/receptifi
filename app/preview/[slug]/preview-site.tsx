@@ -18,6 +18,7 @@ const ACCENTS: Record<string, { accent: string; accentDark: string; tint: string
   restaurant: { accent: "#9f1239", accentDark: "#881337", tint: "#fff1f2" },
   insurance_agency: { accent: "#3730a3", accentDark: "#312e81", tint: "#eef2ff" },
   home_services: { accent: "#4d7c0f", accentDark: "#3f6212", tint: "#f7fee7" },
+  massage: { accent: "#059669", accentDark: "#047857", tint: "#ecfdf5" },
 };
 const DEFAULT_ACCENT = { accent: "#0f766e", accentDark: "#115e59", tint: "#f0fdfa" };
 

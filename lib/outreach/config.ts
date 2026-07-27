@@ -32,6 +32,7 @@ export const VERTICALS: Vertical[] = [
   { key: "electrical", label: "Electrical", queryTerm: "electrician", person: "customer", personPlural: "customers", unit: "job" },
   { key: "garage_door", label: "Garage Door", queryTerm: "garage door repair", person: "homeowner", personPlural: "homeowners", unit: "job" },
   { key: "restoration", label: "Water Damage Restoration", queryTerm: "water damage restoration", person: "homeowner", personPlural: "homeowners", unit: "job" },
+  { key: "massage", label: "Massage & Recovery", queryTerm: "massage and recovery studio", person: "client", personPlural: "clients", unit: "session" },
 ];
 
 // ---- Niche focus: emergency home trades -------------------------------------

@@ -201,6 +201,16 @@ const CONTENT: Record<string, VerticalContent> = {
       { name: "Free Estimates", blurb: "Know the price before we start." },
     ],
   },
+  massage: {
+    tagline: (city) => `${city}'s spot for real recovery, not just relaxation`,
+    about: (name, city) =>
+      `${name} helps ${city} clients recover, move better, and feel like themselves again: hands-on bodywork from people who know the difference between a spa day and actual recovery.`,
+    services: [
+      { name: "Sports & Deep Tissue", blurb: "Targeted work for tight muscles and overuse." },
+      { name: "Recovery Sessions", blurb: "Percussion, stretch, and mobility work built into the visit." },
+      { name: "Membership Packages", blurb: "Regular recovery, priced for showing up often." },
+    ],
+  },
 };
 
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
