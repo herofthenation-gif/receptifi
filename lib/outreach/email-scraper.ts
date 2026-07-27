@@ -51,6 +51,17 @@ const SKIP_DOMAINS = [
   "gohighlevel",
   "leadconnectorhq",
   "mailchimp",
+  // Real-estate-specific site builders/CRMs whose own support address gets
+  // scraped off an agent's site template instead of the agent's real contact
+  // (same failure mode as the webador incident above, hit again once
+  // real_estate sourcing started: 17 of 191 high-ticket emails on
+  // 2026-07-27 were one of these three, not the actual agent).
+  "moxiworks.com",
+  "agentfire.com",
+  "moatable.com",
+  // Placeholder text left in an unfilled template ("your@email.com"),
+  // not a real inbox.
+  "email.com",
 ];
 
 // Addresses that deliver nowhere useful even on the business's own domain.
