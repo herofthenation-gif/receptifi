@@ -54,7 +54,20 @@ const VOICE_STAT_FALLBACK = "Most local businesses miss about a third of inbound
 // null) when the opening already lands the point on its own. The call is
 // always free; price only comes up live if the call turns into a real
 // engagement.
-function auditPitchTouch1(businessName: string, opening: string, insight: string | null, personPlural: string): OutreachEmail {
+//
+// subjectHook is offer-specific and shared by touch 1 and its touch-2 reply
+// (same subject, "Re:" prefixed, so it threads like a real reply). Deliberately
+// not "quick question" — that phrase is the single most fingerprinted cold-email
+// subject line there is; spam filters and jaded owners both pattern-match it
+// instantly, the same problem the old "I checked your Google ranking" call
+// opener had on the phone side.
+function auditPitchTouch1(
+  businessName: string,
+  opening: string,
+  insight: string | null,
+  personPlural: string,
+  subjectHook: string
+): OutreachEmail {
   const paragraphs = [
     `${businessName},`,
     opening,
@@ -65,12 +78,12 @@ function auditPitchTouch1(businessName: string, opening: string, insight: string
     SIGNATURE,
   ].filter((p): p is string => Boolean(p));
 
-  return { subject: `${businessName}, quick question`, text: paragraphs.join("\n\n") };
+  return { subject: `${businessName}, ${subjectHook}`, text: paragraphs.join("\n\n") };
 }
 
 function auditPitchTouch3(businessName: string, closingLine: string): OutreachEmail {
   return {
-    subject: `Closing the loop, ${businessName}`,
+    subject: `${businessName}, last one`,
     text: `Last email.
 
 ${closingLine}
@@ -84,11 +97,11 @@ ${SIGNATURE}`,
 function voiceEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: EmailContext): OutreachEmail {
   const v = getVertical(ctx.vertical);
 
-  if (touch === 1) return auditPitchTouch1(businessName, opening, null, v.personPlural);
+  if (touch === 1) return auditPitchTouch1(businessName, opening, null, v.personPlural, "your after-hours calls");
 
   if (touch === 2) {
     return {
-      subject: `Re: ${businessName}, quick question`,
+      subject: `Re: ${businessName}, your after-hours calls`,
       text: `Still here if you're interested.
 
 ${VOICE_STATS[v.key] ?? VOICE_STAT_FALLBACK} We catch exactly that, and fix it.
@@ -113,13 +126,14 @@ function webEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
       businessName,
       opening,
       `Most ${v.personPlural} decide before they ever call. Whoever looks legitimate online gets the ${v.unit}, and right now that's not you.`,
-      v.personPlural
+      v.personPlural,
+      "your website"
     );
   }
 
   if (touch === 2) {
     return {
-      subject: `Re: ${businessName}, quick question`,
+      subject: `Re: ${businessName}, your website`,
       text: `Still here.
 
 Most ${v.personPlural} check the website before they ever call. Right now that first impression is sending them to competitors. We fix exactly what's costing you, starting with the site.
@@ -144,13 +158,14 @@ function reviewsEmail(touch: 1 | 2 | 3, businessName: string, opening: string, c
       businessName,
       opening,
       `Most happy ${v.personPlural} never think to leave a review unless someone asks at the right moment. That's usually the entire gap between you and the businesses outranking you.`,
-      v.personPlural
+      v.personPlural,
+      "your Google reviews"
     );
   }
 
   if (touch === 2) {
     return {
-      subject: `Re: ${businessName}, quick question`,
+      subject: `Re: ${businessName}, your Google reviews`,
       text: `Still here if you're interested.
 
 When someone searches "${v.queryTerm} near me", they call whoever has the most stars. We show you exactly how you stack up, and close the gap for you.
@@ -175,13 +190,14 @@ function crmEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
       businessName,
       opening,
       `You already spent to get that ${v.person} to reach out. Every minute without a reply is you handing that ${v.unit} to whoever answers first.`,
-      v.personPlural
+      v.personPlural,
+      "that missed follow-up"
     );
   }
 
   if (touch === 2) {
     return {
-      subject: `Re: ${businessName}, quick question`,
+      subject: `Re: ${businessName}, that missed follow-up`,
       text: `Still here if you're interested.
 
 A ${v.person} who doesn't hear back within minutes goes cold. We find exactly where inquiries are slipping through and fix it.
