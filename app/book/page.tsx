@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import Script from "next/script"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, Loader2 } from "lucide-react"
@@ -8,11 +10,27 @@ import { ArrowRight, Loader2 } from "lucide-react"
 const CALENDLY = "https://calendly.com/karmello-koba1ba/30min"
 
 export default function BookPage() {
+  const router = useRouter()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [problem, setProblem] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showCalendly, setShowCalendly] = useState(false)
+
+  useEffect(() => {
+    if (!showCalendly) return
+
+    function handleMessage(e: MessageEvent) {
+      if (e.origin !== "https://calendly.com") return
+      if (e.data?.event === "calendly.event_scheduled") {
+        router.push("/thank-you")
+      }
+    }
+
+    window.addEventListener("message", handleMessage)
+    return () => window.removeEventListener("message", handleMessage)
+  }, [showCalendly, router])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -25,11 +43,43 @@ export default function BookPage() {
         body: JSON.stringify({ name, email, phone, problem }),
       })
     } catch {
-      // Non-blocking — still redirect even if save fails
+      // Non-blocking — still show the calendar even if save fails
     }
 
-    const params = new URLSearchParams({ name, email })
-    window.location.href = `${CALENDLY}?${params.toString()}`
+    setLoading(false)
+    setShowCalendly(true)
+  }
+
+  const calendlyUrl = `${CALENDLY}?${new URLSearchParams({ name, email }).toString()}`
+
+  if (showCalendly) {
+    return (
+      <main className="min-h-screen bg-background">
+        <Navbar />
+        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
+
+        <section className="min-h-[calc(100vh-4rem)] py-24 pt-36">
+          <div className="mx-auto w-full max-w-3xl px-5 sm:px-8">
+            <div className="mb-8 text-center">
+              <span className="mb-4 block font-mono text-xs uppercase tracking-[0.18em] text-primary">
+                Book Your Free Call
+              </span>
+              <h1 className="font-serif text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
+                Pick a time that works.
+              </h1>
+            </div>
+
+            <div
+              className="calendly-inline-widget rounded-[2rem] overflow-hidden"
+              data-url={calendlyUrl}
+              style={{ minWidth: "320px", height: "700px" }}
+            />
+          </div>
+        </section>
+
+        <SiteFooter />
+      </main>
+    )
   }
 
   return (
@@ -122,7 +172,7 @@ export default function BookPage() {
               {loading ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  Taking you to the calendar...
+                  Loading the calendar...
                 </>
               ) : (
                 <>
