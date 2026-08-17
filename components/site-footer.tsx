@@ -9,19 +9,29 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8 sm:pb-32 sm:pt-44">
         <div className="relative mx-auto max-w-3xl text-center">
           <h2 className="text-balance font-serif text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Ready to see what&rsquo;s actually costing you customers?
+            Ready to fix what&rsquo;s actually costing you customers?
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-pretty leading-relaxed text-muted-foreground">
-            Book a free audit call. We&rsquo;ll show you exactly what&rsquo;s broken, missed calls, a weak site, thin reviews, slow follow-up, and what fixing it would mean for your revenue. No pitch, no pressure.
+            Free audit shows you exactly what&rsquo;s broken, missed calls, a weak site, thin reviews, slow follow-up, weak SEO. Then you choose: we build and run the fix, or we teach you how.
           </p>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
               render={<a href="/book" />}
               nativeButton={false}
               size="lg"
-              className="group h-14 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
+              className="group h-14 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
             >
               Book a Free Audit
+              <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-0.5" />
+            </Button>
+            <Button
+              render={<a href="/services" />}
+              nativeButton={false}
+              size="lg"
+              variant="outline"
+              className="group h-14 rounded-full border-2 border-primary/25 bg-transparent px-8 text-base font-semibold text-foreground shadow-none transition-all duration-200 hover:scale-[1.03] hover:border-primary hover:bg-primary/5"
+            >
+              Book Coaching, $700/hr
               <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </div>
@@ -35,6 +45,10 @@ export function SiteFooter() {
             Operating nationally · All 50 states
           </p>
           <div className="flex items-center gap-4">
+            <a href="tel:+19516251893" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              (951) 625-1893
+            </a>
+            <span className="text-muted-foreground/30 text-xs">·</span>
             <a href="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
             </a>
