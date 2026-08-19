@@ -11,6 +11,7 @@ import { assessSiteQuality } from "@/lib/outreach/site-quality";
 import { decideOffer } from "@/lib/outreach/offer";
 import { buildGeneratedSite, buildPreviewSlug } from "@/lib/outreach/site-generator";
 import { sendFailureAlert } from "@/lib/outreach/alerts";
+import { isOutreachPaused } from "@/lib/outreach/kill-switch";
 
 // Firecrawl scrapes (15s timeout each) dominate the classification budget.
 export const maxDuration = 300;
@@ -27,7 +28,19 @@ const MAX_EMAIL_SCRAPES_PER_RUN = 80;
 const HIGH_TICKET_EMAIL_SCRAPE_RESERVE = 25;
 // Separate sweep over the pre-existing backlog (leads with a website that
 // were never attempted, e.g. sourced back when the per-run cap was 10).
-const BACKFILL_BATCH_SIZE = 60;
+// Raised 60 -> 150 on 2026-08-14, then 150 -> 220 on 2026-08-19: backlog had
+// grown to ~3,600 untried leads split roughly 1,226 trades / 1,638
+// high-ticket / 732 other, still outpacing what 150/day could clear. Plain
+// fetches (not Firecrawl), so this is cheap; still well inside the 300s
+// route budget alongside the fresh-batch scrape and classification pass.
+const BACKFILL_BATCH_SIZE = 220;
+// Trades' backlog (1,226 untried as of 2026-08-19) is large enough to eat
+// the entire BACKFILL_BATCH_SIZE on its own every day, which starved
+// high-ticket completely (see backfillEmailScrape below — 996 of 1,055
+// needs_review leads had never had an email scrape attempted). This
+// guarantees high-ticket gets real daily throughput regardless of how deep
+// trades' backlog is.
+const HIGH_TICKET_BACKFILL_RESERVE = 90;
 const SCRAPE_CONCURRENCY = 20;
 // Firecrawl calls per run. Leads without a website classify instantly and
 // don't count against this.
@@ -147,14 +160,17 @@ async function classifyLeads(): Promise<{ classified: ClassificationEntry[]; err
 async function backfillEmailScrape(): Promise<{ attempted: number; found: number; errors: string[] }> {
   const errors: string[] = [];
 
-  // Trades backlog first, then high-ticket, then everything else, only
-  // spending leftover budget on the next bucket. Without the middle bucket,
-  // high-ticket backlog would sit behind trades AND every other stray
-  // vertical indefinitely (see HIGH_TICKET_EMAIL_SCRAPE_RESERVE above).
+  // High-ticket gets a hard reserve, taken first, then trades, then
+  // everything else splits whatever's left. Previously trades ran first
+  // with no cap of its own, so its 1,200+ untried backlog consumed the
+  // entire BACKFILL_BATCH_SIZE every single day and the loop `break`d
+  // before high-ticket's bucket ever ran — needs_review leads (gated on
+  // having an email, see getDueLeads()) sat starved indefinitely, ~1,000
+  // of them with no email ever attempted. See [[project-high-ticket-track]].
   const allFocusKeys = [...FOCUS_VERTICAL_KEYS, ...HIGH_TICKET_VERTICAL_KEYS];
-  const buckets: Array<{ verticals: readonly string[] } | { exclude: readonly string[] }> = [
+  const buckets: Array<{ verticals: readonly string[]; cap?: number } | { exclude: readonly string[] }> = [
+    { verticals: HIGH_TICKET_VERTICAL_KEYS, cap: HIGH_TICKET_BACKFILL_RESERVE },
     { verticals: FOCUS_VERTICAL_KEYS },
-    { verticals: HIGH_TICKET_VERTICAL_KEYS },
     { exclude: allFocusKeys },
   ];
 
@@ -162,6 +178,7 @@ async function backfillEmailScrape(): Promise<{ attempted: number; found: number
   for (const bucket of buckets) {
     const remaining = BACKFILL_BATCH_SIZE - backlog.length;
     if (remaining <= 0) break;
+    const take = "cap" in bucket && bucket.cap != null ? Math.min(bucket.cap, remaining) : remaining;
 
     const query = supabaseAdmin
       .from("leads")
@@ -170,7 +187,7 @@ async function backfillEmailScrape(): Promise<{ attempted: number; found: number
       .is("email", null)
       .is("email_scrape_attempted_at", null)
       .order("priority_tier", { ascending: true })
-      .limit(remaining);
+      .limit(take);
     if ("verticals" in bucket) query.filter("vertical", "in", `(${bucket.verticals.join(",")})`);
     else query.filter("vertical", "not.in", `(${bucket.exclude.join(",")})`);
 
@@ -212,6 +229,10 @@ interface Candidate {
 export async function GET(req: Request) {
   const authError = assertCronAuth(req);
   if (authError) return authError;
+
+  if (await isOutreachPaused()) {
+    return Response.json({ paused: true });
+  }
 
   try {
     return await runSourceLeads();

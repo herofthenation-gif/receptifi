@@ -192,7 +192,10 @@ export const CALENDLY_URL = "https://calendly.com/karmello-koba1ba/30min";
 // 478 failed, 135 succeeded — a ~22% yield, which is expected for trades
 // sites that favor contact forms over a published email). More combos/day
 // is the actual lever on lead supply now, not re-scraping the same sites.
-export const SOURCING_BATCH_SIZE = 10;
+// Raised 10 -> 15 on 2026-08-19 for more daily volume; the untried backlog
+// (1,226 as of that date) still comfortably absorbs the extra candidates
+// via backfillEmailScrape's now-uncapped trades share.
+export const SOURCING_BATCH_SIZE = 15;
 
 // Conservative pilot pace for the high-ticket track (3 verticals x 34 cities
 // = 102 combos; a full pass takes ~20 days at this rate). Kept separate from
