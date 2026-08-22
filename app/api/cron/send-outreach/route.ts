@@ -7,6 +7,7 @@ import { buildOutreachEmail } from "@/lib/outreach/email-templates";
 import { personalizeOpening } from "@/lib/outreach/personalize";
 import { DEFAULT_DAILY_CAP, PREVIEW_BASE_URL } from "@/lib/outreach/config";
 import { sendFailureAlert } from "@/lib/outreach/alerts";
+import { isOutreachPaused } from "@/lib/outreach/kill-switch";
 
 export const maxDuration = 60;
 
@@ -24,6 +25,10 @@ interface SendResultEntry {
 export async function GET(req: Request) {
   const authError = assertCronAuth(req);
   if (authError) return authError;
+
+  if (await isOutreachPaused()) {
+    return Response.json({ paused: true });
+  }
 
   try {
     return await runSendOutreach();
@@ -57,6 +62,7 @@ async function runSendOutreach() {
       vertical: lead.vertical,
       offerType: lead.offer_type,
       previewUrl: lead.preview_slug ? `${PREVIEW_BASE_URL}/${lead.preview_slug}` : null,
+      email: lead.email!,
     };
     const opening =
       touch === 1
