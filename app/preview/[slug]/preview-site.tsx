@@ -19,6 +19,9 @@ const ACCENTS: Record<string, { accent: string; accentDark: string; tint: string
   insurance_agency: { accent: "#3730a3", accentDark: "#312e81", tint: "#eef2ff" },
   home_services: { accent: "#4d7c0f", accentDark: "#3f6212", tint: "#f7fee7" },
   massage: { accent: "#059669", accentDark: "#047857", tint: "#ecfdf5" },
+  garage_door: { accent: "#57534e", accentDark: "#44403c", tint: "#fafaf9" },
+  electrical: { accent: "#ca8a04", accentDark: "#78350f", tint: "#fefce8" },
+  restoration: { accent: "#0369a1", accentDark: "#075985", tint: "#f0f9ff" },
 };
 const DEFAULT_ACCENT = { accent: "#0f766e", accentDark: "#115e59", tint: "#f0fdfa" };
 
@@ -112,6 +115,21 @@ export function PreviewSite({ site }: { site: GeneratedSite }) {
           ))}
         </div>
       </section>
+
+      {/* Testimonial */}
+      {site.review && (
+        <section className="mx-auto max-w-3xl px-5 py-16">
+          <div className="rounded-2xl border border-neutral-200 p-8 sm:p-10" style={{ backgroundColor: "var(--pv-tint)" }}>
+            <Stars rating={site.review.rating} />
+            <p className="mt-4 font-[family-name:var(--font-playfair)] text-xl leading-relaxed text-neutral-800 sm:text-2xl">
+              &ldquo;{site.review.text}&rdquo;
+            </p>
+            <p className="mt-4 text-sm font-semibold text-neutral-600">
+              — {site.review.author}, Google review
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* About */}
       <section className="px-5 py-16" style={{ backgroundColor: "var(--pv-tint)" }}>

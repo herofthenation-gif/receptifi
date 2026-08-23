@@ -13,6 +13,12 @@ export interface GeneratedService {
   blurb: string;
 }
 
+export interface GeneratedReview {
+  text: string;
+  author: string;
+  rating: number;
+}
+
 export interface GeneratedSite {
   businessName: string;
   vertical: string;
@@ -25,6 +31,7 @@ export interface GeneratedSite {
   tagline: string;
   about: string;
   services: GeneratedService[];
+  review: GeneratedReview | null;
   hours: { day: string; hours: string }[] | null;
   sourceUrl: string | null;
   /** Kept for personalizeOpening() so outdated-site emails can cite the real defect. */
@@ -211,6 +218,36 @@ const CONTENT: Record<string, VerticalContent> = {
       { name: "Membership Packages", blurb: "Regular recovery, priced for showing up often." },
     ],
   },
+  garage_door: {
+    tagline: (city) => `${city}'s garage door repair, done right the first time`,
+    about: (name, city) =>
+      `${name} handles garage door repairs and installs across ${city}, from broken springs to full opener replacements, with technicians who show up on time and explain what's actually wrong before they touch anything.`,
+    services: [
+      { name: "Spring & Cable Repair", blurb: "The two things that fail most, fixed safely and fast." },
+      { name: "Opener Installation", blurb: "New openers, remotes, and smart controls set up right." },
+      { name: "Same-Day Service", blurb: "A garage door that won't close can't wait." },
+    ],
+  },
+  electrical: {
+    tagline: (city) => `Licensed electricians ${city} trusts`,
+    about: (name, city) =>
+      `${name} handles ${city}'s electrical work, from panel upgrades to troubleshooting, with licensed electricians who get it right the first time and leave the job site clean.`,
+    services: [
+      { name: "Panel Upgrades", blurb: "Safe capacity for modern homes and EV chargers." },
+      { name: "Troubleshooting & Repairs", blurb: "Find the real problem, not just the symptom." },
+      { name: "Lighting & Wiring", blurb: "New circuits, fixtures, and outlets done to code." },
+    ],
+  },
+  restoration: {
+    tagline: (city) => `${city}'s water damage restoration, first call to last`,
+    about: (name, city) =>
+      `${name} responds fast when ${city} homes take on water: extraction, drying, and repairs handled by one team so nothing falls through the cracks with your insurance claim.`,
+    services: [
+      { name: "Emergency Water Extraction", blurb: "The faster it's out, the less it costs you." },
+      { name: "Structural Drying", blurb: "Industrial equipment, monitored until it's actually dry." },
+      { name: "Insurance Claim Support", blurb: "We document everything your adjuster needs." },
+    ],
+  },
 };
 
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -272,6 +309,26 @@ export interface SiteGeneratorInput {
   websiteUrl: string | null;
   scrape: ScrapedSite | null;
   qualitySignals: QualitySignals | null;
+  /** Most recent Google review, whatever its rating — filtering to "is this
+   * safe to show as a testimonial" happens in pickTestimonial(), not here. */
+  latestReview: GeneratedReview | null;
+}
+
+const TESTIMONIAL_MAX_LENGTH = 280;
+
+/**
+ * Only ever surfaces a positive review as a testimonial on a lead's own
+ * marketing preview — showing their most recent review unfiltered could just
+ * as easily be a complaint (billing disputes, botched jobs), which would be
+ * actively harmful to put on a site meant to sell them on Receptifi.
+ */
+function pickTestimonial(review: GeneratedReview | null): GeneratedReview | null {
+  if (!review || review.rating < 4 || !review.text.trim()) return null;
+  const text =
+    review.text.length > TESTIMONIAL_MAX_LENGTH
+      ? `${review.text.slice(0, TESTIMONIAL_MAX_LENGTH).trim()}…`
+      : review.text;
+  return { ...review, text };
 }
 
 export function buildGeneratedSite(input: SiteGeneratorInput): GeneratedSite {
@@ -291,6 +348,7 @@ export function buildGeneratedSite(input: SiteGeneratorInput): GeneratedSite {
     tagline: content.tagline(city),
     about: extractAboutFromScrape(input.scrape) ?? content.about(input.businessName, city),
     services: content.services,
+    review: pickTestimonial(input.latestReview),
     hours: formatHours(input.hours),
     sourceUrl: input.websiteUrl,
     qualitySignals: input.qualitySignals,

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Script from "next/script"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
+import { AddressAutocomplete } from "@/components/address-autocomplete"
 import { ArrowRight, Loader2 } from "lucide-react"
 
 const CALENDLY = "https://calendly.com/karmello-koba1ba/30min"
@@ -14,6 +15,7 @@ export default function BookPage() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
+  const [address, setAddress] = useState("")
   const [problem, setProblem] = useState("")
   const [loading, setLoading] = useState(false)
   const [showCalendly, setShowCalendly] = useState(false)
@@ -40,7 +42,7 @@ export default function BookPage() {
       await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, problem }),
+        body: JSON.stringify({ name, email, phone, address, problem }),
       })
     } catch {
       // Non-blocking — still show the calendar even if save fails
@@ -148,6 +150,13 @@ export default function BookPage() {
                 onChange={(e) => setPhone(e.target.value)}
                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
               />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="address" className="block font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                Business Address
+              </label>
+              <AddressAutocomplete value={address} onChange={setAddress} />
             </div>
 
             <div className="space-y-2">

@@ -41,6 +41,11 @@ export interface Lead {
   quality_checked_at: string | null;
   unsubscribed_at: string | null;
   email_scrape_attempted_at: string | null;
+  last_review_text: string | null;
+  last_review_author: string | null;
+  last_review_rating: number | null;
+  last_review_at: string | null;
+  last_review_checked_at: string | null;
 }
 
 export interface GooglePlacesPeriod {

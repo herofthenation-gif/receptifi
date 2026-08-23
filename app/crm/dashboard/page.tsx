@@ -336,14 +336,14 @@ export default function CRMPage() {
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ background: "rgba(255,255,255,0.03)", borderBottom: "1px solid var(--hair)" }}>
-                {["Name", "Business", "Vertical", "Offer", "Contact", "Status", "Outreach", "Notes", "Created", ""].map((h) => (
+                {["Name", "Business", "Reviews", "Vertical", "Offer", "Contact", "Status", "Outreach", "Notes", "Created", ""].map((h) => (
                   <th key={h} style={{ padding: "13px 16px", textAlign: "left", fontSize: 11, fontWeight: 600, color: "var(--ink-faint)", letterSpacing: "0.07em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={10} style={{ padding: 48, textAlign: "center", color: "var(--ink-faint)" }}>
+                <tr><td colSpan={11} style={{ padding: 48, textAlign: "center", color: "var(--ink-faint)" }}>
                   <div style={{ display: "inline-flex", gap: 6 }}>
                     {[0, 0.15, 0.3].map((d, i) => (
                       <span key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent-2)", animation: `dot 1.2s ease-in-out ${d}s infinite` }} />
@@ -351,7 +351,7 @@ export default function CRMPage() {
                   </div>
                 </td></tr>
               ) : visible.length === 0 ? (
-                <tr><td colSpan={10} style={{ padding: 64, textAlign: "center", color: "var(--ink-faint)", fontSize: 14 }}>
+                <tr><td colSpan={11} style={{ padding: 64, textAlign: "center", color: "var(--ink-faint)", fontSize: 14 }}>
                   {leads.length === 0 ? "No leads yet — add your first one above." : "No leads match your filter."}
                 </td></tr>
               ) : visible.map((lead, i) => (
@@ -374,6 +374,27 @@ export default function CRMPage() {
                       <a href={`/preview/${lead.preview_slug}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: "var(--accent-2)", marginTop: 2, display: "inline-block" }}>
                         View site ↗
                       </a>
+                    )}
+                  </td>
+                  <td style={{ padding: "14px 16px", maxWidth: 200 }}>
+                    {lead.rating != null ? (
+                      <div style={{ fontSize: 13, color: "var(--ink-dim)" }}>
+                        <span style={{ color: "#fbbf24" }}>★</span> {lead.rating}
+                        <span style={{ color: "var(--ink-faint)" }}> ({lead.review_count ?? 0})</span>
+                      </div>
+                    ) : (
+                      <span style={{ color: "var(--hair-strong)", fontSize: 12 }}>—</span>
+                    )}
+                    {lead.last_review_text && (
+                      <div
+                        title={lead.last_review_text}
+                        style={{ fontSize: 11, color: "var(--ink-faint)", marginTop: 3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                      >
+                        &ldquo;{lead.last_review_text}&rdquo;
+                        {lead.last_review_at && (
+                          <span> — {new Date(lead.last_review_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+                        )}
+                      </div>
                     )}
                   </td>
                   <td style={{ padding: "14px 16px", fontSize: 12, color: "var(--ink-dim)", whiteSpace: "nowrap" }}>

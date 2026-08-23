@@ -1,7 +1,7 @@
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import type { Lead } from "@/lib/supabase";
 import { assertCronAuth } from "@/lib/outreach/cron-auth";
-import { searchPlacesText, type PlacesResult } from "@/lib/outreach/google-places";
+import { searchPlacesText, getPlaceReviews, type PlacesResult } from "@/lib/outreach/google-places";
 import { scrapeContactEmail } from "@/lib/outreach/email-scraper";
 import { mapWithConcurrency } from "@/lib/outreach/concurrency";
 import { nextCombos, advanceCursor, nextHighTicketCombos, advanceHighTicketCursor } from "@/lib/outreach/cursor";
@@ -41,6 +41,11 @@ const BACKFILL_BATCH_SIZE = 220;
 // guarantees high-ticket gets real daily throughput regardless of how deep
 // trades' backlog is.
 const HIGH_TICKET_BACKFILL_RESERVE = 90;
+// Places Details (reviews) is a billed call per lead, unlike the plain-fetch
+// email backfill above — kept well below BACKFILL_BATCH_SIZE so a large
+// backlog clears gradually over several days' cron runs rather than in one
+// expensive burst. Raise if last-review coverage needs to move faster.
+const LAST_REVIEW_BACKFILL_SIZE = 60;
 const SCRAPE_CONCURRENCY = 20;
 // Firecrawl calls per run. Leads without a website classify instantly and
 // don't count against this.
@@ -128,6 +133,13 @@ async function classifyLeads(): Promise<{ classified: ClassificationEntry[]; err
         websiteUrl: lead.website,
         scrape: quality.scrape,
         qualitySignals: quality.signals,
+        latestReview: lead.last_review_text
+          ? {
+              text: lead.last_review_text,
+              author: lead.last_review_author ?? "a customer",
+              rating: lead.last_review_rating ?? lead.rating ?? 5,
+            }
+          : null,
       });
     }
 
@@ -214,6 +226,56 @@ async function backfillEmailScrape(): Promise<{ attempted: number; found: number
       .update({ email, email_scrape_attempted_at: new Date().toISOString() })
       .eq("id", lead.id);
     if (updateError) errors.push(`backfill update ${lead.id}: ${updateError.message}`);
+  });
+
+  return { attempted: backlog.length, found, errors };
+}
+
+/**
+ * Backfills the most recent Google review for leads that have a place_id but
+ * haven't been checked yet. Sorts Places Details' up-to-5 reviews (relevance
+ * order, per Google) by publishTime and keeps the newest. Marks
+ * last_review_checked_at even on zero reviews so it isn't retried forever.
+ */
+async function backfillLastReview(): Promise<{ attempted: number; found: number; errors: string[] }> {
+  const errors: string[] = [];
+
+  const { data, error } = await supabaseAdmin
+    .from("leads")
+    .select("id, place_id")
+    .not("place_id", "is", null)
+    .is("last_review_checked_at", null)
+    .order("priority_tier", { ascending: true })
+    .limit(LAST_REVIEW_BACKFILL_SIZE);
+
+  if (error) {
+    errors.push(`last-review fetch: ${error.message}`);
+    return { attempted: 0, found: 0, errors };
+  }
+
+  const backlog = (data ?? []) as Pick<Lead, "id" | "place_id">[];
+  let found = 0;
+
+  await mapWithConcurrency(backlog, SCRAPE_CONCURRENCY, async (lead) => {
+    const update: Record<string, unknown> = { last_review_checked_at: new Date().toISOString() };
+    try {
+      const reviews = await getPlaceReviews(lead.place_id!);
+      const newest = reviews.sort(
+        (a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()
+      )[0];
+      if (newest) {
+        found++;
+        update.last_review_text = newest.text;
+        update.last_review_author = newest.authorName;
+        update.last_review_rating = newest.rating;
+        update.last_review_at = newest.publishTime;
+      }
+    } catch (err) {
+      errors.push(`last-review ${lead.id}: ${(err as Error).message}`);
+    }
+
+    const { error: updateError } = await supabaseAdmin.from("leads").update(update).eq("id", lead.id);
+    if (updateError) errors.push(`last-review update ${lead.id}: ${updateError.message}`);
   });
 
   return { attempted: backlog.length, found, errors };
@@ -340,6 +402,9 @@ async function runSourceLeads() {
   const backfill = await backfillEmailScrape();
   errors.push(...backfill.errors);
 
+  const reviewBackfill = await backfillLastReview();
+  errors.push(...reviewBackfill.errors);
+
   const classification = await classifyLeads();
   errors.push(...classification.errors);
 
@@ -350,6 +415,8 @@ async function runSourceLeads() {
     emailScrapeAttempted: toScrape.length,
     backfillAttempted: backfill.attempted,
     backfillFound: backfill.found,
+    reviewBackfillAttempted: reviewBackfill.attempted,
+    reviewBackfillFound: reviewBackfill.found,
     classified: classification.classified,
     errors,
   });
