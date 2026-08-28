@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { Logo } from "@/components/logo"
+import { SubscribeForm } from "@/components/subscribe-form"
 
 export function SiteFooter() {
   return (
@@ -42,7 +43,7 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-8 sm:flex-row sm:px-8">
           <Logo />
           <p className="text-xs text-muted-foreground">
-            Operating nationally · All 50 states
+            Based in the Inland Empire, CA · Serving businesses nationwide
           </p>
           <div className="flex items-center gap-4">
             <a href="tel:+19516251893" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
@@ -56,6 +57,14 @@ export function SiteFooter() {
             <p className="text-xs text-muted-foreground">
               © {new Date().getFullYear()} Receptifi. All rights reserved.
             </p>
+          </div>
+        </div>
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-border px-5 py-8 sm:flex-row sm:px-8">
+          <div className="flex flex-col items-center gap-2 sm:items-start">
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              Get occasional updates
+            </span>
+            <SubscribeForm />
           </div>
         </div>
       </div>

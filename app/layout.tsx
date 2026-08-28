@@ -48,6 +48,35 @@ export const viewport: Viewport = {
   themeColor: '#FFFFFF',
 }
 
+// Local SEO: grounds Receptifi in the Inland Empire for local search/maps
+// ranking while still describing nationwide service (see areaServed).
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Receptifi',
+  description:
+    "AI consulting practice for local service businesses. A free audit finds what's costing you customers, then we build and run the fix or teach you to.",
+  url: 'https://receptifi.net',
+  telephone: '+1-951-625-1893',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Moreno Valley',
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Riverside, CA' },
+    { '@type': 'City', name: 'San Bernardino, CA' },
+    { '@type': 'City', name: 'Moreno Valley, CA' },
+    { '@type': 'City', name: 'Ontario, CA' },
+    { '@type': 'City', name: 'Rancho Cucamonga, CA' },
+    { '@type': 'City', name: 'Corona, CA' },
+    { '@type': 'AdministrativeArea', name: 'Inland Empire, CA' },
+    { '@type': 'State', name: 'California' },
+    { '@type': 'Country', name: 'United States' },
+  ],
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -59,6 +88,10 @@ export default function RootLayout({
       className={`${jakarta.variable} ${geistMono.variable} ${playfair.variable} bg-background`}
     >
       <body className="font-sans antialiased bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        />
         {children}
         <ChatLoader />
         {process.env.NODE_ENV === 'production' && <Analytics />}

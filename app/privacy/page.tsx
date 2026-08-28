@@ -42,7 +42,7 @@ export default function PrivacyPage() {
             <div>
               <h2 className="font-serif text-2xl font-bold text-foreground mb-3">What information we collect</h2>
               <p className="text-base leading-relaxed text-muted-foreground mb-4">
-                We only collect information you give us directly. This happens when you fill out the booking form on our website. The information we collect includes:
+                We only collect information you give us directly. This happens when you fill out the booking form on our website, or subscribe to email updates via the form in our site footer. The information we collect includes:
               </p>
               <ul className="space-y-2">
                 {[
@@ -50,6 +50,7 @@ export default function PrivacyPage() {
                   "Your business email address",
                   "Your phone number (optional)",
                   "A description of your current business challenge (optional)",
+                  "Your email address, if you subscribe to our email updates",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-base leading-relaxed text-muted-foreground">
                     <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
@@ -73,6 +74,7 @@ export default function PrivacyPage() {
                   "Follow up with you if you do not complete your booking",
                   "Understand your business needs so we can provide relevant guidance",
                   "Contact you about Receptifi services you have expressed interest in",
+                  "Send occasional email updates, if you subscribed to our list",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-base leading-relaxed text-muted-foreground">
                     <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
@@ -88,7 +90,7 @@ export default function PrivacyPage() {
             <div>
               <h2 className="font-serif text-2xl font-bold text-foreground mb-3">Where your information is stored</h2>
               <p className="text-base leading-relaxed text-muted-foreground">
-                Your information is stored securely in Supabase, a cloud database provider. When you submit the booking form, our team receives a notification via Resend, a transactional email service. You are then redirected to Calendly, a third-party scheduling platform, where their own privacy policy applies. We recommend reviewing{" "}
+                Your information is stored securely in Supabase, a cloud database provider. When you submit the booking form, our team receives a notification via Resend, a transactional email service; if you subscribe to email updates, your address is also stored with Resend so we can send you those emails, and you can unsubscribe at any time via the link in any update we send. You are then redirected to Calendly, a third-party scheduling platform, where their own privacy policy applies. We recommend reviewing{" "}
                 <a href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2">
                   Calendly's privacy policy
                 </a>{" "}
