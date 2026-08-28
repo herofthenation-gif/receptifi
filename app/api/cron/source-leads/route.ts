@@ -320,7 +320,7 @@ async function runSourceLeads() {
   for (const { city, vertical } of combos) {
     let results;
     try {
-      results = await searchPlacesText(`${vertical.queryTerm} in ${city.name}, CA`);
+      results = await searchPlacesText(`${vertical.queryTerm} in ${city.name}, ${city.state}`);
     } catch (err) {
       errors.push(`${vertical.key}/${city.name}: ${(err as Error).message}`);
       continue;

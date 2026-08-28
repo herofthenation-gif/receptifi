@@ -92,11 +92,13 @@ export function article(word: string): "a" | "an" {
   return /^[aeiou]/i.test(word) ? "an" : "a";
 }
 
-export type Region = "LA" | "OC" | "SD" | "IE";
+export type Region = "LA" | "OC" | "SD" | "IE" | "AL";
 
 export interface City {
   name: string;
   region: Region;
+  /** US state abbreviation, used to build the Google Places query text. */
+  state: string;
 }
 
 // Starter SoCal city list. Add more cities here to widen sourcing.
@@ -105,48 +107,51 @@ export interface City {
 // possible, and peak HVAC season hits hardest there).
 export const CITIES: City[] = [
   // LA County
-  { name: "Los Angeles", region: "LA" },
-  { name: "Long Beach", region: "LA" },
-  { name: "Glendale", region: "LA" },
-  { name: "Pasadena", region: "LA" },
-  { name: "Santa Clarita", region: "LA" },
-  { name: "Pomona", region: "LA" },
-  { name: "Torrance", region: "LA" },
-  { name: "Burbank", region: "LA" },
-  { name: "Inglewood", region: "LA" },
-  { name: "Lancaster", region: "LA" },
+  { name: "Los Angeles", region: "LA", state: "CA" },
+  { name: "Long Beach", region: "LA", state: "CA" },
+  { name: "Glendale", region: "LA", state: "CA" },
+  { name: "Pasadena", region: "LA", state: "CA" },
+  { name: "Santa Clarita", region: "LA", state: "CA" },
+  { name: "Pomona", region: "LA", state: "CA" },
+  { name: "Torrance", region: "LA", state: "CA" },
+  { name: "Burbank", region: "LA", state: "CA" },
+  { name: "Inglewood", region: "LA", state: "CA" },
+  { name: "Lancaster", region: "LA", state: "CA" },
   // Orange County
-  { name: "Anaheim", region: "OC" },
-  { name: "Santa Ana", region: "OC" },
-  { name: "Irvine", region: "OC" },
-  { name: "Huntington Beach", region: "OC" },
-  { name: "Garden Grove", region: "OC" },
-  { name: "Orange", region: "OC" },
-  { name: "Fullerton", region: "OC" },
-  { name: "Costa Mesa", region: "OC" },
+  { name: "Anaheim", region: "OC", state: "CA" },
+  { name: "Santa Ana", region: "OC", state: "CA" },
+  { name: "Irvine", region: "OC", state: "CA" },
+  { name: "Huntington Beach", region: "OC", state: "CA" },
+  { name: "Garden Grove", region: "OC", state: "CA" },
+  { name: "Orange", region: "OC", state: "CA" },
+  { name: "Fullerton", region: "OC", state: "CA" },
+  { name: "Costa Mesa", region: "OC", state: "CA" },
   // San Diego County
-  { name: "San Diego", region: "SD" },
-  { name: "Chula Vista", region: "SD" },
-  { name: "Oceanside", region: "SD" },
-  { name: "Escondido", region: "SD" },
-  { name: "Carlsbad", region: "SD" },
-  { name: "El Cajon", region: "SD" },
-  { name: "Vista", region: "SD" },
+  { name: "San Diego", region: "SD", state: "CA" },
+  { name: "Chula Vista", region: "SD", state: "CA" },
+  { name: "Oceanside", region: "SD", state: "CA" },
+  { name: "Escondido", region: "SD", state: "CA" },
+  { name: "Carlsbad", region: "SD", state: "CA" },
+  { name: "El Cajon", region: "SD", state: "CA" },
+  { name: "Vista", region: "SD", state: "CA" },
   // Inland Empire
-  { name: "Riverside", region: "IE" },
-  { name: "San Bernardino", region: "IE" },
-  { name: "Moreno Valley", region: "IE" },
-  { name: "Fontana", region: "IE" },
-  { name: "Rancho Cucamonga", region: "IE" },
-  { name: "Ontario", region: "IE" },
-  { name: "Corona", region: "IE" },
-  { name: "Murrieta", region: "IE" },
-  { name: "Temecula", region: "IE" },
-  { name: "Victorville", region: "IE" },
+  { name: "Riverside", region: "IE", state: "CA" },
+  { name: "San Bernardino", region: "IE", state: "CA" },
+  { name: "Moreno Valley", region: "IE", state: "CA" },
+  { name: "Fontana", region: "IE", state: "CA" },
+  { name: "Rancho Cucamonga", region: "IE", state: "CA" },
+  { name: "Ontario", region: "IE", state: "CA" },
+  { name: "Corona", region: "IE", state: "CA" },
+  { name: "Murrieta", region: "IE", state: "CA" },
+  { name: "Temecula", region: "IE", state: "CA" },
+  { name: "Victorville", region: "IE", state: "CA" },
+  // Birmingham, AL: first market outside SoCal, added 2026-08-28.
+  { name: "Birmingham", region: "AL", state: "AL" },
 ];
 
-// Sourcing visit order: IE first, then the rest of the matrix.
-const REGION_ORDER: Record<Region, number> = { IE: 0, LA: 1, OC: 2, SD: 3 };
+// Sourcing visit order: IE first, then the rest of the matrix. AL last since
+// it's the newest market, still just one city.
+const REGION_ORDER: Record<Region, number> = { IE: 0, LA: 1, OC: 2, SD: 3, AL: 4 };
 export const SOURCING_CITIES: City[] = [...CITIES].sort(
   (a, b) => REGION_ORDER[a.region] - REGION_ORDER[b.region]
 );
