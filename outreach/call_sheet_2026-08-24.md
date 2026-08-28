@@ -11,6 +11,14 @@ Built 2026-08-24. Sourced from live site scans (Firecrawl), Google review mining
 - "Send me something first." > "I'll text you the specific gap I found on your site after we hang up. But the actual plan makes more sense walked through live — 20 minutes, this week?"
 - Voicemail: "Karmello here, I build lead-capture and follow-up systems for [vertical] businesses. I looked at your site/reviews and found something specific worth 20 minutes. Call me back at [your cell]." Log it, call again in 2 days.
 
+## How These Leads Are Scored
+Every lead is pain-scored and sorted highest first, so you're calling the businesses missing the most fundamentals before anyone else:
+- **No website at all:** +6 (heaviest signal, can't be found or booked online at all)
+- **Has a website but no online booking:** +3 (still phone-only to convert)
+- **A real negative review about follow-up/responsiveness:** +4 (pulled from their actual Google reviews)
+- **Search rank vs. the category leader** (SEO/visibility): +3 outside the top 20, +2 if ranked below #10, +1 if ranked below #3
+- **Review-count gap vs. the #1 result:** +2 if the gap is 200+, +1 if 50+
+
 ## The 100
 
 ### 1. MedAesthetics Spa & Wellness  (Chula Vista, Med Spa)
