@@ -4,8 +4,8 @@ import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, TrendingUp, Shield } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "The Platform | Receptifi",
-  description: "What the audit checks: phone coverage, website, reviews, and lead follow-up. A written plan for whichever ones are costing you customers.",
+  title: "Systems | Receptifi",
+  description: "Done-for-you systems for local service businesses. We find what's costing you customers, phone coverage, website, reviews, lead follow-up, SEO, then build and run the fix.",
 }
 
 const layers = [
@@ -36,6 +36,13 @@ const layers = [
     title: "We Track Every Lead",
     body: "Every call, form, and inquiry lands in one clean dashboard. You can see every lead, where they came from, what they need, and whether they booked. Nothing falls through the cracks. Every opportunity is accounted for.",
     stat: { value: "One Place", label: "Every Lead, Tracked" },
+  },
+  {
+    number: "05",
+    tag: "Rank",
+    title: "We Grow Your SEO",
+    body: "Every business wants to rank higher on Google, so this one is not optional, it is built into every plan. We clean up your listings, your site's local signals, and the on-page basics that decide whether you show up when someone nearby searches for what you do, and we track your real ranking over time so you see the movement, not just take our word for it.",
+    stat: { value: "Included", label: "In Every Plan, No Exceptions" },
   },
 ]
 
@@ -70,14 +77,44 @@ export default function PlatformPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <span className="mb-6 block font-mono text-xs uppercase tracking-[0.18em] text-primary">
-              The Platform
+              Done-For-You
             </span>
             <h1 className="text-balance font-serif text-5xl font-bold leading-[1.04] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Four tools. One system. Zero leaks.
+              We find the bottleneck. We build the fix.
             </h1>
             <p className="mt-7 text-pretty text-lg leading-relaxed text-muted-foreground">
-              The audit tells us which of these four are actually costing you customers. We fix those first, then build the rest into your plan, one engagement, not four separate contracts.
+              As your AI consulting partner, every Systems engagement starts with a free audit. We tell you which of these five are actually costing you customers, then build and run the fix, one engagement, not five separate contracts. SEO is never optional and includes real Google ranking tracking, not just checklist items, since every business wants proof it&apos;s actually working.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* How it works, 2-step */}
+      <section className="pb-20 sm:pb-28">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="glass-card rounded-[1.75rem] p-8">
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                Step 1
+              </span>
+              <h3 className="mt-2 font-serif text-2xl font-bold tracking-tight text-foreground">
+                We find your bottleneck
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                A real audit of your calls, site, reviews, booking flow, and SEO, plus your live market and what AI search says about you. Free, and you get the findings either way.
+              </p>
+            </div>
+            <div className="glass-card rounded-[1.75rem] p-8">
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                Step 2
+              </span>
+              <h3 className="mt-2 font-serif text-2xl font-bold tracking-tight text-foreground">
+                We build and run the fix
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                Whichever of the five areas below are actually leaking customers get built into one system, and we run it. Not a one-time delivery you're left to maintain.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -91,11 +128,11 @@ export default function PlatformPage() {
                 What We Check
               </span>
               <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Four places revenue leaks without you noticing.
+                Five places revenue leaks without you noticing.
               </h2>
             </div>
             <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-              The audit checks all four for your specific business. We fix whichever ones are actually losing you customers, built into one plan, not sold as separate add-ons.
+              The audit checks all five for your specific business, and SEO is always one of them. We fix whichever ones are actually losing you customers, built into one plan, not sold as separate add-ons.
             </p>
           </div>
 
@@ -220,15 +257,23 @@ export default function PlatformPage() {
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
             Book a free audit and we will tell you exactly what&rsquo;s costing you customers, and what fixing it would mean for your revenue.
           </p>
-          <a
-            href="/book"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 inline-flex h-14 items-center gap-2 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
-          >
-            Book a Free Audit
-            <ArrowRight className="size-4" />
-          </a>
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a
+              href="/book"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-14 items-center gap-2 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
+            >
+              Book a Free Audit
+              <ArrowRight className="size-4" />
+            </a>
+            <a
+              href="/services"
+              className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground"
+            >
+              Or see the do-it-yourself coaching path
+            </a>
+          </div>
         </div>
       </section>
 

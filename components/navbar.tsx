@@ -6,12 +6,12 @@ import { Menu, X } from "lucide-react"
 import { Logo } from "@/components/logo"
 
 const links = [
-  { label: "Platform", href: "/platform" },
-  { label: "Services", href: "/services" },
+  { label: "Systems", href: "/platform" },
+  { label: "Coaching", href: "/services" },
   { label: "How We Work", href: "/case-studies" },
 ]
 
-export function Navbar() {
+export function Navbar({ overDark = false }: { overDark?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -22,9 +22,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  // Only the homepage has a dark hero behind the transparent, unscrolled
+  // navbar — flip it into the dark token scope there so the logo/links stay
+  // legible, then let it revert once it's sitting on the white bg-background.
+  const overDarkContent = overDark && !scrolled
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${overDarkContent ? "dark" : ""} ${
         scrolled
           ? "border-b border-border bg-background/80 backdrop-blur-xl"
           : "border-b border-transparent"
@@ -51,7 +56,7 @@ export function Navbar() {
             nativeButton={false}
             className="rounded-full bg-primary px-5 font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary/90"
           >
-            Book a Free Audit
+            Book a Call
           </Button>
         </div>
 
@@ -83,7 +88,7 @@ export function Navbar() {
               nativeButton={false}
               className="mt-3 w-full rounded-full bg-primary font-semibold text-primary-foreground"
             >
-              Book a Free Audit
+              Book a Call
             </Button>
           </div>
         </div>

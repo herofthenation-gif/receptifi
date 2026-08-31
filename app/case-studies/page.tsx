@@ -27,7 +27,7 @@ const steps = [
   {
     icon: Hammer,
     title: "We fix it in priority order",
-    body: "Phone coverage, site, reviews, and follow-up, built in the order that stops the bleeding fastest for your specific business, not a bundled package sold the same way to everyone.",
+    body: "Phone coverage, site, reviews, follow-up, and SEO (that last one's in every plan, no exceptions), built in the order that stops the bleeding fastest for your specific business. From there it's your call: we build and run it for you, or we teach you to build it yourself.",
   },
 ]
 
@@ -117,10 +117,10 @@ export default function CaseStudiesPage() {
                 </span>
               </div>
               <p className="mt-4 text-lg leading-relaxed text-foreground">
-                We build first. You watch the system work, on your business, before you pay anything.
+                Choose the done-for-you path and we build first. You watch the system work, on your business, before you pay anything.
               </p>
               <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-                This is how a new practice earns trust without a stack of results to point to: by making the risk ours instead of yours. If it does not do what we said, you owe nothing.
+                This is how a new practice earns trust without a stack of results to point to: by making the risk ours instead of yours. If it does not do what we said, you owe nothing. Coaching works differently, you're paying for our time, not a delivered system, so those sessions are booked and billed per hour.
               </p>
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function CaseStudiesPage() {
             Be the audit we can actually show people.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Book a free 30-minute call and we will show you exactly what is leaking in your business right now, and what fixing it would mean for your revenue.
+            Book a free 30-minute call and we will show you exactly what is leaking in your business right now, what fixing it would mean for your revenue, and whether the done-for-you or the do-it-yourself path fits you better.
           </p>
           <a
             href="/book"

@@ -1,13 +1,8 @@
 import {
-  Stethoscope,
   Wrench,
   Landmark,
   Sparkles,
-  Car,
   Home,
-  Utensils,
-  Shield,
-  Hammer,
   Zap,
   Droplets,
 } from "lucide-react"
@@ -136,57 +131,32 @@ const industries: Industry[] = [
   {
     Icon: Wrench,
     name: "HVAC and Plumbing",
-    note: "Emergency calls come in while your techs are on jobs. Aria answers every one.",
+    note: "Emergency jobs happen nights and weekends. If the call goes to voicemail, it's not lost, it's already been taken by whoever answered first.",
   },
   {
     Icon: Zap,
     name: "Electrical and Garage Door",
-    note: "A breaker trips or a door won't open at 6pm. Whoever answers the phone first gets the job.",
+    note: "A breaker trips or a door won't open at 6pm. We find out whether it's your phone, your site, or your booking flow losing you that job.",
   },
   {
     Icon: Droplets,
     name: "Water Damage and Restoration",
-    note: "Damage doesn't wait for business hours. Every minute on hold is a minute closer to a bigger claim.",
-  },
-  {
-    Icon: Stethoscope,
-    name: "Dental Practices",
-    note: "New patients call after hours. Every missed call books with a competitor down the street.",
+    note: "Damage doesn't wait for business hours. Every minute you're unreachable is a minute closer to losing the job to whoever picks up.",
   },
   {
     Icon: Landmark,
     name: "Law Firms",
-    note: "Qualify and log every intake call without pulling attorneys off billable work.",
+    note: "A missed intake call is a missed case, worth more than most firms spend on marketing in a month. We find where the follow-up breaks down.",
   },
   {
     Icon: Sparkles,
     name: "Med Spas and Clinics",
-    note: "Fill your schedule automatically and grow your Google rating after every visit.",
-  },
-  {
-    Icon: Car,
-    name: "Auto Repair Shops",
-    note: "Answer estimate calls even when the shop floor is too loud to pick up the phone.",
+    note: "A full calendar comes from fast follow-up and a reputation that sells itself. We audit both and tell you which one is actually costing you.",
   },
   {
     Icon: Home,
-    name: "Real Estate Offices",
-    note: "Every listing inquiry gets a live response before they call the next agent on the list.",
-  },
-  {
-    Icon: Utensils,
-    name: "Restaurants",
-    note: "Take reservations, handle party inquiries, and collect reviews without lifting a finger.",
-  },
-  {
-    Icon: Shield,
-    name: "Insurance Agencies",
-    note: "Qualify prospects and schedule consultations without chasing down every lead manually.",
-  },
-  {
-    Icon: Hammer,
-    name: "Home Services",
-    note: "Roofing, landscaping, general contracting. If you miss the call, a competitor picks up the job.",
+    name: "Real Estate Teams",
+    note: "Every listing inquiry that doesn't get a fast response goes to the next agent on the list. We find the gap before it costs you the deal.",
   },
 ]
 
@@ -202,10 +172,10 @@ export function WhoThisIsFor() {
             Who This Is For
           </span>
           <h2 className="text-balance font-serif text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Built for businesses that run on the phone.
+            Google presence lacking?
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-            If your customers call to schedule, book, or get a quote, every unanswered call is a customer lost. Receptifi was built to make sure that never happens to your business again.
+            A call that goes to voicemail is a customer choosing someone else. A site buried on page two might as well not exist. Receptifi ranks you higher than your local competition, guaranteeing top 3 on Google in 90 days.
           </p>
         </div>
 
@@ -238,11 +208,11 @@ export function WhoThisIsFor() {
 
         {/* Bottom note */}
         <p className="mt-10 text-center text-sm text-muted-foreground">
-          Not in one of these categories? Or just curious how AI could help your business but not sure where to start?{" "}
+          Not a trades or high-ticket business? Or just not sure where you&apos;re actually leaking customers?{" "}
           <a href="/book" className="font-semibold text-primary underline underline-offset-2 hover:no-underline">
-            Book a call
+            Book a free audit call
           </a>{" "}
-          and we will tell you honestly if Receptifi is the right fit.
+          and we will tell you honestly if it's worth your time.
         </p>
 
       </div>

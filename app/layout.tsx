@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans, Geist_Mono, Playfair_Display } from 'next/font/google'
+import { Plus_Jakarta_Sans, Geist_Mono, Playfair_Display, Sora } from 'next/font/google'
 import './globals.css'
 import { ChatLoader } from '@/components/chat-loader'
 
@@ -19,11 +19,18 @@ const playfair = Playfair_Display({
   weight: ['500', '600', '700', '800', '900'],
   style: ['normal', 'italic'],
 })
+// Geometric sans for the wordmark/brand mark, matching the quiet-luxury
+// rebrand's "bold, wide-tracked geometric sans" spec.
+const sora = Sora({
+  variable: '--font-sora',
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+})
 
 export const metadata: Metadata = {
   title: 'Receptifi: AI Consultant for Local Service Businesses',
   description:
-    'A one-time audit of your calls, site, reviews, and booking flow, then a written plan for what to fix first. No retainer, no contract.',
+    'Receptifi is an AI consulting practice for local service businesses. A free audit finds what\'s costing you customers, calls, site, reviews, follow-up, real Google rankings. Then you choose: we build and run the fix, or we teach you to build it yourself.',
   icons: {
     icon: [
       {
@@ -85,7 +92,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jakarta.variable} ${geistMono.variable} ${playfair.variable} bg-background`}
+      className={`${jakarta.variable} ${geistMono.variable} ${playfair.variable} ${sora.variable} bg-background`}
     >
       <body className="font-sans antialiased bg-background text-foreground">
         <script

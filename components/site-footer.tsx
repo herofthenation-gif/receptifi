@@ -5,7 +5,7 @@ import { SubscribeForm } from "@/components/subscribe-form"
 
 export function SiteFooter() {
   return (
-    <footer id="book" className="scroll-mt-24 border-t border-border bg-section-alt">
+    <footer id="book" className="dark scroll-mt-24 border-t border-border bg-section-alt">
       {/* Generous top padding ensures zero collision with any content above */}
       <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8 sm:pb-32 sm:pt-44">
         <div className="relative mx-auto max-w-3xl text-center">
