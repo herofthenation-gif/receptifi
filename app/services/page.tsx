@@ -3,7 +3,7 @@ import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
 import { HoursNote } from "@/components/hours-note"
 import { MissedCallCalculator } from "@/components/missed-call-calculator"
-import { ArrowRight, Phone, Globe, Star, LayoutDashboard, Search } from "lucide-react"
+import { ArrowRight, Phone, Globe, LayoutDashboard } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Coaching | Receptifi",
@@ -38,19 +38,6 @@ const modules = [
     calculator: false,
   },
   {
-    icon: <Star className="size-6 text-primary" />,
-    tag: "Reviews",
-    title: "How to automate review requests without chasing customers",
-    bullets: [
-      "The right moment to ask for a review, and why timing matters more than wording",
-      "How to automate the ask so you're not manually texting every customer",
-      "How to catch negative feedback privately before it goes public",
-      "What tools do this without a $300/month reputation-management contract",
-    ],
-    highlight: "93% of consumers say online reviews influence their buying decisions. We show you the system, not just the advice.",
-    calculator: false,
-  },
-  {
     icon: <LayoutDashboard className="size-6 text-primary" />,
     tag: "Lead Tracking",
     title: "How to build a simple system so no lead goes cold",
@@ -61,19 +48,6 @@ const modules = [
       "How to build this with tools you likely already have access to",
     ],
     highlight: "It takes an average of 5 follow-up attempts to close a new customer. Most businesses follow up once. We show you how to automate the rest.",
-    calculator: false,
-  },
-  {
-    icon: <Search className="size-6 text-primary" />,
-    tag: "SEO",
-    title: "How to rank higher on Google without paying an agency monthly",
-    bullets: [
-      "How to fully optimize your Google Business Profile yourself",
-      "The on-page basics that actually move local rankings",
-      "How to fix inconsistent business info across the listings that matter",
-      "What's worth doing yourself versus what's worth paying for",
-    ],
-    highlight: "Every business owner wants to rank higher on Google. Most are paying $500 to $1,000+/month for basics they could learn to do themselves.",
     calculator: false,
   },
 ]
