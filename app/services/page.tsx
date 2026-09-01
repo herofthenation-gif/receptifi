@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
 import { HoursNote } from "@/components/hours-note"
+import { MissedCallCalculator } from "@/components/missed-call-calculator"
 import { ArrowRight, Phone, Globe, Star, LayoutDashboard, Search } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ const modules = [
       "What to look for so you don't get locked into an enterprise contract",
     ],
     highlight: "80% of callers who reach voicemail will not call back. We show you how to close that gap yourself, with tools sized for your business.",
+    calculator: true,
   },
   {
     icon: <Globe className="size-6 text-primary" />,
@@ -33,6 +35,7 @@ const modules = [
       "What to build yourself versus when it's worth paying someone",
     ],
     highlight: "The average small business website converts less than 3% of visitors. We walk you through what a booking-focused rebuild actually requires.",
+    calculator: false,
   },
   {
     icon: <Star className="size-6 text-primary" />,
@@ -45,6 +48,7 @@ const modules = [
       "What tools do this without a $300/month reputation-management contract",
     ],
     highlight: "93% of consumers say online reviews influence their buying decisions. We show you the system, not just the advice.",
+    calculator: false,
   },
   {
     icon: <LayoutDashboard className="size-6 text-primary" />,
@@ -57,6 +61,7 @@ const modules = [
       "How to build this with tools you likely already have access to",
     ],
     highlight: "It takes an average of 5 follow-up attempts to close a new customer. Most businesses follow up once. We show you how to automate the rest.",
+    calculator: false,
   },
   {
     icon: <Search className="size-6 text-primary" />,
@@ -69,6 +74,7 @@ const modules = [
       "What's worth doing yourself versus what's worth paying for",
     ],
     highlight: "Every business owner wants to rank higher on Google. Most are paying $500 to $1,000+/month for basics they could learn to do themselves.",
+    calculator: false,
   },
 ]
 
@@ -167,6 +173,7 @@ export default function CoachingPage() {
                         {mod.highlight}
                       </p>
                     </div>
+                    {mod.calculator && <MissedCallCalculator />}
                   </div>
                 </div>
               </article>
