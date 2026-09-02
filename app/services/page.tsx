@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
-import { ArrowRight, Phone, Globe, Star, LayoutDashboard, Search } from "lucide-react"
+import { HoursNote } from "@/components/hours-note"
+import { MissedCallCalculator } from "@/components/missed-call-calculator"
+import { ArrowRight, Phone, Globe, LayoutDashboard } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Coaching | Receptifi",
@@ -20,6 +22,7 @@ const modules = [
       "What to look for so you don't get locked into an enterprise contract",
     ],
     highlight: "80% of callers who reach voicemail will not call back. We show you how to close that gap yourself, with tools sized for your business.",
+    calculator: true,
   },
   {
     icon: <Globe className="size-6 text-primary" />,
@@ -32,18 +35,7 @@ const modules = [
       "What to build yourself versus when it's worth paying someone",
     ],
     highlight: "The average small business website converts less than 3% of visitors. We walk you through what a booking-focused rebuild actually requires.",
-  },
-  {
-    icon: <Star className="size-6 text-primary" />,
-    tag: "Reviews",
-    title: "How to automate review requests without chasing customers",
-    bullets: [
-      "The right moment to ask for a review, and why timing matters more than wording",
-      "How to automate the ask so you're not manually texting every customer",
-      "How to catch negative feedback privately before it goes public",
-      "What tools do this without a $300/month reputation-management contract",
-    ],
-    highlight: "93% of consumers say online reviews influence their buying decisions. We show you the system, not just the advice.",
+    calculator: false,
   },
   {
     icon: <LayoutDashboard className="size-6 text-primary" />,
@@ -56,18 +48,7 @@ const modules = [
       "How to build this with tools you likely already have access to",
     ],
     highlight: "It takes an average of 5 follow-up attempts to close a new customer. Most businesses follow up once. We show you how to automate the rest.",
-  },
-  {
-    icon: <Search className="size-6 text-primary" />,
-    tag: "SEO",
-    title: "How to rank higher on Google without paying an agency monthly",
-    bullets: [
-      "How to fully optimize your Google Business Profile yourself",
-      "The on-page basics that actually move local rankings",
-      "How to fix inconsistent business info across the listings that matter",
-      "What's worth doing yourself versus what's worth paying for",
-    ],
-    highlight: "Every business owner wants to rank higher on Google. Most are paying $500 to $1,000+/month for basics they could learn to do themselves.",
+    calculator: false,
   },
 ]
 
@@ -101,7 +82,11 @@ export default function CoachingPage() {
               $700<span className="text-2xl font-medium text-muted-foreground">/hour</span>
             </p>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              Tell us what you're trying to build and we scope the session around that. Most builds run about two hours, roughly $1,400 total.
+              Tell us what you're trying to build and we scope the session around that. Most builds run about{" "}
+              <HoursNote note="Depending on skill level and experience with AI, coaching sessions can run for as little as 30 minutes. This is for those with experience — not every build takes 2 hours.">
+                two hours
+              </HoursNote>
+              , roughly $1,400 total.
             </p>
             <a
               href="/book"
@@ -162,6 +147,7 @@ export default function CoachingPage() {
                         {mod.highlight}
                       </p>
                     </div>
+                    {mod.calculator && <MissedCallCalculator />}
                   </div>
                 </div>
               </article>
