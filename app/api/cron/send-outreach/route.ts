@@ -78,7 +78,7 @@ async function runSendOutreach() {
           })
         : "";
     const { subject, text } = buildOutreachEmail(touch, businessName, opening, ctx);
-    const offerType = lead.offer_type ?? "voice";
+    const offerType = lead.offer_type ?? "seo";
 
     if (dryRun) {
       results.push({ businessName, touch, to: lead.email!, subject, vertical: lead.vertical, offerType, status: "preview" });

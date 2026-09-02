@@ -19,7 +19,7 @@ export interface PersonalizeInput {
   rating: number | null;
   vertical: string | null;
   city: string | null;
-  /** Defaults to "voice" for unclassified leads — matches the pre-offer-matching behavior. */
+  /** Defaults to "seo" for unclassified leads, the universal hook per the 2026-09-02 pivot. */
   offerType: OfferType | null;
   /** Real defects found by the site-quality check; lets outdated-site openings cite specifics. */
   qualitySignals: QualitySignals | null;
@@ -71,7 +71,7 @@ function outdatedSiteObservation(signals: QualitySignals | null): string {
 export function personalizeOpening(input: PersonalizeInput): string {
   const { hasWebsite, reviewCount, rating, hours, city, qualitySignals } = input;
   const v = getVertical(input.vertical);
-  const offer = input.offerType ?? "voice";
+  const offer = input.offerType ?? "seo";
   const area = city ?? "your area";
 
   if (offer === "web") {
@@ -91,6 +91,10 @@ export function personalizeOpening(input: PersonalizeInput): string {
 
   if (offer === "crm") {
     return `Good rating, solid website, but no way to book online. Every ${v.person} who can't book right then calls the next result.`;
+  }
+
+  if (offer === "seo") {
+    return `Having a website doesn't mean you're ranking. Most ${v.personPlural} searching ${area} never scroll past the top 3, and there's no way to know where you land without checking.`;
   }
 
   // voice — the original hours-based openers, in the vertical's language.

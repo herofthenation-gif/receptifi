@@ -3,11 +3,15 @@
 //   none/outdated website               -> web      (worst gap, easiest close)
 //   good site + weak reviews            -> reviews  (rating < 4.0 or < 50 reviews)
 //   good site + no booking/lead capture -> crm
-//   good site + everything solid        -> voice    (after-hours calls are the remaining leak)
+//   good site + everything solid        -> seo       (2026-09-02 pivot: site now leads
+//                                                      with "not ranking top 3" as the
+//                                                      universal hook, so this replaced
+//                                                      "voice" as the fallback pitch for
+//                                                      leads with no other obvious defect)
 
 import type { SiteQuality } from "./site-quality";
 
-export type OfferType = "web" | "reviews" | "crm" | "voice";
+export type OfferType = "web" | "reviews" | "crm" | "voice" | "seo";
 
 export interface OfferDecision {
   offerType: OfferType;
@@ -42,5 +46,5 @@ export function decideOffer({ quality, rating, reviewCount }: OfferInput): Offer
     return { offerType: "crm", reasoning: `good site (${quality.score}/6), strong reviews, but no booking/lead-capture signal` };
   }
 
-  return { offerType: "voice", reasoning: `solid presence (${quality.score}/6, rating ${rating}, ${reviewCount} reviews), after-hours calls are the gap` };
+  return { offerType: "seo", reasoning: `solid presence (${quality.score}/6, rating ${rating}, ${reviewCount} reviews), ranking is the untested gap` };
 }

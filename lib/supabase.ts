@@ -35,7 +35,7 @@ export interface Lead {
   address: string | null;
   website_status: "none" | "outdated" | "good" | null;
   site_quality_score: number | null;
-  offer_type: "web" | "reviews" | "crm" | "voice" | null;
+  offer_type: "web" | "reviews" | "crm" | "voice" | "seo" | null;
   preview_slug: string | null;
   generated_site: GeneratedSite | null;
   quality_checked_at: string | null;

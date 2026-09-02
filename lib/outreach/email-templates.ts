@@ -267,6 +267,42 @@ ${SIGNATURE}`,
   );
 }
 
+// 2026-09-02: site pivot leads with "not ranking top 3" as the universal
+// hook, so this replaced "voice" as the fallback pitch for leads with no
+// other obvious defect (decent site, decent reviews, has booking).
+function seoEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: EmailContext): OutreachEmail {
+  const v = getVertical(ctx.vertical);
+
+  if (touch === 1) {
+    return auditPitchTouch1(
+      businessName,
+      opening,
+      `A good-looking site and a real Google ranking are two different things. Most owners have never actually checked where they land against the competitors showing up for that same search.`,
+      v.personPlural,
+      "your Google ranking",
+      ctx.email
+    );
+  }
+
+  if (touch === 2) {
+    return {
+      subject: `Re: ${businessName}, your Google ranking`,
+      text: `Still here if you're interested.
+
+When someone searches "${v.queryTerm} near me", they call whoever's in the top 3, not whoever has the nicest site. We check your actual position against local competitors and close the gap.
+
+20 minutes, no obligation.
+
+${SIGNATURE}`,
+    };
+  }
+
+  return auditPitchTouch3(
+    businessName,
+    `If ranking isn't a priority, no worries. But every day you're not in the top 3, ${v.personPlural} are calling whoever is, and that's fixable.`
+  );
+}
+
 /**
  * Builds the cold email for a touch, matched to the offer the lead actually
  * needs (see lib/outreach/offer.ts). Same proven voice throughout: Problem +
@@ -286,7 +322,9 @@ export function buildOutreachEmail(
       return reviewsEmail(touch, businessName, opening, ctx);
     case "crm":
       return crmEmail(touch, businessName, opening, ctx);
-    default:
+    case "voice":
       return voiceEmail(touch, businessName, opening, ctx);
+    default:
+      return seoEmail(touch, businessName, opening, ctx);
   }
 }
