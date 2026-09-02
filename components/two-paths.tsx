@@ -67,56 +67,56 @@ export function TwoPaths() {
           </p>
 
           <div className="mt-6 grid gap-6 lg:grid-cols-2 lg:gap-8">
-            {/* Done-for-you */}
+            {/* Receptifi Marketing */}
             <article className="glass-card flex flex-col rounded-[2rem] p-8 sm:p-10">
               <div className="flex size-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/6">
                 <Hammer className="size-5 text-primary" />
               </div>
               <span className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-                Done-For-You
+                Receptifi Marketing
               </span>
               <h3 className="mt-3 font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                We build it for you.
+                We build and run your marketing.
               </h3>
               <p className="mt-4 flex-1 text-base leading-relaxed text-muted-foreground">
-                Once we know what&apos;s broken, we build and run the system that fixes it: voice, website, reviews, lead tracking, SEO, whichever ones are actually costing you. You keep running your business. We handle the leak.
+                Once we know exactly what&apos;s broken, our team builds and runs the system that fixes it: phone coverage, your website, reviews, lead tracking, SEO, whichever of these are actually costing you customers. Nothing generic, nothing you have to configure yourself. You keep running your business. We handle the leak, day to day, for as long as you work with us.
               </p>
               <ul className="mt-6 space-y-2.5 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2.5">
                   <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
-                  Starts with a free audit call
+                  Starts with the same free audit, no extra step
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
-                  Built around your specific bottleneck, not a bundle
+                  Built around your specific bottleneck, not a one-size bundle
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
-                  We run it. You don&apos;t manage another tool
+                  We run it ongoing. You don&apos;t manage another tool
                 </li>
               </ul>
               <a
                 href="/platform"
                 className="mt-8 inline-flex h-13 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
               >
-                See What We Build
+                See Receptifi Marketing
                 <ArrowRight className="size-4" />
               </a>
             </article>
 
-            {/* Coaching */}
+            {/* Receptifi AI Consultation */}
             <article className="glass-card flex flex-col rounded-[2rem] p-8 sm:p-10">
               <div className="flex size-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/6">
                 <GraduationCap className="size-5 text-primary" />
               </div>
               <span className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-                Do-It-Yourself
+                Receptifi AI Consultation
               </span>
               <h3 className="mt-3 font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                We teach you to build it.
+                We consult, you build.
               </h3>
               <p className="mt-4 flex-1 text-base leading-relaxed text-muted-foreground">
-                Prefer to build it yourself? We&apos;ll walk you through exactly how, live, using the same diagnosis. Hands-on coaching for owners who want to own the system, not rent it.
+                Prefer to build it in-house? An AI consultant walks you or your team through exactly how, live, using the same findings from your audit, not generic advice. You leave each session knowing precisely what to build, why it matters, and how to build it yourselves. You own the system. We don&apos;t run it for you.
               </p>
               <div className="mt-6 rounded-xl border border-primary/20 bg-primary/5 px-5 py-4">
                 <p className="font-serif text-2xl font-bold text-foreground">
@@ -130,7 +130,7 @@ export function TwoPaths() {
                 href="/services"
                 className="mt-8 inline-flex h-13 items-center justify-center gap-2 rounded-full border-2 border-primary/25 bg-transparent px-8 text-base font-semibold text-foreground transition-all duration-200 hover:scale-[1.02] hover:border-primary hover:bg-primary/5 active:scale-[0.98]"
               >
-                See What We Teach
+                See Receptifi AI Consultation
                 <ArrowRight className="size-4" />
               </a>
             </article>
