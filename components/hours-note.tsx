@@ -32,7 +32,7 @@ export function HoursNote({ children, note }: HoursNoteProps) {
     >
       <button
         type="button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => setOpen(true)}
         className="rounded-sm bg-primary/15 px-1 font-medium text-primary underline decoration-primary/40 decoration-dotted underline-offset-4 transition-colors hover:bg-primary/20"
         aria-expanded={open}
       >

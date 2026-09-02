@@ -62,7 +62,7 @@ export function MissedCallCalculator() {
       </div>
 
       <p className="mt-4 text-sm leading-relaxed text-foreground">
-        Estimated revenue you're leaving on the table:{" "}
+        Estimated revenue you&apos;re leaving on the table:{" "}
         <span className="font-semibold text-primary">${formatCurrency(monthlyLoss)}/month</span>{" "}
         <span className="text-muted-foreground">(${formatCurrency(weeklyLoss)}/week)</span>
       </p>
