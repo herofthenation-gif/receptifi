@@ -234,12 +234,12 @@ async function main() {
 function buildTradesFacts(l: Enriched): string[] {
   const facts: string[] = [];
   if (!l.hasWebsite) {
-    facts.push(`No website at all — every emergency call has to find you by phone or a Google listing alone.`);
+    facts.push(`No website at all, every emergency call has to find you by phone or a Google listing alone.`);
   } else if (l.bookingWidget === false) {
     facts.push(`Website has no online booking, every job still has to be caught live on the phone to convert.`);
   }
   if (l.marketRank == null) {
-    facts.push(`Outside the results for "${getVertical(l.vertical).queryTerm} in ${CITY}" — invisible to anyone searching cold.`);
+    facts.push(`Outside the results for "${getVertical(l.vertical).queryTerm} in ${CITY}", invisible to anyone searching cold.`);
   } else if (l.marketRank > 5) {
     facts.push(`Ranks #${l.marketRank} in ${CITY} search results, behind ${l.leaderName} (${l.leaderReviewCount} reviews, ${l.leaderRating}★).`);
   }
@@ -312,29 +312,29 @@ ${opener.split("\n").map((line) => `  ${line}`).join("\n")}
 `;
   });
   fs.writeFileSync(path, header + cards.join("\n"));
-  console.log(`Wrote ${path} — ${leads.length} leads.`);
+  console.log(`Wrote ${path}, ${leads.length} leads.`);
 }
 
 function buildHighTicketFacts(l: Enriched): string[] {
   const facts: string[] = [];
   const unit = HIGH_TICKET_UNIT[l.vertical] ?? "lead";
   if (!l.hasWebsite) {
-    facts.push(`No website at all — every ${unit} inquiry has to find them by phone or a Google listing alone.`);
+    facts.push(`No website at all, every ${unit} inquiry has to find them by phone or a Google listing alone.`);
   } else if (l.bookingWidget === false) {
-    facts.push(`Website has no online booking/scheduling widget — every ${unit} still has to be caught live on the phone to convert.`);
+    facts.push(`Website has no online booking/scheduling widget, every ${unit} still has to be caught live on the phone to convert.`);
   }
   if (l.marketRank == null) {
-    facts.push(`Outside the results for "${getVertical(l.vertical).queryTerm} in ${CITY}" — invisible to anyone searching cold.`);
+    facts.push(`Outside the results for "${getVertical(l.vertical).queryTerm} in ${CITY}", invisible to anyone searching cold.`);
   } else if (l.marketRank > 5) {
     facts.push(`Ranks #${l.marketRank} in ${CITY} search results, behind ${l.leaderName} (${l.leaderReviewCount} reviews, ${l.leaderRating}★).`);
   }
   if (l.complaintQuote) facts.push(`A real client review flagged a follow-up gap: "${l.complaintQuote}"`);
   const reviewGap = (l.leaderReviewCount ?? 0) - (l.reviewCount ?? 0);
   if (reviewGap > 100) {
-    facts.push(`${l.reviewCount ?? 0} reviews vs. the category leader's ${l.leaderReviewCount} — a ${reviewGap}-review gap that compounds every month it's not addressed.`);
+    facts.push(`${l.reviewCount ?? 0} reviews vs. the category leader's ${l.leaderReviewCount}, a ${reviewGap}-review gap that compounds every month it's not addressed.`);
   }
   if (facts.length === 0) {
-    facts.push(`Established review base (${l.reviewCount ?? "?"} reviews) but no automated intake — still relying on manual phone pickup to not lose ${unit}s.`);
+    facts.push(`Established review base (${l.reviewCount ?? "?"} reviews) but no automated intake, still relying on manual phone pickup to not lose ${unit}s.`);
   }
   return facts;
 }
@@ -346,14 +346,14 @@ function buildHighTicketOpener(l: Enriched): string {
   if (!l.hasWebsite) {
     hook = `You don't have a website up right now, which means every ${unit} that doesn't already have your number by word of mouth is going to whoever comes up first on Google.`;
   } else if (l.bookingWidget === false) {
-    hook = `I checked your site — there's no online booking on it. Every ${unit} still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment inquiries are just gone.`;
+    hook = `I checked your site, there's no online booking on it. Every ${unit} still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment inquiries are just gone.`;
   } else if (l.complaintQuote) {
     hook = `I pulled your reviews. One of them called out a follow-up gap: "${l.complaintQuote}" That's not a one-off, that's a system problem.`;
   } else {
     hook = `You're at ${l.reviewCount ?? "a solid number of"} reviews but still running intake manually. ${l.leaderName ? `${l.leaderName} is ahead of you in ${CITY} search results at ${l.leaderReviewCount} reviews` : "The businesses ahead of you"} because they've automated what you're still doing by hand.`;
   }
   return `"Hi, is this the owner?" [wait]
-"My name's Karmello, I build done-for-you systems for ${label.toLowerCase()} businesses — lead capture, follow-up, retention, that side of the operation. ${hook} I build and run that as a monthly retainer, so it's not a one-time fix that decays. Worth 20 minutes this week to walk through what I found on your setup specifically?"`;
+"My name's Karmello, I build done-for-you systems for ${label.toLowerCase()} businesses, lead capture, follow-up, retention, that side of the operation. ${hook} I build and run that as a monthly retainer, so it's not a one-time fix that decays. Worth 20 minutes this week to walk through what I found on your setup specifically?"`;
 }
 
 function writeHighTicketSheet(leads: Enriched[]) {
@@ -366,9 +366,9 @@ Built 2026-08-28. First non-SoCal market, sourced live from Google Places, Firec
 **Wedge:** free 20-minute call first, built around the specific gap found on their own site/reviews (below), retainer pitched live on that call.
 
 ## Objections
-- "How much does this cost?" > "The call's free — it's just me walking you through what I found on your setup. If it's a fit, the retainer's $4k+ a month depending on scope, and I'll lay that out on the call, not before."
-- "I'm not looking to spend that much." > "Totally fair — I also do a $700 one-time audit if you want the findings without the ongoing build. Most people start there if the retainer's too much right now."
-- "Send me something first." > "I'll text you the specific gap I found on your site after we hang up. But the actual plan makes more sense walked through live — 20 minutes, this week?"
+- "How much does this cost?" > "The call's free, it's just me walking you through what I found on your setup. If it's a fit, the retainer's $4k+ a month depending on scope, and I'll lay that out on the call, not before."
+- "I'm not looking to spend that much." > "Totally fair, I also do a $700 one-time audit if you want the findings without the ongoing build. Most people start there if the retainer's too much right now."
+- "Send me something first." > "I'll text you the specific gap I found on your site after we hang up. But the actual plan makes more sense walked through live, 20 minutes, this week?"
 - Voicemail: "Karmello here, I build lead-capture and follow-up systems for [vertical] businesses. I looked at your site/reviews and found something specific worth 20 minutes. Call me back at [your cell]." Log it, call again in 2 days.
 
 ## How These Leads Are Scored
@@ -398,7 +398,7 @@ ${opener.split("\n").map((line) => `  ${line}`).join("\n")}
 `;
   });
   fs.writeFileSync(path, header + cards.join("\n"));
-  console.log(`Wrote ${path} — ${leads.length} leads.`);
+  console.log(`Wrote ${path}, ${leads.length} leads.`);
 }
 
 main();

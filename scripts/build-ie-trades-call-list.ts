@@ -108,13 +108,13 @@ function buildFacts(l: EnrichedLead): string[] {
   const facts: string[] = [];
 
   if (!l.hasWebsite) {
-    facts.push(`No website at all — every emergency call has to find you by phone or a Google listing alone.`);
+    facts.push(`No website at all, every emergency call has to find you by phone or a Google listing alone.`);
   } else if (l.bookingWidget === false) {
     facts.push(`Website has no online booking, every job still has to be caught live on the phone to convert.`);
   }
 
   if (l.marketRank == null) {
-    facts.push(`Outside the top 20 results for "${getVertical(l.vertical).queryTerm} in ${l.city}" — invisible to anyone searching cold.`);
+    facts.push(`Outside the top 20 results for "${getVertical(l.vertical).queryTerm} in ${l.city}", invisible to anyone searching cold.`);
   } else if (l.marketRank > 5) {
     facts.push(`Ranks #${l.marketRank} in ${l.city} search results, behind ${l.leaderName} (${l.leaderReviewCount} reviews, ${l.leaderRating}★).`);
   }
@@ -283,7 +283,7 @@ ${opener.split("\n").map((line) => `  ${line}`).join("\n")}
   });
 
   fs.writeFileSync(OUTPUT_PATH, header + cards.join("\n"));
-  console.log(`Wrote ${OUTPUT_PATH} — ${selected.length} leads.`);
+  console.log(`Wrote ${OUTPUT_PATH}, ${selected.length} leads.`);
 }
 
 main();

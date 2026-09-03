@@ -40,7 +40,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 48 (4.9★), ranks #17 in Birmingham search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #17 in Birmingham search results, behind Mr. Drippy Plumbing (1514 reviews, 4.9★).
   - 48 reviews vs. the category leader's 1514, a 1466-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -53,7 +53,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 8 (5★), ranks #13 in Birmingham search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #13 in Birmingham search results, behind Mr. Electric of Birmingham (1395 reviews, 4.9★).
   - 8 reviews vs. the category leader's 1395, a 1387-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -66,7 +66,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 1 (5★), ranks #14 in Birmingham search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #14 in Birmingham search results, behind Mr. Electric of Birmingham (1395 reviews, 4.9★).
   - 1 reviews vs. the category leader's 1395, a 1394-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -79,7 +79,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 19 (5★), ranks #15 in Birmingham search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #15 in Birmingham search results, behind Mr. Electric of Birmingham (1395 reviews, 4.9★).
   - 19 reviews vs. the category leader's 1395, a 1376-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -92,7 +92,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 10 (5★), ranks #19 in Birmingham search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #19 in Birmingham search results, behind Precision Garage Door Service of Birmingham (819 reviews, 4.9★).
   - 10 reviews vs. the category leader's 819, a 809-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -118,7 +118,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 13 (5★), ranks #10 in Birmingham search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #10 in Birmingham search results, behind Mr. Electric of Birmingham (1395 reviews, 4.9★).
   - 13 reviews vs. the category leader's 1395, a 1382-review gap that compounds every month it's not addressed.
 - **Say this:**

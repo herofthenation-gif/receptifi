@@ -1,4 +1,5 @@
 import fs from "fs";
+import { getVertical } from "../lib/outreach/config";
 
 interface EnrichedLead {
   id: string;
@@ -38,16 +39,22 @@ const UNIT: Record<string, string> = {
 function buildFacts(l: EnrichedLead): string[] {
   const facts: string[] = [];
   const unit = UNIT[l.vertical] ?? "lead";
+  // Gatekept-intake verticals (law firms, insurance) don't lose business
+  // over a missing booking widget, intake is deliberately screened by a
+  // human. Surface visibility/marketing gaps instead. See Vertical.pitchFit.
+  const marketingFit = getVertical(l.vertical).pitchFit === "marketing";
 
   if (!l.hasWebsite) {
-    facts.push(`No website at all — every ${unit} inquiry has to find them by phone or a Google listing alone.`);
-  } else if (l.bookingWidget === false) {
-    facts.push(`Website has no online booking/scheduling widget — every ${unit} still has to be caught live on the phone to convert.`);
+    facts.push(`No website at all, every ${unit} inquiry has to find them by phone or a Google listing alone.`);
+  } else if (!marketingFit && l.bookingWidget === false) {
+    facts.push(`Website has no online booking/scheduling widget, every ${unit} still has to be caught live on the phone to convert.`);
+  } else if (marketingFit && l.napCta === false) {
+    facts.push(`Website doesn't lead with a clear phone number or call-to-action, a visitor has to hunt for how to actually reach someone.`);
   }
 
   if (l.marketRank == null) {
-    facts.push(`Outside the top 20 results for "${l.vertical === "med_spa" ? "med spa" : l.vertical === "legal_intake" ? "law firm" : "real estate agent"} in ${l.city}" — invisible to anyone searching cold.`);
-  } else if (l.marketRank > 5) {
+    facts.push(`Outside the top 20 results for "${l.vertical === "med_spa" ? "med spa" : l.vertical === "legal_intake" ? "law firm" : "real estate agent"} in ${l.city}", invisible to anyone searching cold.`);
+  } else if (l.marketRank > (marketingFit ? 3 : 5)) {
     facts.push(`Ranks #${l.marketRank} in ${l.city} search results, behind ${l.leaderName} (${l.leaderReviewCount} reviews, ${l.leaderRating}★).`);
   }
 
@@ -57,11 +64,11 @@ function buildFacts(l: EnrichedLead): string[] {
 
   const reviewGap = (l.leaderReviewCount ?? 0) - (l.review_count ?? 0);
   if (reviewGap > 100) {
-    facts.push(`${l.review_count ?? 0} reviews vs. the category leader's ${l.leaderReviewCount} — a ${reviewGap}-review gap that compounds every month it's not addressed.`);
+    facts.push(`${l.review_count ?? 0} reviews vs. the category leader's ${l.leaderReviewCount}, a ${reviewGap}-review gap that compounds every month it's not addressed.`);
   }
 
   if (facts.length === 0) {
-    facts.push(`Established review base (${l.review_count ?? "?"} reviews) but no automated intake — still relying on manual phone pickup to not lose ${unit}s.`);
+    facts.push(`Established review base (${l.review_count ?? "?"} reviews) but no automated intake, still relying on manual phone pickup to not lose ${unit}s.`);
   }
 
   return facts;
@@ -70,22 +77,29 @@ function buildFacts(l: EnrichedLead): string[] {
 function buildOpener(l: EnrichedLead): string {
   const label = VERTICAL_LABEL[l.vertical] ?? l.vertical;
   const unit = UNIT[l.vertical] ?? "lead";
-  const facts = buildFacts(l);
-  const leadFact = facts[0];
+  const marketingFit = getVertical(l.vertical).pitchFit === "marketing";
 
   let hook: string;
   if (!l.hasWebsite) {
     hook = `You don't have a website up right now, which means every ${unit} that doesn't already have your number by word of mouth is going to whoever comes up first on Google.`;
-  } else if (l.bookingWidget === false) {
-    hook = `I checked your site — there's no online booking on it. Every ${unit} still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment inquiries are just gone.`;
+  } else if (!marketingFit && l.bookingWidget === false) {
+    hook = `I checked your site, there's no online booking on it. Every ${unit} still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment inquiries are just gone.`;
   } else if (l.complaintQuote) {
     hook = `I pulled your reviews. One of them called out a follow-up gap: "${l.complaintQuote}" That's not a one-off, that's a system problem.`;
+  } else if (marketingFit && l.marketRank != null && l.marketRank > 3) {
+    hook = `I checked search rankings for "${label.toLowerCase()}s in ${l.city}" and you're sitting at #${l.marketRank}${l.leaderName ? `, behind ${l.leaderName} at ${l.leaderReviewCount} reviews` : ""}. That's not a website problem, that's a visibility problem, people searching for one right now are calling whoever they see first.`;
+  } else if (marketingFit) {
+    hook = `You're at ${l.review_count ?? "a solid number of"} reviews but I didn't see a real search or review-marketing push behind that, nothing converting that reputation into new ${unit}s beyond word of mouth.`;
   } else {
     hook = `You're at ${l.review_count ?? "a solid number of"} reviews but still running intake manually. ${l.leaderName ? `${l.leaderName} is ahead of you in ${l.city} search results at ${l.leaderReviewCount} reviews` : "The businesses ahead of you"} because they've automated what you're still doing by hand.`;
   }
 
+  const systemsLine = marketingFit
+    ? `I build done-for-you marketing and visibility systems for ${label.toLowerCase()} businesses, search rankings, reviews, and follow-up, that side of the operation.`
+    : `I build done-for-you systems for ${label.toLowerCase()} businesses, lead capture, follow-up, retention, that side of the operation.`;
+
   return `"Hi, is this the owner?" [wait]
-"My name's Karmello, I build done-for-you systems for ${label.toLowerCase()} businesses — lead capture, follow-up, retention, that side of the operation. ${hook} I build and run that as a monthly retainer, so it's not a one-time fix that decays. Worth 20 minutes this week to walk through what I found on your setup specifically?"`;
+"My name's Karmello, ${systemsLine} ${hook} I build and run that as a monthly retainer, so it's not a one-time fix that decays. Worth 20 minutes this week to walk through what I found on your setup specifically?"`;
 }
 
 function buildOutcomeLine(): string {
@@ -96,16 +110,16 @@ function main() {
   const leads: EnrichedLead[] = JSON.parse(fs.readFileSync("scripts/.tmp-ht-selected.json", "utf-8"));
 
   const header = `# Call Sheet: 100 High-Ticket Leads (Med Spa / Law Firm / Real Estate)
-Built 2026-08-24. Sourced from live site scans (Firecrawl), Google review mining, and Google Maps search-rank benchmarking against the category leader in each lead's own city — same methodology as the 7/14-7/15 trades call sheet, applied here to the high-ticket track.
+Built 2026-09-02. Sourced from live site scans (Firecrawl), Google review mining, and Google Maps search-rank benchmarking against the category leader in each lead's own city, same methodology as the 7/14-7/15 trades call sheet, applied here to the high-ticket track.
 
-**Offer, per the 2026-08-12 pivot:** lead with the $4k+/mo done-for-you retainer as the main ask — this track was sourced specifically for businesses that can plausibly pay it (established review counts, already spending on client acquisition). The $700 audit is the fallback if they're not ready to commit to a retainer on the first call; don't lead with it.
+**Offer, per the 2026-08-12 pivot:** lead with the $4k+/mo done-for-you retainer as the main ask, this track was sourced specifically for businesses that can plausibly pay it (established review counts, already spending on client acquisition). The $700 audit is the fallback if they're not ready to commit to a retainer on the first call; don't lead with it.
 
-**Wedge:** free 20-minute call first, built around the specific gap found on their own site/reviews (below), retainer pitched live on that call — not a warm-up freebie, a diagnostic that already shows them something real about their own business.
+**Wedge:** free 20-minute call first, built around the specific gap found on their own site/reviews (below), retainer pitched live on that call, not a warm-up freebie, a diagnostic that already shows them something real about their own business.
 
 ## Objections
-- "How much does this cost?" > "The call's free — it's just me walking you through what I found on your setup. If it's a fit, the retainer's $4k+ a month depending on scope, and I'll lay that out on the call, not before."
-- "I'm not looking to spend that much." > "Totally fair — I also do a $700 one-time audit if you want the findings without the ongoing build. Most people start there if the retainer's too much right now."
-- "Send me something first." > "I'll text you the specific gap I found on your site after we hang up. But the actual plan makes more sense walked through live — 20 minutes, this week?"
+- "How much does this cost?" > "The call's free, it's just me walking you through what I found on your setup. If it's a fit, the retainer's $4k+ a month depending on scope, and I'll lay that out on the call, not before."
+- "I'm not looking to spend that much." > "Totally fair, I also do a $700 one-time audit if you want the findings without the ongoing build. Most people start there if the retainer's too much right now."
+- "Send me something first." > "I'll text you the specific gap I found on your site after we hang up. But the actual plan makes more sense walked through live, 20 minutes, this week?"
 - Voicemail: "Karmello here, I build lead-capture and follow-up systems for [vertical] businesses. I looked at your site/reviews and found something specific worth 20 minutes. Call me back at [your cell]." Log it, call again in 2 days.
 
 ## How These Leads Are Scored
@@ -138,8 +152,8 @@ ${buildOutcomeLine()}
   });
 
   const out = header + cards.join("\n");
-  fs.writeFileSync("outreach/call_sheet_2026-08-24.md", out);
-  console.log(`Wrote outreach/call_sheet_2026-08-24.md — ${leads.length} leads.`);
+  fs.writeFileSync("outreach/call_sheet_2026-09-02.md", out);
+  console.log(`Wrote outreach/call_sheet_2026-09-02.md, ${leads.length} leads.`);
 }
 
 main();

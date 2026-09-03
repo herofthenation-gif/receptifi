@@ -277,7 +277,7 @@ function seoEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
     return auditPitchTouch1(
       businessName,
       opening,
-      `A good-looking site and a real Google ranking are two different things. Most owners have never actually checked where they land against the competitors showing up for that same search.`,
+      null,
       v.personPlural,
       "your Google ranking",
       ctx.email

@@ -10,10 +10,15 @@ import { assessSiteQuality } from "../lib/outreach/site-quality";
 import { searchPlacesText, type PlacesResult } from "../lib/outreach/google-places";
 import { mapWithConcurrency } from "../lib/outreach/concurrency";
 import { getVertical } from "../lib/outreach/config";
+import fsSync from "fs";
 
 const TARGET_COUNT = 100;
 const MAX_PER_CITY_VERTICAL = 6;
-const CANDIDATE_POOL_LIMIT = 150;
+// Raised from 150: exclusion of already-surfaced leads now happens after
+// this DB-side limit, and the top-150-by-review-count slice is exactly
+// where prior lists drew most heavily from, so 150 left too thin a pool
+// once those were filtered out.
+const CANDIDATE_POOL_LIMIT = 400;
 
 interface CandidateLead {
   id: string;
@@ -79,17 +84,28 @@ interface EnrichedLead extends CandidateLead {
 }
 
 function computePainScore(e: Omit<EnrichedLead, "painScore">): number {
+  // Gatekept-intake verticals (law firms, insurance) don't actually lose
+  // business over a missing booking widget — intake is deliberately
+  // screened by a human. Score search visibility harder for them instead,
+  // so the pitch angle matches what they'd actually feel as pain. See
+  // Vertical.pitchFit in lib/outreach/config.ts.
+  const marketingFit = getVertical(e.vertical).pitchFit === "marketing";
+
   let score = 0;
   if (!e.hasWebsite) score += 6;
-  if (e.hasWebsite && e.bookingWidget === false) score += 3;
-  if (e.hasWebsite && e.napCta === false) score += 1;
+  // bookingWidget is a scheduling-convenience signal — skip it for
+  // gatekept-intake verticals. napCta (clear phone/address/CTA on the
+  // site) is a visibility/conversion signal instead, so it still applies,
+  // weighted harder since it's now doing more of the marketing-fit work.
+  if (!marketingFit && e.hasWebsite && e.bookingWidget === false) score += 3;
+  if (e.hasWebsite && e.napCta === false) score += marketingFit ? 2 : 1;
   if (e.complaintQuote) score += 4;
-  if (e.marketRank == null) score += 3;
-  else if (e.marketRank > 10) score += 2;
-  else if (e.marketRank > 3) score += 1;
+  if (e.marketRank == null) score += marketingFit ? 5 : 3;
+  else if (e.marketRank > 10) score += marketingFit ? 3 : 2;
+  else if (e.marketRank > 3) score += marketingFit ? 2 : 1;
   const reviewGap = (e.leaderReviewCount ?? 0) - (e.review_count ?? 0);
-  if (reviewGap > 200) score += 2;
-  else if (reviewGap > 50) score += 1;
+  if (reviewGap > 200) score += marketingFit ? 3 : 2;
+  else if (reviewGap > 50) score += marketingFit ? 2 : 1;
   return score;
 }
 
@@ -104,8 +120,20 @@ async function main() {
     .limit(CANDIDATE_POOL_LIMIT);
   if (error) throw error;
 
-  const candidates = (data ?? []) as CandidateLead[];
-  console.log(`Pool: ${candidates.length} high-ticket leads with phone numbers.`);
+  // Exclude businesses already surfaced on a prior call sheet — otherwise
+  // this always re-picks the same top-review-count leads every run, since
+  // outcomes from paper call sheets never get written back to Supabase.
+  const excludePath = "outreach/.excluded-high-ticket-names.txt";
+  const excluded = new Set(
+    fsSync.existsSync(excludePath)
+      ? fsSync.readFileSync(excludePath, "utf-8").split("\n").map((n) => n.trim().toLowerCase()).filter(Boolean)
+      : []
+  );
+
+  const candidates = ((data ?? []) as CandidateLead[]).filter(
+    (l) => !excluded.has((l.business_name ?? l.name).trim().toLowerCase())
+  );
+  console.log(`Pool: ${candidates.length} high-ticket leads with phone numbers (${(data ?? []).length - candidates.length} excluded as already-surfaced).`);
 
   // Memoize one market search per (city, vertical) pair — many leads share one.
   const marketCache = new Map<string, PlacesResult[]>();

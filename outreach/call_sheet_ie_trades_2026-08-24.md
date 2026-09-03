@@ -26,8 +26,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 1 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "garage door repair in Corona" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "garage door repair in Corona", invisible to anyone searching cold.
   - 1 reviews vs. the category leader's 241, a 240-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -39,8 +39,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 6 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "garage door repair in Murrieta" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "garage door repair in Murrieta", invisible to anyone searching cold.
   - 6 reviews vs. the category leader's 533, a 527-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -52,8 +52,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 7 (4.6★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Ontario" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Ontario", invisible to anyone searching cold.
   - 7 reviews vs. the category leader's 248, a 241-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -79,8 +79,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 30 (4.7★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "garage door repair in San Bernardino" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "garage door repair in San Bernardino", invisible to anyone searching cold.
   - 30 reviews vs. the category leader's 1149, a 1119-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -92,8 +92,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 1 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Victorville" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Victorville", invisible to anyone searching cold.
   - 1 reviews vs. the category leader's 165, a 164-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -105,7 +105,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 2 (5★), ranks #16 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #16 in Fontana search results, behind Anthony's Plumbing (800 reviews, 4.9★).
   - 2 reviews vs. the category leader's 800, a 798-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -118,8 +118,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 3 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Rancho Cucamonga" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Rancho Cucamonga", invisible to anyone searching cold.
   - 3 reviews vs. the category leader's 116, a 113-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -131,8 +131,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 3 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Fontana" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Fontana", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -143,7 +143,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 4 (5★), ranks #16 in Ontario search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #16 in Ontario search results, behind All Pro Cooling, Heating, Plumbing & Electrical (8710 reviews, 4.8★).
   - 4 reviews vs. the category leader's 8710, a 8706-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -156,7 +156,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 4 (5★), ranks #13 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #13 in Fontana search results, behind NexGen HVAC & Plumbing (780 reviews, 4.7★).
   - 4 reviews vs. the category leader's 780, a 776-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -169,8 +169,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 5 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Rancho Cucamonga" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Rancho Cucamonga", invisible to anyone searching cold.
   - 5 reviews vs. the category leader's 116, a 111-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -182,7 +182,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 5 (4.8★), ranks #16 in San Bernardino search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #16 in San Bernardino search results, behind On Trac Garage Door Company (1149 reviews, 4.9★).
   - 5 reviews vs. the category leader's 1149, a 1144-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -195,7 +195,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 5 (5★), ranks #15 in Murrieta search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #15 in Murrieta search results, behind Direct Electric Company (1408 reviews, 4.9★).
   - 5 reviews vs. the category leader's 1408, a 1403-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -208,8 +208,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 6 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Corona" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Corona", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -220,8 +220,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 7 (4.9★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Riverside" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Riverside", invisible to anyone searching cold.
   - 7 reviews vs. the category leader's 137, a 130-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -233,8 +233,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 7 (3.9★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in Corona" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in Corona", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -245,7 +245,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 10 (3.8★), ranks #14 in Ontario search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #14 in Ontario search results, behind Mr. Electric of Ontario (248 reviews, 5★).
   - 10 reviews vs. the category leader's 248, a 238-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -258,8 +258,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 11 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "water damage restoration in Riverside" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "water damage restoration in Riverside", invisible to anyone searching cold.
   - 11 reviews vs. the category leader's 112, a 101-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -271,7 +271,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 17 (4.8★), ranks #12 in Murrieta search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #12 in Murrieta search results, behind Direct Electric Company (1408 reviews, 4.9★).
   - 17 reviews vs. the category leader's 1408, a 1391-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -284,7 +284,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 32 (5★), ranks #15 in Temecula search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #15 in Temecula search results, behind Advanced Heating & Air Conditioning (314 reviews, 4.9★).
   - 32 reviews vs. the category leader's 314, a 282-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -297,7 +297,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 1 (5★), ranks #14 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #14 in Rancho Cucamonga search results, behind Potter Electric Inc. - Rancho Cucamonga Electrician (116 reviews, 5★).
   - 1 reviews vs. the category leader's 116, a 115-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -310,8 +310,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 2 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "HVAC contractor in Rancho Cucamonga" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "HVAC contractor in Rancho Cucamonga", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for hvac companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -322,7 +322,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 3 (5★), ranks #15 in Moreno Valley search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #15 in Moreno Valley search results, behind City Wide Air Conditioning Plumbing & Heating - Ac Repair Moreno Valley (173 reviews, 4.9★).
   - 3 reviews vs. the category leader's 173, a 170-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -335,7 +335,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 4 (5★), ranks #4 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - 4 reviews vs. the category leader's 242, a 238-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -347,7 +347,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 5 (5★), ranks #11 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #11 in Rancho Cucamonga search results, behind Potter Electric Inc. - Rancho Cucamonga Electrician (116 reviews, 5★).
   - 5 reviews vs. the category leader's 116, a 111-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -360,8 +360,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 6 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "electrician in San Bernardino" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "electrician in San Bernardino", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -372,7 +372,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 6 (5★), ranks #7 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #7 in Victorville search results, behind AC Plus Heating & Air (2802 reviews, 5★).
   - 6 reviews vs. the category leader's 2802, a 2796-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -385,7 +385,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 7 (4.9★), ranks #11 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #11 in Rancho Cucamonga search results, behind Restoration 1 of Rancho Cucamonga (107 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -397,7 +397,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 7 (4.7★), ranks #4 in San Bernardino search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - 7 reviews vs. the category leader's 245, a 238-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -409,7 +409,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 8 (4.5★), ranks #12 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #12 in Victorville search results, behind Bear Electric and Construction (165 reviews, 4.9★).
   - 8 reviews vs. the category leader's 165, a 157-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -422,7 +422,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 8 (5★), ranks #7 in Ontario search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #7 in Ontario search results, behind All Pro Cooling, Heating, Plumbing & Electrical (8710 reviews, 4.8★).
   - 8 reviews vs. the category leader's 8710, a 8702-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -435,7 +435,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 8 (4.5★), ranks #11 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #11 in Victorville search results, behind Bear Electric and Construction (165 reviews, 4.9★).
   - 8 reviews vs. the category leader's 165, a 157-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -448,8 +448,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 9 (3.7★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "water damage restoration in Murrieta" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "water damage restoration in Murrieta", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -460,7 +460,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 14 (5★), ranks #9 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #9 in Fontana search results, behind NexGen HVAC & Plumbing (780 reviews, 4.7★).
   - 14 reviews vs. the category leader's 780, a 766-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -473,7 +473,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 16 (5★), ranks #6 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #6 in Victorville search results, behind Purofirst Fire & Water Restoration (242 reviews, 4.8★).
   - 16 reviews vs. the category leader's 242, a 226-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -486,7 +486,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 17 (5★), ranks #9 in San Bernardino search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #9 in San Bernardino search results, behind Superior Mechanical Heating & Air Inc. (245 reviews, 5★).
   - 17 reviews vs. the category leader's 245, a 228-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -499,8 +499,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 22 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "water damage restoration in Murrieta" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "water damage restoration in Murrieta", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -511,7 +511,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 23 (5★), ranks #11 in Riverside search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #11 in Riverside search results, behind All Lights Electrical Service (137 reviews, 5★).
   - 23 reviews vs. the category leader's 137, a 114-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -524,8 +524,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 24 (4.3★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "water damage restoration in Corona" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "water damage restoration in Corona", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -536,7 +536,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 26 (5★), ranks #8 in Riverside search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #8 in Riverside search results, behind Precision Door Service (1542 reviews, 4.8★).
   - 26 reviews vs. the category leader's 1542, a 1516-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -549,7 +549,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 26 (4.7★), ranks #6 in Riverside search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #6 in Riverside search results, behind Precision Door Service (1542 reviews, 4.8★).
   - 26 reviews vs. the category leader's 1542, a 1516-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -562,7 +562,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 26 (4.7★), ranks #5 in San Bernardino search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - 26 reviews vs. the category leader's 1149, a 1123-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -574,8 +574,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 28 (3★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "garage door repair in Victorville" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "garage door repair in Victorville", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for garage door companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -586,8 +586,8 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 29 (5★)
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
-  - Outside the top 20 results for "water damage restoration in Murrieta" — invisible to anyone searching cold.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
+  - Outside the top 20 results for "water damage restoration in Murrieta", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -598,7 +598,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 1 (5★), ranks #10 in Temecula search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #10 in Temecula search results, behind Flood 1 Restoration (99 reviews, 4.9★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -611,7 +611,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 1 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Ontario" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Ontario", invisible to anyone searching cold.
   - 1 reviews vs. the category leader's 248, a 247-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -623,7 +623,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 1 (5★), ranks #10 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #10 in Rancho Cucamonga search results, behind Union Garage Doors & Gates Repair (183 reviews, 5★).
   - 1 reviews vs. the category leader's 183, a 182-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -636,7 +636,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 2 (5★), ranks #12 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #12 in Victorville search results, behind Precision Garage Door Service (52 reviews, 4.9★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -648,7 +648,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 2 (5★), ranks #4 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for garage door companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -660,7 +660,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 2 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Murrieta" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Murrieta", invisible to anyone searching cold.
   - 2 reviews vs. the category leader's 1408, a 1406-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -672,7 +672,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 2 (5★), ranks #11 in Moreno Valley search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #11 in Moreno Valley search results, behind Voltech Electrical Services (25 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -685,7 +685,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 2 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Ontario" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Ontario", invisible to anyone searching cold.
   - 2 reviews vs. the category leader's 248, a 246-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -697,7 +697,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 4 (5★), ranks #9 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #9 in Rancho Cucamonga search results, behind Restoration 1 of Rancho Cucamonga (107 reviews, 5★).
   - 4 reviews vs. the category leader's 107, a 103-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -710,7 +710,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 4 (5★), ranks #9 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #9 in Rancho Cucamonga search results, behind Union Garage Doors & Gates Repair (183 reviews, 5★).
   - 4 reviews vs. the category leader's 183, a 179-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -723,7 +723,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 4 (5★), ranks #8 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #8 in Fontana search results, behind Joeboys electrical (99 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -735,7 +735,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 5 (3.4★), ranks #5 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for garage door companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -747,7 +747,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 5 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "garage door repair in Corona" — invisible to anyone searching cold.
+  - Outside the top 20 results for "garage door repair in Corona", invisible to anyone searching cold.
   - 5 reviews vs. the category leader's 241, a 236-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -759,7 +759,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 6 (5★), ranks #10 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #10 in Fontana search results, behind Precision Garage Door Service (63 reviews, 4.9★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -772,7 +772,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 7 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "garage door repair in Murrieta" — invisible to anyone searching cold.
+  - Outside the top 20 results for "garage door repair in Murrieta", invisible to anyone searching cold.
   - 7 reviews vs. the category leader's 533, a 526-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -785,7 +785,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 9 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "garage door repair in Riverside" — invisible to anyone searching cold.
+  - Outside the top 20 results for "garage door repair in Riverside", invisible to anyone searching cold.
   - 9 reviews vs. the category leader's 1542, a 1533-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -797,7 +797,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 9 (1.9★), ranks #11 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #11 in Victorville search results, behind Precision Garage Door Service (52 reviews, 4.9★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -809,7 +809,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 9 (5★), ranks #13 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #13 in Rancho Cucamonga search results, behind Reliant HVAC Service LLC (42 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -821,7 +821,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 9 (4.6★), ranks #13 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #13 in Victorville search results, behind Precision Garage Door Service (52 reviews, 4.9★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -833,7 +833,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 10 (4.5★), ranks #7 in Victorville search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #7 in Victorville search results, behind Bear Electric and Construction (165 reviews, 4.9★).
   - 10 reviews vs. the category leader's 165, a 155-review gap that compounds every month it's not addressed.
 - **Say this:**
@@ -847,7 +847,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 10 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "HVAC contractor in San Bernardino" — invisible to anyone searching cold.
+  - Outside the top 20 results for "HVAC contractor in San Bernardino", invisible to anyone searching cold.
   - 10 reviews vs. the category leader's 245, a 235-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -860,7 +860,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 13 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "HVAC contractor in San Bernardino" — invisible to anyone searching cold.
+  - Outside the top 20 results for "HVAC contractor in San Bernardino", invisible to anyone searching cold.
   - 13 reviews vs. the category leader's 245, a 232-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -872,7 +872,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 13 (5★), ranks #7 in Temecula search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #7 in Temecula search results, behind Rapid Repair Garage Doors LLC (109 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -884,7 +884,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 13 (5★), ranks #11 in Fontana search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #11 in Fontana search results, behind Precision Garage Door Service (63 reviews, 4.9★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -896,7 +896,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 14 (4.8★), ranks #14 in Rancho Cucamonga search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #14 in Rancho Cucamonga search results, behind Reliant HVAC Service LLC (42 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -909,7 +909,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 14 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "HVAC contractor in Corona" — invisible to anyone searching cold.
+  - Outside the top 20 results for "HVAC contractor in Corona", invisible to anyone searching cold.
   - 14 reviews vs. the category leader's 1401, a 1387-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -922,7 +922,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 20 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "HVAC contractor in Temecula" — invisible to anyone searching cold.
+  - Outside the top 20 results for "HVAC contractor in Temecula", invisible to anyone searching cold.
   - 20 reviews vs. the category leader's 314, a 294-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -935,7 +935,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 31 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "garage door repair in San Bernardino" — invisible to anyone searching cold.
+  - Outside the top 20 results for "garage door repair in San Bernardino", invisible to anyone searching cold.
   - 31 reviews vs. the category leader's 1149, a 1118-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -948,7 +948,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 34 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Temecula" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Temecula", invisible to anyone searching cold.
   - 34 reviews vs. the category leader's 467, a 433-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -960,7 +960,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 34 (4.9★), ranks #7 in Riverside search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #7 in Riverside search results, behind Affordable Home Works (112 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -972,7 +972,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 1 (5★), ranks #10 in Moreno Valley search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #10 in Moreno Valley search results, behind Voltech Electrical Services (25 reviews, 5★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -985,7 +985,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 1 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Corona" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Corona", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1022,7 +1022,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 2 (5★), ranks #5 in Moreno Valley search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1034,7 +1034,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 2 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Corona" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Corona", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1046,7 +1046,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 3 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "garage door repair in Rancho Cucamonga" — invisible to anyone searching cold.
+  - Outside the top 20 results for "garage door repair in Rancho Cucamonga", invisible to anyone searching cold.
   - 3 reviews vs. the category leader's 183, a 180-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -1059,7 +1059,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 3 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "water damage restoration in Ontario" — invisible to anyone searching cold.
+  - Outside the top 20 results for "water damage restoration in Ontario", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1071,7 +1071,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 5 (3.4★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Fontana" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Fontana", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1083,7 +1083,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 5 (4.2★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Fontana" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Fontana", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1108,7 +1108,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 6 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "garage door repair in Rancho Cucamonga" — invisible to anyone searching cold.
+  - Outside the top 20 results for "garage door repair in Rancho Cucamonga", invisible to anyone searching cold.
   - 6 reviews vs. the category leader's 183, a 177-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -1120,7 +1120,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 7 (4.4★), ranks #7 in San Bernardino search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - Ranks #7 in San Bernardino search results, behind All In 1 Electric (23 reviews, 4.7★).
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -1146,7 +1146,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 7 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "water damage restoration in Corona" — invisible to anyone searching cold.
+  - Outside the top 20 results for "water damage restoration in Corona", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1157,7 +1157,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 7 (5★), ranks #2 in Moreno Valley search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
   - 7 reviews vs. the category leader's 173, a 166-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
@@ -1183,7 +1183,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 11 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "water damage restoration in Rancho Cucamonga" — invisible to anyone searching cold.
+  - Outside the top 20 results for "water damage restoration in Rancho Cucamonga", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1208,7 +1208,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 13 (5★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "water damage restoration in Ontario" — invisible to anyone searching cold.
+  - Outside the top 20 results for "water damage restoration in Ontario", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1219,7 +1219,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Website:** none found
 - **Reviews:** 14 (5★), ranks #5 in San Bernardino search
 - **The gaps found:**
-  - No website at all — every emergency call has to find you by phone or a Google listing alone.
+  - No website at all, every emergency call has to find you by phone or a Google listing alone.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for electrical companies here in the Inland Empire, more calls, more jobs, and I guarantee it. You don't have a website up right now, which means every job that doesn't already have your number by word of mouth is going to whoever comes up first on Google. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1257,7 +1257,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 15 (4.7★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "water damage restoration in Corona" — invisible to anyone searching cold.
+  - Outside the top 20 results for "water damage restoration in Corona", invisible to anyone searching cold.
 - **Say this:**
   "Hi, is this the owner?" [wait]
   "My name's Karmello, I run marketing for water damage restoration companies here in the Inland Empire, more calls, more jobs, and I guarantee it. I checked your site, there's no online booking on it. Every job still has to catch someone live on the phone to actually convert, which means after-hours and busy-moment calls are just gone. I build and run the marketing myself, and you don't pay until you're actually seeing more jobs come in. Worth 20 minutes this week to walk through what I found on your setup specifically?"
@@ -1269,7 +1269,7 @@ Every lead is pain-scored and sorted highest first, so you're calling the busine
 - **Reviews:** 17 (4.8★)
 - **The gaps found:**
   - Website has no online booking, every job still has to be caught live on the phone to convert.
-  - Outside the top 20 results for "electrician in Riverside" — invisible to anyone searching cold.
+  - Outside the top 20 results for "electrician in Riverside", invisible to anyone searching cold.
   - 17 reviews vs. the category leader's 137, a 120-review gap that compounds every month it's not addressed.
 - **Say this:**
   "Hi, is this the owner?" [wait]
