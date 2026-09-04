@@ -50,7 +50,7 @@ export function MarketingServices() {
             Receptifi Marketing Services
           </span>
           <h2 className="text-balance font-serif text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Most local businesses aren&rsquo;t losing to a better competitor.
+            For businesses that benefit from digital presence.
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
             A call that goes to voicemail is a customer choosing someone else. A site buried on page five might as well not exist, nobody scrolls that far. The businesses with the strongest digital presence are the ones winning.
@@ -81,15 +81,6 @@ export function MarketingServices() {
             </div>
           ))}
         </div>
-
-        {/* Bottom note: hard close, no hedging */}
-        <p className="mx-auto mt-12 max-w-2xl text-center text-sm text-muted-foreground">
-          Run all three together and you don&rsquo;t just compete, you dominate the search results in your market. Receptifi guarantees top 3 on Google in 90 days.{" "}
-          <a href="/book" className="font-semibold text-primary underline underline-offset-2 hover:no-underline">
-            Book your free audit now
-          </a>{" "}
-          before your competitor does.
-        </p>
 
       </div>
     </section>
