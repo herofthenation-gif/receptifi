@@ -5,18 +5,23 @@ import { NextResponse } from "next/server"
 const resend = new Resend(process.env.RESEND_API_KEY)
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+// Which page element the signup came from, lets Karmello see which topic
+// a subscriber is actually interested in (e.g. for follow-up email content).
+const VALID_SOURCES = new Set(["footer", "seo_tips", "google_tips", "meta_tips"])
+
 export async function POST(req: Request) {
-  const { email } = await req.json()
+  const { email, source } = await req.json()
 
   if (typeof email !== "string" || !EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 })
   }
 
   const normalized = email.trim().toLowerCase()
+  const resolvedSource = typeof source === "string" && VALID_SOURCES.has(source) ? source : "footer"
 
   const { error: dbError } = await supabaseAdmin
     .from("subscribers")
-    .upsert({ email: normalized }, { onConflict: "email", ignoreDuplicates: true })
+    .upsert({ email: normalized, source: resolvedSource }, { onConflict: "email", ignoreDuplicates: true })
 
   if (dbError) {
     console.error("Supabase subscriber insert error:", dbError)
@@ -24,7 +29,7 @@ export async function POST(req: Request) {
   }
 
   // Best-effort: sync to the Resend segment used for broadcast updates.
-  // Non-fatal — the subscriber row is the source of truth, this just keeps
+  // Non-fatal: the subscriber row is the source of truth, this just keeps
   // Resend in sync so broadcasts can be sent from there directly.
   const segmentId = process.env.RESEND_SUBSCRIBERS_SEGMENT_ID
   if (segmentId) {

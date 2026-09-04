@@ -2,7 +2,7 @@ import { Navbar } from "@/components/navbar"
 import { HomepageShell } from "@/components/homepage-shell"
 import { Marquee } from "@/components/marquee"
 import { TwoPaths } from "@/components/two-paths"
-import { WhoThisIsFor } from "@/components/who-this-is-for"
+import { MarketingServices } from "@/components/marketing-services"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function Page() {
@@ -13,8 +13,8 @@ export default function Page() {
       <HomepageShell />
       {/* Marquee ticker */}
       <Marquee />
-      {/* Who This Is For */}
-      <WhoThisIsFor />
+      {/* Marketing Services: SEO, Google, Meta, each with a mini email opt-in */}
+      <MarketingServices />
       {/* Two Paths — bottleneck diagnosis, then done-for-you vs coaching */}
       <TwoPaths />
       {/* CTA Footer */}
