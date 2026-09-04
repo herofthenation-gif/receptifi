@@ -122,7 +122,6 @@ function auditPitchTouch1(
     greetingFor(email),
     opening,
     insight,
-    `We're an AI-driven consulting practice built to solve exactly this for local service businesses like yours. This might not be the only thing costing you ${personPlural}.`,
     `We don't just hand you a report. We fix what's broken: your site, your reviews, your booking, your phone coverage, in the right order.`,
     `Free 20 minutes to see if it's worth doing for you?`,
     SIGNATURE,
