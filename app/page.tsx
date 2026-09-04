@@ -13,10 +13,10 @@ export default function Page() {
       <HomepageShell />
       {/* Marquee ticker */}
       <Marquee />
-      {/* Two Paths — bottleneck diagnosis, then done-for-you vs coaching */}
-      <TwoPaths />
       {/* Who This Is For */}
       <WhoThisIsFor />
+      {/* Two Paths — bottleneck diagnosis, then done-for-you vs coaching */}
+      <TwoPaths />
       {/* CTA Footer */}
       <SiteFooter />
     </main>
