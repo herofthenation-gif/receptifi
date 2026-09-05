@@ -4,7 +4,7 @@ import { useState } from "react"
 import { ArrowRight, Check } from "lucide-react"
 
 type SubscribeFormProps = {
-  source?: "footer" | "seo_tips" | "google_tips" | "meta_tips"
+  source?: "footer" | "seo_tips" | "google_tips" | "meta_tips" | "aria_tips" | "chat_tips" | "followup_tips"
   label?: string
   buttonLabel?: string
   successText?: string

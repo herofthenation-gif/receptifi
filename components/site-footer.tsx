@@ -32,7 +32,7 @@ export function SiteFooter() {
               variant="outline"
               className="group h-14 rounded-full border-2 border-primary/25 bg-transparent px-8 text-base font-semibold text-foreground shadow-none transition-all duration-200 hover:scale-[1.03] hover:border-primary hover:bg-primary/5"
             >
-              Book Coaching, $700/hr
+              Book Coaching
               <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </div>

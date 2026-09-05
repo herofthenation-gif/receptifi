@@ -7,7 +7,15 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // Which page element the signup came from, lets Karmello see which topic
 // a subscriber is actually interested in (e.g. for follow-up email content).
-const VALID_SOURCES = new Set(["footer", "seo_tips", "google_tips", "meta_tips"])
+const VALID_SOURCES = new Set([
+  "footer",
+  "seo_tips",
+  "google_tips",
+  "meta_tips",
+  "aria_tips",
+  "chat_tips",
+  "followup_tips",
+])
 
 export async function POST(req: Request) {
   const { email, source } = await req.json()
