@@ -1,6 +1,7 @@
 import { supabaseAdmin } from "@/lib/supabase-admin"
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
+import { buildTipEmail } from "@/lib/tip-email"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -13,8 +14,8 @@ const VALID_SOURCES = new Set([
   "google_tips",
   "meta_tips",
   "aria_tips",
-  "chat_tips",
-  "followup_tips",
+  "website_tips",
+  "crm_tips",
 ])
 
 export async function POST(req: Request) {
@@ -47,6 +48,22 @@ export async function POST(req: Request) {
     })
     if (resendError) {
       console.error("Resend contact sync error:", resendError)
+    }
+  }
+
+  // Best-effort: deliver the free tip they signed up for immediately.
+  // Non-fatal: the subscriber row is already saved either way.
+  const tipEmail = buildTipEmail(resolvedSource)
+  if (tipEmail) {
+    const { error: tipEmailError } = await resend.emails.send({
+      from: tipEmail.from,
+      to: normalized,
+      replyTo: tipEmail.replyTo,
+      subject: tipEmail.subject,
+      html: tipEmail.html,
+    })
+    if (tipEmailError) {
+      console.error("Tip email send error:", tipEmailError)
     }
   }
 

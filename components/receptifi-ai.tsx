@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, RefreshCw } from "lucide-react"
+import { Phone, Globe, Database } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { SubscribeForm } from "@/components/subscribe-form"
 
@@ -8,7 +8,7 @@ type AiService = {
   name: string
   detail: string
   tips: string
-  source: "aria_tips" | "chat_tips" | "followup_tips"
+  source: "aria_tips" | "website_tips" | "crm_tips"
 }
 
 const aiServices: AiService[] = [
@@ -21,20 +21,20 @@ const aiServices: AiService[] = [
     source: "aria_tips",
   },
   {
-    Icon: MessageCircle,
-    name: "AI Website Chat",
+    Icon: Globe,
+    name: "Website",
     detail:
-      "The same AI answering questions in this chat window lives on your own site, engaging every visitor and capturing their contact info the second they land, instead of a silent bounce you never even hear about.",
-    tips: "Get free chat setup tips",
-    source: "chat_tips",
+      "If you don't have a website, or the one you have looks like it hasn't been touched since 2012, we build you a new one, modern, fast, and built to convert, so you look like the obvious choice the second someone lands on it.",
+    tips: "Get free website tips",
+    source: "website_tips",
   },
   {
-    Icon: RefreshCw,
-    name: "AI-Powered Follow-Up",
+    Icon: Database,
+    name: "CRM Creation",
     detail:
-      "Almost nobody buys on the first touch, they go quiet, and most businesses just let them. Our system emails and texts on a set schedule until they book or say no, so a cold lead never quietly disappears again.",
-    tips: "Get free follow-up tips",
-    source: "followup_tips",
+      "Most businesses run leads out of a notebook, a spreadsheet, or memory, and things slip through. We build you a real CRM that tracks every lead from first contact to close, with follow-up that fires automatically until they book or say no.",
+    tips: "Get free CRM setup tips",
+    source: "crm_tips",
   },
 ]
 
