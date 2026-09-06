@@ -79,14 +79,14 @@ export default function CoachingPage() {
         <div className="mx-auto max-w-2xl px-5 sm:px-8">
           <div className="glass-card rounded-[2rem] p-8 text-center sm:p-10">
             <p className="font-serif text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
-              $700<span className="text-2xl font-medium text-muted-foreground">/hour</span>
+              700<span className="text-2xl font-medium text-muted-foreground">/hour</span>
             </p>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
               Tell us what you're trying to build and we scope the session around that. Most builds run about{" "}
               <HoursNote note="Depending on skill level and experience with AI, coaching sessions can run for as little as 30 minutes. This is for those with experience — not every build takes 2 hours.">
                 two hours
               </HoursNote>
-              , roughly $1,400 total.
+              , roughly 1,400 total.
             </p>
             <a
               href="/book"
