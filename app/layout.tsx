@@ -28,10 +28,10 @@ const sora = Sora({
 })
 
 export const metadata: Metadata = {
-  title: 'title: 'Best AI Consultant in the Inland Empire | Receptifi',',
+  title: 'Best AI Consultant in the Inland Empire | Receptifi',
   description:
-'Looking for the best AI consultant in the Inland Empire? Receptifi helps local service businesses directly attract and retain more clients with tailored systems that eliminate bottlenecks. Free audit available.',
-  icons: {  icons: {
+    'Looking for the best AI consultant in the Inland Empire? Receptifi helps local service businesses directly attract and retain more clients with tailored systems that eliminate bottlenecks. Free audit available.',
+  icons: {
     icon: [
       {
         url: '/icon-light-32x32.png',
