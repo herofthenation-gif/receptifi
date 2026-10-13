@@ -44,10 +44,10 @@ export default function CaseStudiesPage() {
               How We Work
             </span>
             <h1 className="text-balance font-serif text-5xl font-bold leading-[1.04] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              We don&rsquo;t have a shelf of case studies. Here is something more useful.
+              We show you the work before you pay for it.
             </h1>
             <p className="mt-7 text-pretty text-lg leading-relaxed text-muted-foreground">
-              Receptifi is a new practice. Instead of dressing that up, here is exactly what an audit looks like, one reference who will tell you the truth about working with us, and terms that put the risk on us, not you.
+              Most agencies sell you a package and hope it works. We start with a live audit of your actual business, show you the gaps, and only then build. One verified reference. Terms that put the risk on us.
             </p>
           </div>
         </div>
