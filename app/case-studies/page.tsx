@@ -44,10 +44,10 @@ export default function CaseStudiesPage() {
               How We Work
             </span>
             <h1 className="text-balance font-serif text-5xl font-bold leading-[1.04] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              We show you the work before you pay for it.
+              A clear process. Measurable results.
             </h1>
             <p className="mt-7 text-pretty text-lg leading-relaxed text-muted-foreground">
-              Most agencies sell you a package and hope it works. We start with a live audit of your actual business, show you the gaps, and only then build. One verified reference. Terms that put the risk on us.
+              Every engagement begins with a live audit of your business. We identify the exact points where revenue is leaking, then build the systems that close those gaps — whether we implement them for you or coach your team to do it.
             </p>
           </div>
         </div>
