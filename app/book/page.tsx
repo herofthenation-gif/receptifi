@@ -16,7 +16,7 @@ export default function BookPage() {
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [address, setAddress] = useState("")
-  const [problem, setProblem] = useState("")
+  const [challenges, setChallenges] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [showCalendly, setShowCalendly] = useState(false)
 
@@ -42,7 +42,13 @@ export default function BookPage() {
       await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, address, problem }),
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          address,
+          problem: challenges.join(", "),
+        }),
       })
     } catch {
       // Non-blocking — still show the calendar even if save fails
@@ -159,18 +165,44 @@ export default function BookPage() {
               <AddressAutocomplete value={address} onChange={setAddress} />
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="problem" className="block font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-                What is your biggest challenge right now?
+            <div className="space-y-3">
+              <label className="block font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                What is your biggest challenge right now? (select all that apply)
               </label>
-              <textarea
-                id="problem"
-                rows={4}
-                placeholder="e.g. We miss too many calls after hours. Our website gets traffic but no one books. We have no idea where our leads come from..."
-                value={problem}
-                onChange={(e) => setProblem(e.target.value)}
-                className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
-              />
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {[
+                  { label: "Traffic", desc: "How they find you" },
+                  { label: "Lead Capture", desc: "Stranger turned into contact" },
+                  { label: "Lead Management", desc: "Speed of reply" },
+                  { label: "Sales", desc: "Interested turned into paid" },
+                  { label: "Customer Experience", desc: "Will they return?" },
+                  { label: "Operations", desc: "Behind the scenes work" },
+                  { label: "Intelligence", desc: "Know the business numbers" },
+                ].map((option) => {
+                  const selected = challenges.includes(option.label)
+                  return (
+                    <button
+                      key={option.label}
+                      type="button"
+                      onClick={() => {
+                        setChallenges((prev) =>
+                          selected
+                            ? prev.filter((c) => c !== option.label)
+                            : [...prev, option.label]
+                        )
+                      }}
+                      className={`rounded-xl border px-4 py-3 text-left transition-all ${
+                        selected
+                          ? "border-primary bg-primary/10 text-foreground"
+                          : "border-border bg-background text-muted-foreground hover:border-primary/40"
+                      }`}
+                    >
+                      <div className="text-sm font-medium">{option.label}</div>
+                      <div className="mt-0.5 text-xs opacity-70">{option.desc}</div>
+                    </button>
+                  )
+                })}
+              </div>
             </div>
 
             <button
