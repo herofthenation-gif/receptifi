@@ -5,14 +5,14 @@ import { ArrowRight, Search, ScanLine, Sparkles, Hammer, ShieldCheck } from "luc
 
 export const metadata: Metadata = {
   title: "How We Work | Receptifi",
-  description: "No manufactured case studies here. This is the real audit process, one verified reference, and the terms that put the risk on us, not you.",
+  description: "See exactly how a Receptifi audit works — live market data, real system findings, one verified reference, and clear terms.",
 }
 
 const steps = [
   {
     icon: Search,
     title: "We pull your real market",
-    body: "Live data from Google, not guesses: every competitor in your category and city, their rating, their review count. You see exactly where you stand next to the businesses actually beating you for calls.",
+    body: "Live data from Google: every competitor in your category and city, their rating, their review count. You see exactly where you stand next to the businesses actually beating you for calls.",
   },
   {
     icon: ScanLine,
@@ -117,10 +117,10 @@ export default function CaseStudiesPage() {
                 </span>
               </div>
               <p className="mt-4 text-lg leading-relaxed text-foreground">
-                Choose the done-for-you path and we build first. You watch the system work, on your business, before you pay anything.
+                Every engagement starts with a clear diagnosis. You see exactly what’s leaking before any work begins.
               </p>
               <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-                This is how a new practice earns trust without a stack of results to point to: by making the risk ours instead of yours. If it does not do what we said, you owe nothing. Coaching works differently, you're paying for our time, not a delivered system, so those sessions are booked and billed per hour.
+                Done-for-you systems are scoped and quoted after the audit. Coaching is billed hourly for our time.
               </p>
             </div>
           </div>
@@ -148,5 +148,7 @@ export default function CaseStudiesPage() {
 
       <SiteFooter />
     </main>
+  )
+}
   )
 }
