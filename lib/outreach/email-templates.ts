@@ -1,12 +1,14 @@
-import { CALENDLY_URL, getVertical, PHYSICAL_ADDRESS, WEBSITE } from "./config";
+import { article, CALENDLY_URL, getVertical, PHYSICAL_ADDRESS, WEBSITE } from "./config";
+import { seoFraming } from "./personalize";
 import type { OfferType } from "./offer";
 
 // CAN-SPAM: every commercial email needs a physical postal address and a
 // clear opt-out. The opt-out is a reply — checkGmailReplies() detects it and
 // sets unsubscribed_at, which getDueLeads() honors.
-const SIGNATURE = `Karmello
+const SIGN_OFF = `Talk soon,
+Karmello`;
 
-Receptifi | ${WEBSITE}
+const LEGAL_FOOTER = `Receptifi | ${WEBSITE}
 ${PHYSICAL_ADDRESS}
 Not interested? Reply "unsubscribe" and you won't hear from me again.`;
 
@@ -97,13 +99,18 @@ const VOICE_STATS: Record<string, string> = {
 
 const VOICE_STAT_FALLBACK = "Most local businesses miss about a third of inbound calls. Every one is a customer who never calls back.";
 
-// Shared audit pitch (touch 1). The opening carries the offer-specific hook
-// and `insight` adds an optional second, bucket-specific beat of expertise
-// before the pivot to the general pitch (see personalize.ts) — skip it (pass
-// null) when the opening already lands the point on its own. The call is
-// always free; price only comes up live if the call turns into a real
-// engagement.
-//
+/**
+ * The only hard sell in the email, and it's not hard: what I fix, specific,
+ * then a no-pressure reply ask. Same shape every time on purpose, it's the
+ * formula, not a template we forgot to vary.
+ */
+function closingPs(fixDescription: string): string {
+  return `P.S. ${fixDescription} Free 15 minutes, no pitch deck. Just reply and we'll see if it's worth your time.`;
+}
+
+// Shared audit pitch (touch 1). The opening carries the offer-specific hook,
+// `insight` adds an optional second, bucket-specific beat before the pivot
+// line lands the point, then the sign-off and a P.S. carry the only ask.
 // subjectHook is offer-specific and shared by touch 1 and its touch-2 reply
 // (same subject, "Re:" prefixed, so it threads like a real reply). Deliberately
 // not "quick question" — that phrase is the single most fingerprinted cold-email
@@ -114,7 +121,8 @@ function auditPitchTouch1(
   businessName: string,
   opening: string,
   insight: string | null,
-  personPlural: string,
+  pivotLine: string | null,
+  ps: string,
   subjectHook: string,
   email: string
 ): OutreachEmail {
@@ -122,9 +130,10 @@ function auditPitchTouch1(
     greetingFor(email),
     opening,
     insight,
-    `We don't just hand you a report. We fix what's broken: your site, your reviews, your booking, your phone coverage, in the right order.`,
-    `Free 20 minutes to see if it's worth doing for you?`,
-    SIGNATURE,
+    pivotLine,
+    SIGN_OFF,
+    ps,
+    LEGAL_FOOTER,
   ].filter((p): p is string => Boolean(p));
 
   return { subject: `${businessName}, ${subjectHook}`, text: paragraphs.join("\n\n") };
@@ -139,31 +148,45 @@ ${closingLine}
 
 Book 20 minutes: ${CALENDLY_URL}
 
-${SIGNATURE}`,
+${SIGN_OFF}
+
+${LEGAL_FOOTER}`,
   };
 }
 
 function voiceEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: EmailContext): OutreachEmail {
   const v = getVertical(ctx.vertical);
 
-  if (touch === 1) return auditPitchTouch1(businessName, opening, null, v.personPlural, "your after-hours calls", ctx.email);
+  if (touch === 1) {
+    return auditPitchTouch1(
+      businessName,
+      opening,
+      null,
+      null,
+      closingPs(`I turn missed calls into booked ${v.unit}s for ${v.label.toLowerCase()} businesses.`),
+      "your after-hours calls",
+      ctx.email
+    );
+  }
 
   if (touch === 2) {
     return {
       subject: `Re: ${businessName}, your after-hours calls`,
-      text: `Still here if you're interested.
+      text: `Still here.
 
 ${VOICE_STATS[v.key] ?? VOICE_STAT_FALLBACK} We catch exactly that, and fix it.
 
-20 minutes, no obligation.
+No pitch. Reply if you want the 20 minutes.
 
-${SIGNATURE}`,
+${SIGN_OFF}
+
+${LEGAL_FOOTER}`,
     };
   }
 
   return auditPitchTouch3(
     businessName,
-    `If missed calls aren't a problem, no worries. But if the phones are stretched or you're losing after-hours ${v.personPlural}, that's exactly what we fix.`
+    `Maybe missed calls aren't costing you anything. I'd bet otherwise. Every one that rings out is ${article(v.unit)} ${v.unit} for whoever picks up next.`
   );
 }
 
@@ -175,7 +198,8 @@ function webEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
       businessName,
       opening,
       `Most ${v.personPlural} decide before they ever call. Whoever looks legitimate online gets the ${v.unit}, and right now that's not you.`,
-      v.personPlural,
+      "And that's the whole game, decided before the phone even rings.",
+      closingPs(`I build or fix exactly what's making you lose that decision online.`),
       "your website",
       ctx.email
     );
@@ -188,15 +212,17 @@ function webEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
 
 Most ${v.personPlural} check the website before they ever call. Right now that first impression is sending them to competitors. We fix exactly what's costing you, starting with the site.
 
-20 minutes, no obligation.
+No pitch. Reply if you want the 20 minutes.
 
-${SIGNATURE}`,
+${SIGN_OFF}
+
+${LEGAL_FOOTER}`,
     };
   }
 
   return auditPitchTouch3(
     businessName,
-    `If the website isn't a priority, no worries. But it's the first thing ${v.personPlural} see, and right now it's working against you. We can fix that fast.`
+    `Your website is still the first thing ${v.personPlural} see before they ever dial. Right now it's talking them out of calling.`
   );
 }
 
@@ -208,7 +234,8 @@ function reviewsEmail(touch: 1 | 2 | 3, businessName: string, opening: string, c
       businessName,
       opening,
       `Most happy ${v.personPlural} never think to leave a review unless someone asks at the right moment. That's usually the entire gap between you and the businesses outranking you.`,
-      v.personPlural,
+      "And it's a gap anyone can close in a week.",
+      closingPs(`I close exactly that gap, so you outrank them instead of the other way around.`),
       "your Google reviews",
       ctx.email
     );
@@ -217,19 +244,21 @@ function reviewsEmail(touch: 1 | 2 | 3, businessName: string, opening: string, c
   if (touch === 2) {
     return {
       subject: `Re: ${businessName}, your Google reviews`,
-      text: `Still here if you're interested.
+      text: `Still here.
 
 When someone searches "${v.queryTerm} near me", they call whoever has the most stars. We show you exactly how you stack up, and close the gap for you.
 
-20 minutes, no obligation.
+No pitch. Reply if you want the 20 minutes.
 
-${SIGNATURE}`,
+${SIGN_OFF}
+
+${LEGAL_FOOTER}`,
     };
   }
 
   return auditPitchTouch3(
     businessName,
-    `If reviews aren't a priority, no worries. But every week at your current rating is ${v.personPlural} picking a competitor off a Google search, and that's fixable.`
+    `Every week at your current rating is a few more ${v.personPlural} picking whoever has more stars than you. That's a fixable number, not bad luck.`
   );
 }
 
@@ -241,7 +270,8 @@ function crmEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
       businessName,
       opening,
       `You already spent to get that ${v.person} to reach out. Every minute without a reply is you handing that ${v.unit} to whoever answers first.`,
-      v.personPlural,
+      "So. The money's already spent, the lead's just slipping through anyway.",
+      closingPs(`I find exactly where inquiries are going cold and plug it.`),
       "that missed follow-up",
       ctx.email
     );
@@ -250,19 +280,21 @@ function crmEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
   if (touch === 2) {
     return {
       subject: `Re: ${businessName}, that missed follow-up`,
-      text: `Still here if you're interested.
+      text: `Still here.
 
 A ${v.person} who doesn't hear back within minutes goes cold. We find exactly where inquiries are slipping through and fix it.
 
-20 minutes, no obligation.
+No pitch. Reply if you want the 20 minutes.
 
-${SIGNATURE}`,
+${SIGN_OFF}
+
+${LEGAL_FOOTER}`,
     };
   }
 
   return auditPitchTouch3(
     businessName,
-    `If follow-up isn't a problem, no worries. But if ${v.personPlural} are slipping through after the first contact, that's exactly what we fix.`
+    `You already paid for that ${v.person} to show up. Every one that slips through after first contact is money you spent for nothing.`
   );
 }
 
@@ -277,36 +309,48 @@ function seoEmail(touch: 1 | 2 | 3, businessName: string, opening: string, ctx: 
       businessName,
       opening,
       null,
-      v.personPlural,
+      "So. I'd have called whoever was actually in front of me.",
+      closingPs(`I fix exactly where you show up, so next time it's you in front of them, not a competitor.`),
       "your Google ranking",
       ctx.email
     );
   }
 
+  const framing = seoFraming(ctx.email);
+
   if (touch === 2) {
+    const rankingLine =
+      framing === "top20"
+        ? `When someone searches "${v.queryTerm} near me", almost no one scrolls past the top 20 results, they call whoever's already in front of them. We check your actual position and close the gap.`
+        : `When someone searches "${v.queryTerm} near me", almost no one goes past page 1, they call whoever's already in front of them. We check your actual position and close the gap.`;
     return {
       subject: `Re: ${businessName}, your Google ranking`,
-      text: `Still here if you're interested.
+      text: `Still here.
 
-When someone searches "${v.queryTerm} near me", they call whoever's in the top 3, not whoever has the nicest site. We check your actual position against local competitors and close the gap.
+${rankingLine}
 
-20 minutes, no obligation.
+No pitch. Reply if you want the 20 minutes.
 
-${SIGNATURE}`,
+${SIGN_OFF}
+
+${LEGAL_FOOTER}`,
     };
   }
 
   return auditPitchTouch3(
     businessName,
-    `If ranking isn't a priority, no worries. But every day you're not in the top 3, ${v.personPlural} are calling whoever is, and that's fixable.`
+    framing === "top20"
+      ? `Maybe ranking doesn't matter to you. I doubt it. Every day outside the top 20 is ${article(v.person)} ${v.person} calling whoever they could actually find.`
+      : `Maybe ranking doesn't matter to you. I doubt it. Every day off page 1 is ${article(v.person)} ${v.person} calling whoever they could actually find.`
   );
 }
 
 /**
  * Builds the cold email for a touch, matched to the offer the lead actually
- * needs (see lib/outreach/offer.ts). Same proven voice throughout: Problem +
- * Expertise + Confidence + a 20-minute audit call as the ask. No price in
- * the email — that's discussed on the call.
+ * needs (see lib/outreach/offer.ts). Direct, story-first, no corporate
+ * hedging: state the problem flat, one punchy pivot line, sign off, and the
+ * only ask lives in a low-pressure P.S. ("just reply"), not a mid-body CTA.
+ * No price in the email, that's discussed on the call.
  */
 export function buildOutreachEmail(
   touch: 1 | 2 | 3,
