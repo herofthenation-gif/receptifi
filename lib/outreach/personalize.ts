@@ -23,10 +23,26 @@ export interface PersonalizeInput {
   offerType: OfferType | null;
   /** Real defects found by the site-quality check; lets outdated-site openings cite specifics. */
   qualitySignals: QualitySignals | null;
+  /** Seeds the top-20/page-1 framing split for the seo offer; see seoFraming(). */
+  email: string;
 }
 
 function hasDayOpen(periods: GooglePlacesPeriod[], day: number): boolean {
   return periods.some((p) => p.open.day === day);
+}
+
+/**
+ * The SEO offer's ranking-pain line comes in two framings, "top 20" vs
+ * "page 1" — same claim, different wording, kept in a 60/40 mix so cold
+ * copy doesn't read as templated across a lead list. Hashed off the lead's
+ * email so touch 1/2/3 for the same lead stay consistent with each other.
+ */
+export function seoFraming(email: string): "top20" | "page1" {
+  let hash = 0;
+  for (let i = 0; i < email.length; i++) {
+    hash = (hash * 31 + email.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash) % 5 < 3 ? "top20" : "page1";
 }
 
 function formatTime(hour: number, minute: number): string {
@@ -94,7 +110,9 @@ export function personalizeOpening(input: PersonalizeInput): string {
   }
 
   if (offer === "seo") {
-    return `Having a website doesn't mean you're ranking. Most ${v.personPlural} searching ${area} never scroll past the top 3, and there's no way to know where you land without checking.`;
+    return seoFraming(input.email) === "top20"
+      ? `I searched Google for a ${v.queryTerm} in ${area} today. You were outside the top 20, I'd never have scrolled that far.`
+      : `I searched Google for a ${v.queryTerm} in ${area} today. You weren't on page 1, I'd never have found you.`;
   }
 
   // voice — the original hours-based openers, in the vertical's language.

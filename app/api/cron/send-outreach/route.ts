@@ -75,6 +75,7 @@ async function runSendOutreach() {
             city: lead.city,
             offerType: lead.offer_type,
             qualitySignals: lead.generated_site?.qualitySignals ?? null,
+            email: lead.email!,
           })
         : "";
     const { subject, text } = buildOutreachEmail(touch, businessName, opening, ctx);
