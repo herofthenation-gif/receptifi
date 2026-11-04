@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase"
+import { supabaseAdmin } from "@/lib/supabase-admin"
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
 
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   }
 
   // Save to Supabase
-  const { error: dbError } = await supabase.from("leads").insert({
+  const { error: dbError } = await supabaseAdmin.from("leads").insert({
     name,
     email,
     phone: phone ?? null,

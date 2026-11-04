@@ -20,9 +20,9 @@ function getClient(): SupabaseClient {
 
 /**
  * Privileged server-side client (service-role key). Used by cron jobs,
- * webhooks, and migration scripts — never imported from client components.
- * The browser-facing CRM dashboard keeps using the anon client in
- * lib/supabase.ts; this does not change that RLS policy.
+ * webhooks, migration scripts, and the /api/admin/* routes the CRM dashboard
+ * calls — never imported from client components. The browser no longer
+ * talks to Supabase directly (see supabase/migrations/0005_lock_down_leads_rls.sql).
  */
 export const supabaseAdmin: SupabaseClient = new Proxy({} as SupabaseClient, {
   get(_target, prop, receiver) {

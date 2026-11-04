@@ -1,8 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { supabase, type Lead, type LeadStatus } from "@/lib/supabase";
+import { useEffect, useRef, useState } from "react";
+import type { Lead, LeadStatus } from "@/lib/supabase";
 import { getVertical } from "@/lib/outreach/config";
+import { CRM_THEME } from "@/lib/crm-theme";
+import { ReviewPanel } from "./review-panel";
+
+// ── Server-side lead API (service-role key stays on the server; the browser
+// never talks to Supabase directly here — see app/api/admin/leads/route.ts
+// and the RLS lockdown in supabase/migrations/0005_lock_down_leads_rls.sql) ──
+async function apiGetLeads(): Promise<{ leads?: Lead[]; error?: string }> {
+  const res = await fetch("/api/admin/leads");
+  return res.json();
+}
+async function apiInsertLeads(leads: Partial<Lead>[]): Promise<{ error?: string }> {
+  const res = await fetch("/api/admin/leads", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ leads }),
+  });
+  return res.json();
+}
+async function apiUpdateLead(id: string, patch: Partial<Lead>): Promise<{ error?: string }> {
+  const res = await fetch("/api/admin/leads", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, patch }),
+  });
+  return res.json();
+}
+async function apiDeleteLead(id: string): Promise<{ error?: string }> {
+  const res = await fetch(`/api/admin/leads?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+  return res.json();
+}
 
 // ── CSV import types ─────────────────────────────────────
 interface CsvRow {
@@ -47,21 +77,6 @@ const STATUS: Record<LeadStatus, { label: string; color: string; bg: string; bor
 const STATUSES: LeadStatus[] = ["needs_review", "cold", "warm", "booked", "closed"];
 
 const EMPTY_FORM = { name: "", business_name: "", phone: "", email: "", status: "cold" as LeadStatus, notes: "" };
-
-// Scoped to this page only — the marketing site has its own (light) theme
-// tokens in globals.css and must not be touched. These were referenced
-// throughout this file but never actually defined anywhere, so every badge
-// and glass-card effect below was silently falling back to plain black-on-
-// white. Values match the dark theme this page was originally designed for.
-const CRM_THEME = {
-  "--bg": "#05070d",
-  "--ink": "#e8eef9",
-  "--ink-dim": "#9aa5b8",
-  "--ink-faint": "rgba(232,238,249,.55)",
-  "--hair": "rgba(255,255,255,.08)",
-  "--hair-strong": "rgba(255,255,255,.14)",
-  "--accent-2": "#60a5fa",
-} as CSSProperties;
 
 // ── Offer type config ────────────────────────────────────
 const OFFER: Record<string, { label: string; color: string; bg: string; border: string }> = {
@@ -138,14 +153,12 @@ export default function CRMPage() {
   const [importRows, setImportRows] = useState<CsvRow[]>([]);
   const [importing, setImporting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [view, setView] = useState<"leads" | "review" | "v2">("leads");
 
   async function fetchLeads() {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("leads")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (error) setError(error.message);
+    const { leads: data, error } = await apiGetLeads();
+    if (error) setError(error);
     else setLeads(data ?? []);
     setLoading(false);
   }
@@ -155,8 +168,8 @@ export default function CRMPage() {
   async function addLead(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
-    const { error } = await supabase.from("leads").insert([form]);
-    if (error) alert(error.message);
+    const { error } = await apiInsertLeads([form]);
+    if (error) alert(error);
     else { setForm(EMPTY_FORM); setShowForm(false); fetchLeads(); }
     setSaving(false);
   }
@@ -164,26 +177,26 @@ export default function CRMPage() {
   async function updateStatus(id: string, status: LeadStatus) {
     const patch: Partial<Lead> = { status };
     if (status === "booked") patch.booked_at = new Date().toISOString();
-    await supabase.from("leads").update(patch).eq("id", id);
+    await apiUpdateLead(id, patch);
     setLeads((prev) => prev.map((l) => l.id === id ? { ...l, ...patch } : l));
   }
 
   async function saveNote(id: string) {
-    await supabase.from("leads").update({ notes: noteText }).eq("id", id);
+    await apiUpdateLead(id, { notes: noteText });
     setLeads((prev) => prev.map((l) => l.id === id ? { ...l, notes: noteText } : l));
     setEditingNote(null);
   }
 
   async function saveEmail(id: string) {
     const email = emailText.trim() || null;
-    await supabase.from("leads").update({ email }).eq("id", id);
+    await apiUpdateLead(id, { email });
     setLeads((prev) => prev.map((l) => l.id === id ? { ...l, email } : l));
     setEditingEmail(null);
   }
 
   async function deleteLead(id: string) {
     if (!confirm("Delete this lead?")) return;
-    await supabase.from("leads").delete().eq("id", id);
+    await apiDeleteLead(id);
     setLeads((prev) => prev.filter((l) => l.id !== id));
   }
 
@@ -215,8 +228,8 @@ export default function CRMPage() {
     }));
     const CHUNK = 50;
     for (let i = 0; i < batch.length; i += CHUNK) {
-      const { error } = await supabase.from("leads").insert(batch.slice(i, i + CHUNK));
-      if (error) { alert(error.message); break; }
+      const { error } = await apiInsertLeads(batch.slice(i, i + CHUNK));
+      if (error) { alert(error); break; }
     }
     setImporting(false);
     setShowImport(false);
@@ -264,8 +277,42 @@ export default function CRMPage() {
             </a>
             <span style={{ color: "var(--hair-strong)", fontSize: 20, fontWeight: 200 }}>|</span>
             <span style={{ color: "var(--ink-dim)", fontSize: 15, fontWeight: 500 }}>CRM</span>
+            <div style={{ display: "flex", padding: 3, borderRadius: 10, background: "rgba(255,255,255,0.04)", border: "1px solid var(--hair)", gap: 2 }}>
+              {([["leads", "Leads"], ["review", "Review"], ["v2", "v2"]] as const).map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => setView(key)}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: 7,
+                    padding: "6px 14px", borderRadius: 8, border: 0, fontSize: 13, fontWeight: 600, cursor: "pointer",
+                    color: view === key ? "#fff" : "var(--ink-dim)",
+                    background: view === key ? "linear-gradient(180deg,#3b82f6,#2563eb)" : "transparent",
+                  }}
+                >
+                  {label}
+                  {key === "review" && counts.needs_review > 0 && (
+                    <span style={{
+                      display: "inline-flex", alignItems: "center", justifyContent: "center",
+                      minWidth: 18, height: 18, padding: "0 5px", borderRadius: 999,
+                      fontSize: 10, fontWeight: 700,
+                      color: view === key ? "#fff" : "#f472b6",
+                      background: view === key ? "rgba(255,255,255,0.25)" : "rgba(244,114,182,0.14)",
+                    }}>
+                      {counts.needs_review}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
-          <div style={{ display: "flex", gap: 10 }}>
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <a
+              href="/crm/seo"
+              style={{ fontSize: 13, fontWeight: 600, color: "var(--ink-dim)", padding: "8px 4px", textDecoration: "none" }}
+            >
+              SEO Clients →
+            </a>
+            {view === "leads" && <>
             <button
               onClick={() => setShowImport(true)}
               style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 18px", borderRadius: 10, border: "1px solid rgba(96,165,250,0.3)", background: "rgba(59,130,246,0.08)", color: "var(--accent-2)", fontWeight: 600, fontSize: 14, cursor: "pointer" }}
@@ -280,9 +327,23 @@ export default function CRMPage() {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14" /></svg>
               Add Lead
             </button>
+            </>}
           </div>
         </div>
 
+        {view === "v2" ? (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, padding: "120px 20px", textAlign: "center" }}>
+            <div style={{ fontSize: 16, fontWeight: 600, color: "var(--ink-dim)" }}>Dashboard v2</div>
+            <div style={{ fontSize: 14, color: "var(--ink-faint)", maxWidth: 380 }}>
+              This view is reserved for the next dashboard design. Switch back to <strong>Leads</strong> to keep using the CRM.
+            </div>
+          </div>
+        ) : view === "review" ? (
+          <div style={{ marginTop: 28 }}>
+            <ReviewPanel />
+          </div>
+        ) : (
+        <>
         {/* ── Stat pills ── */}
         <div style={{ display: "flex", gap: 12, margin: "28px 0", flexWrap: "wrap" }}>
           {[{ key: "all" as const, label: "All leads", count: leads.length, color: "var(--accent-2)", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)" },
@@ -528,6 +589,8 @@ export default function CRMPage() {
             <pre style={{ background: "rgba(0,0,0,0.4)", borderRadius: 10, padding: "16px 18px", overflowX: "auto", color: "#93c5fd", fontSize: 12, lineHeight: 1.7, margin: 0 }}>{SQL_SETUP}</pre>
           </div>
         )}
+        </>
+        )}
       </div>
 
       {/* ── Add lead modal ── */}
@@ -710,7 +773,10 @@ alter table public.leads
   add column if not exists outreach_sent_at date,
   add column if not exists outreach_replied boolean default false;
 
--- Allow full access via the anon key (internal CRM tool)
+-- RLS: deny the public anon key entirely. The dashboard no longer talks to
+-- Supabase from the browser — it goes through /api/admin/leads (service-role
+-- key, server-side, gated by admin login). Enabling RLS with no policy for
+-- anon/authenticated denies them by default; service_role bypasses RLS
+-- regardless. See supabase/migrations/0005_lock_down_leads_rls.sql.
 alter table public.leads enable row level security;
-drop policy if exists "crm_all" on public.leads;
-create policy "crm_all" on public.leads for all using (true) with check (true);`;
+drop policy if exists "crm_all" on public.leads;`;
