@@ -7,7 +7,7 @@ const NOTIFY_TO = "herofthenation@gmail.com"
 const FROM = "Receptifi Leads <receptifi.ai@gmail.com>"
 
 export async function POST(req: Request) {
-  const { name, email, phone, address, problem } = await req.json()
+  const { name, email, phone, address, problem, source } = await req.json()
 
   if (!name || !email) {
     return NextResponse.json({ error: "Name and email are required." }, { status: 400 })
@@ -20,6 +20,7 @@ export async function POST(req: Request) {
     phone: phone ?? null,
     address: address ?? null,
     notes: problem ?? null,
+    source: source ?? null,
     status: "warm",
   })
 
@@ -61,6 +62,11 @@ export async function POST(req: Request) {
           <tr>
             <td style="padding:14px 0;color:#64748b;vertical-align:top">Challenge</td>
             <td style="padding:14px 0;color:#0f172a;line-height:1.6">${problem}</td>
+          </tr>` : ""}
+          ${source ? `
+          <tr>
+            <td style="padding:10px 0;color:#64748b">Heard about us via</td>
+            <td style="padding:10px 0;color:#0f172a;font-weight:500">${source}</td>
           </tr>` : ""}
         </table>
         <div style="margin-top:28px">

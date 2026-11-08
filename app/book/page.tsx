@@ -17,6 +17,7 @@ export default function BookPage() {
   const [phone, setPhone] = useState("")
   const [address, setAddress] = useState("")
   const [challenges, setChallenges] = useState<string[]>([])
+  const [source, setSource] = useState("")
   const [loading, setLoading] = useState(false)
   const [showCalendly, setShowCalendly] = useState(false)
 
@@ -48,6 +49,7 @@ export default function BookPage() {
           phone,
           address,
           problem: challenges.join(", "),
+          source: source || null,
         }),
       })
     } catch {
@@ -203,6 +205,26 @@ export default function BookPage() {
                   )
                 })}
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="source" className="block font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                How did you hear about us?
+              </label>
+              <select
+                id="source"
+                value={source}
+                onChange={(e) => setSource(e.target.value)}
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
+              >
+                <option value="">Select one (optional)</option>
+                <option value="google_search">Google Search</option>
+                <option value="google_ads">Google Ads</option>
+                <option value="ai_assistant">ChatGPT / AI assistant</option>
+                <option value="social_media">Social Media</option>
+                <option value="referral">Referral / Word of mouth</option>
+                <option value="other">Other</option>
+              </select>
             </div>
 
             <button

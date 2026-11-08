@@ -1,5 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { Plus_Jakarta_Sans, Geist_Mono, Playfair_Display, Sora } from 'next/font/google'
 import './globals.css'
 import { ChatLoader } from '@/components/chat-loader'
@@ -102,6 +103,22 @@ export default function RootLayout({
         {children}
         <ChatLoader />
         {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-7TWE8N52B0"
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-7TWE8N52B0');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   )
