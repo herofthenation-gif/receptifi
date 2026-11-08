@@ -2,53 +2,73 @@ import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
 import { HoursNote } from "@/components/hours-note"
-import { MissedCallCalculator } from "@/components/missed-call-calculator"
-import { ArrowRight, Phone, Globe, LayoutDashboard } from "lucide-react"
+import { ArrowRight, Search, MapPin, Megaphone, Share2, Sparkles } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Coaching | Receptifi",
-  description: "Hands-on coaching to build your own AI-powered growth systems: phone coverage, website, reviews, lead tracking, and SEO. $700/hour.",
+  description: "Hands-on coaching to run your own marketing: General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO. $700/hour.",
 }
 
 const modules = [
   {
-    icon: <Phone className="size-6 text-primary" />,
-    tag: "Phone Coverage",
-    title: "How to stop losing jobs to voicemail",
+    icon: <Search className="size-6 text-primary" />,
+    tag: "General SEO",
+    title: "How to rank higher without hiring an agency full-time",
     bullets: [
-      "What live-answering and AI-answering options actually exist, and what they cost",
-      "How to route after-hours and overflow calls without hiring a receptionist",
-      "How to qualify and book a caller before you ever pick up the phone",
-      "What to look for so you don't get locked into an enterprise contract",
+      "What actually moves organic rankings versus what's a waste of time",
+      "How to structure your site and content around what customers search, not what you want to say",
+      "How to build backlinks that are worth having, not just more of them",
+      "How to track ranking movement so you know it's working before you've spent a fortune",
     ],
-    highlight: "80% of callers who reach voicemail will not call back. We show you how to close that gap yourself, with tools sized for your business.",
-    calculator: true,
+    highlight: "Most small business sites rank for their own name and nothing else. We show you how to build for the searches that actually bring in customers.",
   },
   {
-    icon: <Globe className="size-6 text-primary" />,
-    tag: "Website",
-    title: "How to build a site that actually books appointments",
+    icon: <MapPin className="size-6 text-primary" />,
+    tag: "Local SEO",
+    title: "How to win the map pack for searches near you",
     bullets: [
-      "What makes a site convert versus just look good",
-      "The handful of pages and CTAs that do most of the work",
-      "How to set up tracking so you know where leads actually come from",
-      "What to build yourself versus when it's worth paying someone",
+      "How to fully build out your Google Business Profile, not just the basics",
+      "How to get a steady stream of reviews without begging for them",
+      "Why mismatched listings across directories quietly hurt your ranking, and how to fix it",
+      "What to check weekly so you know where you actually stand",
     ],
-    highlight: "The average small business website converts less than 3% of visitors. We walk you through what a booking-focused rebuild actually requires.",
-    calculator: false,
+    highlight: "Over 90% of local searches never scroll past the map pack. We show you exactly what it takes to get into it.",
   },
   {
-    icon: <LayoutDashboard className="size-6 text-primary" />,
-    tag: "Lead Tracking",
-    title: "How to build a simple system so no lead goes cold",
+    icon: <Megaphone className="size-6 text-primary" />,
+    tag: "Google Ads",
+    title: "How to stop wasting ad spend on clicks that never call",
     bullets: [
-      "How to capture every call, form, and inquiry in one place without expensive CRM software",
-      "How to set up automatic follow-up so you're not relying on memory",
-      "What to track so you actually know where your leads come from",
-      "How to build this with tools you likely already have access to",
+      "How to set up campaigns that target the searches actually worth paying for",
+      "Why sending clicks to your homepage is costing you money, and what to send them to instead",
+      "How to set up call-only extensions and conversion tracking correctly",
+      "What budget actually makes sense before you scale up",
     ],
-    highlight: "It takes an average of 5 follow-up attempts to close a new customer. Most businesses follow up once. We show you how to automate the rest.",
-    calculator: false,
+    highlight: "Most local businesses waste half their Google Ads budget on the wrong clicks. We show you where it's leaking.",
+  },
+  {
+    icon: <Share2 className="size-6 text-primary" />,
+    tag: "Meta Ads",
+    title: "How to build ads that actually stop the scroll",
+    bullets: [
+      "What creative actually performs versus what just looks nice",
+      "How to set up targeting so you're not paying to reach the wrong people",
+      "How to keep your page looking active so an ad click doesn't land on a dead profile",
+      "What to test first so you're not guessing with your budget",
+    ],
+    highlight: "Facebook and Instagram ads live or die in the first half-second. We show you the changes that actually move performance.",
+  },
+  {
+    icon: <Sparkles className="size-6 text-primary" />,
+    tag: "AI SEO",
+    title: "How to get recommended when someone asks ChatGPT instead of Google",
+    bullets: [
+      "How to check what ChatGPT, Gemini, and Perplexity already say about you and your competitors",
+      "What signals these tools actually pull from, and why it overlaps with your local SEO",
+      "How to publish content that gets cited instead of ignored",
+      "How to track whether you're showing up over time, not just once",
+    ],
+    highlight: "A growing share of customers are asking AI before they ever open Google. We show you how to make sure it names you.",
   },
 ]
 
@@ -109,7 +129,7 @@ export default function CoachingPage() {
               What We Teach
             </span>
             <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              The same five things we'd build for you, except you build them.
+              The same five channels we'd run for you, except you run them.
             </h2>
           </div>
 
@@ -147,7 +167,6 @@ export default function CoachingPage() {
                         {mod.highlight}
                       </p>
                     </div>
-                    {mod.calculator && <MissedCallCalculator />}
                   </div>
                 </div>
               </article>

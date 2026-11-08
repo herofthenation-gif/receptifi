@@ -27,7 +27,7 @@ const steps = [
   {
     icon: Hammer,
     title: "We fix it in priority order",
-    body: "Phone coverage, site, reviews, follow-up, and SEO (that last one's in every plan, no exceptions), built in the order that stops the bleeding fastest for your specific business. From there it's your call: we build and run it for you, or we teach you to build it yourself.",
+    body: "General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO (that last one's in every plan, no exceptions), run in the order that gets you the most calls fastest for your specific business. From there it's your call: we run it for you, or we teach you to run it yourself.",
   },
 ]
 

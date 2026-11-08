@@ -44,14 +44,36 @@ const TIP_TOPICS: Record<string, TipTopic> = {
     ],
   },
   seo_tips: {
-    subject: "Your free SEO tips",
+    subject: "Your free General SEO tips",
     heading: "3 ways to rank higher this month",
     intro:
-      "Over 90% of local searches never scroll past the first screen. These are the highest-leverage, lowest-cost moves to get in front of that screen.",
+      "Ranking is decided by what's on your site, not just your listings. These are the highest-leverage, lowest-cost moves to fix first.",
+    tips: [
+      "Build one page per service you offer, not one generic services page trying to rank for all of them at once. Google can't rank one page for everything equally.",
+      "Write content that answers the exact question a customer is searching, not just a description of your company. Pages that answer a question outrank pages that only describe a business.",
+      "Get a handful of backlinks from sites in your industry or area, supplier directories, associations, guest posts. Still one of the strongest ranking signals there is.",
+    ],
+  },
+  local_seo_tips: {
+    subject: "Your free Local SEO tips",
+    heading: "3 ways to win the map pack this month",
+    intro:
+      "Over 90% of local searches never scroll past the first screen, and the map pack sits right at the top of it. These are the fastest, lowest-cost moves to get into it.",
     tips: [
       "Fully fill out your Google Business Profile, hours, every relevant category, and real job photos. It's free and most competitors only half do it.",
-      "Ask every satisfied customer for a Google review before they leave the job. Recent reviews beat sheer volume of old ones for ranking.",
-      "Build one page per service-and-city combination (\"AC repair in Riverside\"), not one generic services page trying to rank for everything at once.",
+      "Ask every satisfied customer for a Google review before they leave the job. Recent reviews beat sheer volume of old ones for local ranking.",
+      "Make sure your business name, address, and phone number match exactly across every directory you're listed on. A mismatch quietly hurts your map pack ranking.",
+    ],
+  },
+  ai_seo_tips: {
+    subject: "Your free AI SEO tips",
+    heading: "3 ways to get recommended by AI, not just Google",
+    intro:
+      "ChatGPT, Gemini, and Perplexity are already answering \"who should I call for this\" for a growing share of your customers. Here's how to make sure they're naming you.",
+    tips: [
+      "Ask ChatGPT and Perplexity who they'd recommend in your category and city right now. If you're not in the answer, you know exactly what you're fixing.",
+      "Keep your Google Business Profile and review count strong. AI answer engines pull heavily from the same local signals Google ranking does.",
+      "Publish clear, specific content about exactly what you do and where you do it. AI tools cite the clearest source they find, not the most generic one.",
     ],
   },
   google_tips: {

@@ -2,7 +2,6 @@ import { Navbar } from "@/components/navbar"
 import { HomepageShell } from "@/components/homepage-shell"
 import { Marquee } from "@/components/marquee"
 import { MarketingServices } from "@/components/marketing-services"
-import { ReceptifiAi } from "@/components/receptifi-ai"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function Page() {
@@ -13,10 +12,8 @@ export default function Page() {
       <HomepageShell />
       {/* Marquee ticker */}
       <Marquee />
-      {/* Marketing Services: SEO, Google, Meta, each with a mini email opt-in */}
+      {/* What We Do: General SEO, Local SEO, Google Ads, Meta Ads, AI SEO, each with a mini email opt-in */}
       <MarketingServices />
-      {/* Receptifi AI: Aria, website chat, follow-up, each with a mini email opt-in */}
-      <ReceptifiAi />
       {/* CTA Footer */}
       <SiteFooter />
     </main>

@@ -11,8 +11,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const VALID_SOURCES = new Set([
   "footer",
   "seo_tips",
+  "local_seo_tips",
   "google_tips",
   "meta_tips",
+  "ai_seo_tips",
   "aria_tips",
   "website_tips",
   "crm_tips",
