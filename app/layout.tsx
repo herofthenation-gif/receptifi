@@ -29,9 +29,9 @@ const sora = Sora({
 })
 
 export const metadata: Metadata = {
-  title: 'Best AI Consultant in the Inland Empire | Receptifi',
+  title: 'Hardest-Working Marketing Agency for Local Service Businesses | Receptifi',
   description:
-    'Looking for the best AI consultant in the Inland Empire? Receptifi helps local service businesses directly attract and retain more clients with tailored systems that eliminate bottlenecks. Free audit available.',
+    'Marketing agency for local service businesses in the Inland Empire: SEO, Google Ads, Meta Ads, and AI SEO, run for you or taught to you. Free audit available.',
   icons: {
     icon: [
       {
@@ -63,7 +63,7 @@ const jsonLd = {
   '@type': 'ProfessionalService',
   name: 'Receptifi',
   description:
-    "AI consulting practice for local service businesses. A free audit finds what's costing you customers, then we build and run the fix or teach you to.",
+    "Receptifi is a marketing agency and AI consulting practice for local service businesses in the Inland Empire. We run General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO campaigns, or teach your team to run them, starting with a free audit of what's actually costing you customers.",
   url: 'https://receptifi.net',
   telephone: '+1-951-625-1893',
   address: {
