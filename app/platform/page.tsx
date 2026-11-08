@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   description: "Done-for-you marketing for local service businesses. We find which channel, General SEO, Local SEO, Google Ads, Meta Ads, or AI SEO, is actually costing you customers, then run it.",
 }
 
+const SERVICE_SLUGS: Record<string, string> = {
+  "General SEO": "/general-seo",
+  "Local SEO": "/local-seo",
+  "Google Ads": "/google-ads",
+  "Meta Ads": "/meta-ads",
+  "AI SEO": "/ai-seo",
+}
+
 const layers = [
   {
     number: "01",
@@ -119,6 +127,29 @@ export default function PlatformPage() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="pb-20 sm:pb-28">
+        <div className="mx-auto max-w-2xl px-5 sm:px-8">
+          <div className="glass-card rounded-[2rem] p-8 text-center sm:p-10">
+            <p className="font-serif text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+              3,000<span className="text-2xl font-medium text-muted-foreground">/month</span>
+            </p>
+            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+              Covers whichever of the five channels your free audit shows are actually worth running, managed as one plan.
+            </p>
+            <a
+              href="/book"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex h-13 items-center gap-2 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
+            >
+              Book a Free Audit
+              <ArrowRight className="size-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Individual services */}
       <section className="bg-section-alt py-24 sm:py-36">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -161,6 +192,15 @@ export default function PlatformPage() {
                     <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
                       {layer.body}
                     </p>
+                    {SERVICE_SLUGS[layer.tag] && (
+                      <a
+                        href={SERVICE_SLUGS[layer.tag]}
+                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                      >
+                        More on {layer.tag}
+                        <ArrowRight className="size-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
                 <div className="rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center">

@@ -1,12 +1,19 @@
 import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
-import { HoursNote } from "@/components/hours-note"
 import { ArrowRight, Search, MapPin, Megaphone, Share2, Sparkles } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Coaching | Receptifi",
-  description: "Hands-on coaching to run your own marketing: General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO. $700/hour.",
+  description: "Hands-on coaching to run your own marketing: General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO. $1,500/month.",
+}
+
+const SERVICE_SLUGS: Record<string, string> = {
+  "General SEO": "/general-seo",
+  "Local SEO": "/local-seo",
+  "Google Ads": "/google-ads",
+  "Meta Ads": "/meta-ads",
+  "AI SEO": "/ai-seo",
 }
 
 const modules = [
@@ -99,14 +106,10 @@ export default function CoachingPage() {
         <div className="mx-auto max-w-2xl px-5 sm:px-8">
           <div className="glass-card rounded-[2rem] p-8 text-center sm:p-10">
             <p className="font-serif text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
-              700<span className="text-2xl font-medium text-muted-foreground">/hour</span>
+              1,500<span className="text-2xl font-medium text-muted-foreground">/month</span>
             </p>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              Tell us what you're trying to build and we scope the session around that. Most builds run about{" "}
-              <HoursNote note="Depending on skill level and experience with AI, coaching sessions can run for as little as 30 minutes. This is for those with experience — not every build takes 2 hours.">
-                two hours
-              </HoursNote>
-              , roughly 1,400 total.
+              Ongoing access to an AI consultant while you build your own marketing and ranking systems. Book sessions as you need them, scoped around whatever you&apos;re working on that month.
             </p>
             <a
               href="/book"
@@ -167,6 +170,15 @@ export default function CoachingPage() {
                         {mod.highlight}
                       </p>
                     </div>
+                    {SERVICE_SLUGS[mod.tag] && (
+                      <a
+                        href={SERVICE_SLUGS[mod.tag]}
+                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                      >
+                        More on {mod.tag}
+                        <ArrowRight className="size-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </article>
