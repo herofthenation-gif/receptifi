@@ -52,6 +52,10 @@ export default function BookPage() {
           source: source || null,
         }),
       })
+
+      window.gtag?.("event", "generate_lead", {
+        lead_source: source || "not_specified",
+      })
     } catch {
       // Non-blocking — still show the calendar even if save fails
     }
