@@ -130,7 +130,7 @@ export function buildTipEmail(source: string): { from: string; replyTo: string; 
   </ol>
 
   <p style="font-size:16px;color:#94a3b8;line-height:1.7;margin:0 0 24px">
-    Want us to just handle this for you, guaranteed results before you pay? Grab 20 minutes and we'll show you exactly what's costing you jobs right now.
+    Want us to just handle this for you, guaranteed results before you pay? Grab 20 minutes and we'll show you exactly what your bottlenecks are right now.
   </p>
 
   <a href="${CALENDLY_URL}" style="display:inline-block;padding:14px 28px;border-radius:10px;background:linear-gradient(135deg,#3b82f6,#0ea5e9);color:#fff;font-weight:600;font-size:15px;text-decoration:none;margin-bottom:32px">

@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
-import { ArrowRight, Search, TrendingUp, Users } from "lucide-react"
+import { SubscribeForm } from "@/components/subscribe-form"
+import { ArrowRight, Search, Users } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "General SEO for Local Service Businesses in the Inland Empire | Receptifi",
@@ -23,8 +24,8 @@ const faqs = [
     a: "No. Nobody can honestly guarantee a specific Google ranking. What we can guarantee is that we'll show you exactly what's moving and what isn't.",
   },
   {
-    q: "Is General SEO included if I'm on the Systems plan?",
-    a: "It's one of the five channels checked in every free audit. If it's a channel worth running for your business, it gets built into your Systems plan.",
+    q: "Is General SEO covered in Coaching?",
+    a: "It's one of the five channels checked in every free audit, and if it's worth running for your business, it's one of the things we teach you to build.",
   },
   {
     q: "What if I want to learn to do this myself?",
@@ -64,16 +65,8 @@ export default function GeneralSeoPage() {
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
             Most small business sites rank for their own name and nothing else. General SEO means building the on-page structure, content, and site authority Google rewards for the searches that actually bring in customers, tracked over time so you see real movement.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="/book"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-14 items-center gap-2 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
-            >
-              Book a Free Audit
-              <ArrowRight className="size-4" />
-            </a>
+          <div className="mt-10 flex justify-center">
+            <SubscribeForm source="audit_cta" buttonLabel="Sign Up" size="lg" />
           </div>
         </div>
       </section>
@@ -111,42 +104,23 @@ export default function GeneralSeoPage() {
             Built for Inland Empire service businesses.
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-            Receptifi works with local service businesses, HVAC, plumbing, electrical, and others, across Riverside, San Bernardino, Moreno Valley, Ontario, Rancho Cucamonga, and Corona. Every engagement starts with a free audit of your current rankings, so you see exactly what&apos;s costing you customers before you spend anything.
+            Receptifi works with local service businesses, HVAC, plumbing, electrical, and others, across Riverside, San Bernardino, Moreno Valley, Ontario, Rancho Cucamonga, and Corona. Every engagement starts with a free audit of your current rankings, so you see exactly what your bottlenecks are before you spend anything.
           </p>
         </div>
       </section>
 
-      {/* Two paths */}
+      {/* Coaching plan */}
       <section className="bg-section-alt py-24 sm:py-36">
         <div className="mx-auto max-w-5xl px-5 sm:px-8">
           <div className="mx-auto mb-14 max-w-2xl text-center">
             <span className="mb-3 block font-mono text-xs uppercase tracking-[0.18em] text-primary">
-              Two Ways To Work With Us
+              How To Work With Us
             </span>
             <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Done for you, or taught to you.
+              Hands-on coaching, taught to you.
             </h2>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2">
-            <div className="glass-card flex flex-col rounded-[2rem] p-8 sm:p-10">
-              <TrendingUp className="size-6 text-primary" />
-              <h3 className="mt-4 font-serif text-2xl font-bold tracking-tight text-foreground">
-                Systems
-              </h3>
-              <p className="mt-3 flex-1 text-base leading-relaxed text-muted-foreground">
-                If the audit shows General SEO is worth running for you, it gets built into your plan, site fixes, content, and ranking tracked weekly.
-              </p>
-              <p className="mt-6 font-serif text-3xl font-bold text-foreground">
-                3,000<span className="text-base font-medium text-muted-foreground">/month</span>
-              </p>
-              <a
-                href="/platform"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-              >
-                See the Systems plan
-                <ArrowRight className="size-4" />
-              </a>
-            </div>
+          <div className="mx-auto max-w-md">
             <div className="glass-card flex flex-col rounded-[2rem] p-8 sm:p-10">
               <Users className="size-6 text-primary" />
               <h3 className="mt-4 font-serif text-2xl font-bold tracking-tight text-foreground">
@@ -198,21 +172,13 @@ export default function GeneralSeoPage() {
       <section className="bg-section-alt py-24 sm:py-36">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 text-center">
           <h2 className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            See what&apos;s actually costing you rankings.
+            See what&apos;s actually bottlenecking your rankings.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Book a free audit and we&apos;ll show you the gap, in writing, before you spend a dollar.
+            Sign up and we&apos;ll show you the gap, in writing, before you spend a dollar.
           </p>
-          <div className="mt-10">
-            <a
-              href="/book"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-14 items-center gap-2 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
-            >
-              Book a Free Audit
-              <ArrowRight className="size-4" />
-            </a>
+          <div className="mt-10 flex justify-center">
+            <SubscribeForm source="audit_cta" buttonLabel="Sign Up" size="lg" />
           </div>
           <p className="mt-10 text-xs text-muted-foreground">
             Written by Karmello Robinson, founder of Receptifi. Last reviewed November 2026.

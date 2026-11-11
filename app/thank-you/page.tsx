@@ -42,7 +42,7 @@ export default function ThankYouPage() {
               </li>
               <li className="flex gap-3">
                 <span className="text-primary">2.</span>
-                <span>On the call, we walk through what's costing you leads and what we'd fix first.</span>
+                <span>On the call, we walk through your bottlenecks and what we'd fix first.</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-primary">3.</span>

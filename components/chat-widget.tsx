@@ -38,7 +38,7 @@ export function ChatWidget() {
     {
       role: "assistant",
       content:
-        "Hi! I'm the Receptifi assistant. We're an AI-driven consulting practice — free audit call, then we fix whatever's actually costing you customers. Ask me anything.",
+        "Hi! I'm the Receptifi assistant. We're an AI-driven consulting practice, free audit call, then we eliminate whatever's actually bottlenecking your business. Ask me anything.",
     },
   ])
   const bottomRef = useRef<HTMLDivElement>(null)

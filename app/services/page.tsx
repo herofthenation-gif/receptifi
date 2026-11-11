@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { SiteFooter } from "@/components/site-footer"
+import { SubscribeForm } from "@/components/subscribe-form"
 import { ArrowRight, Search, MapPin, Megaphone, Share2, Sparkles } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -95,7 +96,7 @@ export default function CoachingPage() {
               Learn to build it yourself.
             </h1>
             <p className="mt-7 text-pretty text-lg leading-relaxed text-muted-foreground">
-              Not every owner wants done-for-you. Some want an AI consultant in the room while they build their own marketing and ranking systems, with their own team, on their own timeline. That's what coaching is for.
+              An AI consultant in the room while you build your own marketing and ranking systems, with your own team, on your own timeline.
             </p>
           </div>
         </div>
@@ -111,15 +112,9 @@ export default function CoachingPage() {
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
               Ongoing access to an AI consultant while you build your own marketing and ranking systems. Book sessions as you need them, scoped around whatever you&apos;re working on that month.
             </p>
-            <a
-              href="/book"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex h-13 items-center gap-2 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.02] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
-            >
-              Book a Coaching Call
-              <ArrowRight className="size-4" />
-            </a>
+            <div className="mt-8 flex justify-center">
+              <SubscribeForm source="audit_cta" buttonLabel="Sign Up" size="lg" />
+            </div>
           </div>
         </div>
       </section>
@@ -183,35 +178,6 @@ export default function CoachingPage() {
                 </div>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 sm:py-36">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 text-center">
-          <h2 className="font-serif text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Would rather we just build it?
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            That's the other path. Same diagnosis, we build and run the fix for you instead.
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="/book"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-14 items-center gap-2 rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
-            >
-              Book a Coaching Call
-              <ArrowRight className="size-4" />
-            </a>
-            <a
-              href="/platform"
-              className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground"
-            >
-              Or see the done-for-you Systems path
-            </a>
           </div>
         </div>
       </section>

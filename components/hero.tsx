@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { SubscribeForm } from "@/components/subscribe-form"
 
 /* ─── Component ──────────────────────────────────────────────── */
 export function Hero() {
@@ -39,16 +38,8 @@ export function Hero() {
           </h1>
 
           {/* ── CTA ── */}
-          <div className="mt-14">
-            <Button
-              render={<a href="/book" />}
-              nativeButton={false}
-              size="lg"
-              className="group h-14 rounded-full bg-[linear-gradient(115deg,var(--color-gold-champagne),var(--color-gold)_55%,var(--color-gold-bronze))] px-10 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98]"
-            >
-              Book a Free Audit
-              <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-0.5" />
-            </Button>
+          <div className="mt-14 w-full max-w-lg">
+            <SubscribeForm source="audit_cta" buttonLabel="Sign Up" size="lg" />
           </div>
 
         </div>

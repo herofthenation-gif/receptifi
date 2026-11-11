@@ -6,9 +6,7 @@ import { Menu, X } from "lucide-react"
 import { Logo } from "@/components/logo"
 
 const links = [
-  { label: "Systems", href: "/platform" },
   { label: "Coaching", href: "/services" },
-  { label: "How We Work", href: "/case-studies" },
 ]
 
 export function Navbar({ overDark = false }: { overDark?: boolean }) {
@@ -52,11 +50,11 @@ export function Navbar({ overDark = false }: { overDark?: boolean }) {
 
         <div className="hidden md:block">
           <Button
-            render={<a href="/book" />}
+            render={<a href="#signup" />}
             nativeButton={false}
             className="rounded-full bg-primary px-5 font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary/90"
           >
-            Book a Call
+            Sign Up
           </Button>
         </div>
 
@@ -84,11 +82,11 @@ export function Navbar({ overDark = false }: { overDark?: boolean }) {
               </a>
             ))}
             <Button
-              render={<a href="/book" onClick={() => setOpen(false)} />}
+              render={<a href="#signup" onClick={() => setOpen(false)} />}
               nativeButton={false}
               className="mt-3 w-full rounded-full bg-primary font-semibold text-primary-foreground"
             >
-              Book a Call
+              Sign Up
             </Button>
           </div>
         </div>

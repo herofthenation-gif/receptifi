@@ -4,6 +4,7 @@ import Script from 'next/script'
 import { Plus_Jakarta_Sans, Geist_Mono, Playfair_Display, Sora } from 'next/font/google'
 import './globals.css'
 import { ChatLoader } from '@/components/chat-loader'
+import { AuditPopup } from '@/components/audit-popup'
 
 const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
@@ -63,7 +64,7 @@ const jsonLd = {
   '@type': 'ProfessionalService',
   name: 'Receptifi',
   description:
-    "Receptifi is a marketing agency and AI consulting practice for local service businesses in the Inland Empire. We run General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO campaigns, or teach your team to run them, starting with a free audit of what's actually costing you customers.",
+    "Receptifi is a marketing agency and AI consulting practice for local service businesses in the Inland Empire. We run General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO campaigns, or teach your team to run them, starting with a free audit that finds your bottlenecks. We eliminate bottlenecks.",
   url: 'https://receptifi.net',
   telephone: '+1-951-625-1893',
   address: {
@@ -101,6 +102,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
         {children}
+        <AuditPopup />
         <ChatLoader />
         {process.env.NODE_ENV === 'production' && <Analytics />}
         {process.env.NODE_ENV === 'production' && (

@@ -1,41 +1,27 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { SubscribeForm } from "@/components/subscribe-form"
 
 export function SiteFooter() {
   return (
-    <footer id="book" className="dark scroll-mt-24 border-t border-border bg-section-alt">
+    <footer className="dark border-t border-border bg-section-alt">
       {/* Generous top padding ensures zero collision with any content above */}
       <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8 sm:pb-32 sm:pt-44">
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div id="signup" className="relative mx-auto max-w-3xl scroll-mt-24 text-center">
           <h2 className="text-balance font-serif text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Ready to fix what&rsquo;s actually costing you customers?
+            Ready to eliminate your bottlenecks?
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-pretty leading-relaxed text-muted-foreground">
-            Free audit shows you exactly what&rsquo;s broken, missed calls, a weak site, thin reviews, slow follow-up, weak SEO. Then you choose: we build and run the fix, or we teach you how.
+            Sign up and we&rsquo;ll send you exactly what&rsquo;s broken, missed calls, a weak site, thin reviews, slow follow-up, weak SEO, and what fixing it would mean for your business.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button
-              render={<a href="/book" />}
-              nativeButton={false}
-              size="lg"
-              className="group h-14 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-soft-lg transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]"
-            >
-              Book a Free Audit
-              <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-0.5" />
-            </Button>
-            <Button
-              render={<a href="/services" />}
-              nativeButton={false}
-              size="lg"
-              variant="outline"
-              className="group h-14 rounded-full border-2 border-primary/25 bg-transparent px-8 text-base font-semibold text-foreground shadow-none transition-all duration-200 hover:scale-[1.03] hover:border-primary hover:bg-primary/5"
-            >
-              Book Coaching
-              <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-0.5" />
-            </Button>
+          <div className="mt-10 flex justify-center">
+            <SubscribeForm source="audit_cta" buttonLabel="Sign Up" size="lg" />
           </div>
+          <a
+            href="/services"
+            className="mt-6 inline-block text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground"
+          >
+            Or see the do-it-yourself coaching path
+          </a>
         </div>
       </div>
 

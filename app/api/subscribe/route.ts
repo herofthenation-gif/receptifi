@@ -10,6 +10,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 // a subscriber is actually interested in (e.g. for follow-up email content).
 const VALID_SOURCES = new Set([
   "footer",
+  "audit_cta",
   "seo_tips",
   "local_seo_tips",
   "google_tips",
