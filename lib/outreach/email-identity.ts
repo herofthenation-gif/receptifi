@@ -17,7 +17,7 @@ export const ROLE_INBOX_LOCAL_PARTS = new Set([
   "do-not-reply", "orders", "order", "shop", "store", "welcome", "concierge",
   "reservations", "reservation", "service", "services", "intake",
   "referrals", "referral", "scheduling", "schedule", "desk", "manager",
-  "management", "owner", "staffing",
+  "management", "owner", "staffing", "business", "company",
 ]);
 
 const VOWEL_RE = /[aeiouy]/;
