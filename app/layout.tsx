@@ -29,7 +29,7 @@ const sora = Sora({
 })
 
 export const metadata: Metadata = {
-  title: 'Hardest-Working Marketing Agency for Local Service Businesses | Receptifi',
+  title: 'Hardest-Working Marketing Agency for Local Service Businesses in the Inland Empire | Receptifi',
   description:
     'Marketing agency for local service businesses in the Inland Empire: SEO, Google Ads, Meta Ads, and AI SEO, run for you or taught to you. Free audit available.',
   icons: {

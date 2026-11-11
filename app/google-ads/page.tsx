@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, Megaphone, TrendingUp, Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Google Ads for Local Service Businesses | Receptifi",
+  title: "Google Ads for Local Service Businesses in the Inland Empire | Receptifi",
   description:
     "Google Ads management for local service businesses in the Inland Empire. Campaigns sent to pages built for the exact search, not your homepage, with call tracking that works.",
 }

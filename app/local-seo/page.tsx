@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, MapPin, TrendingUp, Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Local SEO & Map Pack for Local Service Businesses | Receptifi",
+  title: "Local SEO & Map Pack for Local Service Businesses in the Inland Empire | Receptifi",
   description:
     "Win the Google map pack in the Inland Empire. We fully build out your Google Business Profile and review process so nearby customers find you first.",
 }

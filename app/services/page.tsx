@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, Search, MapPin, Megaphone, Share2, Sparkles } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Coaching | Receptifi",
+  title: "Marketing Coaching for Local Service Businesses in the Inland Empire | Receptifi",
   description: "Hands-on coaching to run your own marketing: General SEO, Local SEO, Google Ads, Meta Ads, and AI SEO. $1,500/month.",
 }
 

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>General SEO Audit, Receptifi, 2026-11-08</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #fdfcfa;
+    --card-bg: #ffffff;
+    --border: #e8e4dd;
+    --gold: #b8863a;
+    --gold-soft: #f5ead6;
+    --green: #2f7d4f;
+    --green-soft: #e3f3e9;
+    --amber: #b2720a;
+    --amber-soft: #fcefd8;
+    --coral: #c4453a;
+    --coral-soft: #fbe9e7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+  header.top { margin-bottom: 36px; }
+  .date { font-size: 14px; color: var(--muted); letter-spacing: 0.02em; }
+  h1.title { font-size: 26px; margin: 6px 0 0; line-height: 1.3; }
+  .headline-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .headline-card p.finding {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+  .status-counts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill {
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .pill.good { background: var(--green-soft); color: var(--green); }
+  .pill.partly { background: var(--gold-soft); color: var(--gold); }
+  .pill.fixing { background: var(--coral-soft); color: var(--coral); }
+  .pill.notchecked { background: #eee; color: var(--muted); }
+
+  h2.section-head {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 40px 0 16px;
+  }
+
+  .step-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    background: var(--card-bg);
+  }
+  .step-row .label { font-weight: 600; }
+  .status-tag {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .status-tag.good { background: var(--green-soft); color: var(--green); }
+  .status-tag.partly { background: var(--gold-soft); color: var(--gold); }
+  .status-tag.fixing { background: var(--coral-soft); color: var(--coral); }
+  .status-tag.notchecked { background: #eee; color: var(--muted); }
+
+  .fix-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--coral);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .fix-card .rank {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--coral);
+    margin-bottom: 6px;
+  }
+  .fix-card h3 { margin: 0 0 8px; font-size: 18px; }
+  .fix-card p { margin: 6px 0; color: var(--muted); }
+  .fix-card p.fix-label { color: var(--ink); font-weight: 600; margin-top: 10px; }
+
+  .works-card {
+    background: var(--green-soft);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 10px;
+  }
+  .works-card p { margin: 0; }
+
+  .bar-row { margin-bottom: 18px; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px; }
+  .bar-track { background: #eee; border-radius: 999px; height: 10px; overflow: hidden; }
+  .bar-fill { background: var(--gold); height: 100%; border-radius: 999px; }
+
+  details {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  details summary { font-weight: 600; cursor: pointer; }
+  details .inner { margin-top: 12px; }
+  details ul { margin: 8px 0; padding-left: 20px; }
+  details li { margin-bottom: 6px; color: var(--muted); }
+  code { background: #f1efe9; padding: 1px 6px; border-radius: 6px; font-size: 0.9em; }
+
+  .not-checked-note {
+    font-size: 14px;
+    color: var(--muted);
+    background: #f4f4f4;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="date">General SEO Audit, dated 2026-11-08</div>
+    <h1 class="title">receptifi.net</h1>
+  </header>
+
+  <div class="headline-card">
+    <p class="finding">Google has not indexed receptifi.net at all. Zero pages, confirmed two ways, despite nothing technical blocking it.</p>
+    <div class="status-counts">
+      <span class="pill good">2 good</span>
+      <span class="pill partly">1 partly there</span>
+      <span class="pill fixing">2 need fixing</span>
+      <span class="pill notchecked">3 not checked</span>
+    </div>
+  </div>
+
+  <h2 class="section-head">Status by step</h2>
+
+  <div class="step-row">
+    <span class="label">Step 1: Measurement (Search Console, GA4)</span>
+    <span class="status-tag fixing">Needs fixing</span>
+  </div>
+  <div class="step-row">
+    <span class="label">Step 2: Can Google read the site</span>
+    <span class="status-tag fixing">Needs fixing</span>
+  </div>
+  <div class="step-row">
+    <span class="label">Step 3: Money pages (title, meta, H1, FAQ, links, images, mobile, speed)</span>
+    <span class="status-tag partly">Partly there</span>
+  </div>
+  <div class="step-row">
+    <span class="label">Step 4: Content quality, swap test</span>
+    <span class="status-tag good">Good</span>
+  </div>
+  <div class="step-row">
+    <span class="label">Step 5: Backlinks vs. competitors</span>
+    <span class="status-tag notchecked">Not checked</span>
+  </div>
+
+  <h2 class="section-head">Top 5 fixes, ranked</h2>
+
+  <div class="fix-card">
+    <span class="rank">#1</span>
+    <h3>Google has indexed zero pages of receptifi.net</h3>
+    <p>Confirmed two separate ways: a <code>site:receptifi.net</code> search returns nothing at all, and a search for an exact unique phrase that only exists on the homepage title tag ("Hardest-Working Marketing Agency") returns nothing either. Nothing technical is blocking this: robots.txt has no blocking rules (it doesn't exist as a file, which isn't the same as blocking), no noindex tags were found on any real page, Googlebot's user agent gets a normal 200 response, and the sitemap at <code>/sitemap.xml</code> is valid and reachable. The most likely cause is that Google Search Console was never set up, so the sitemap was never submitted and indexing was never requested, left purely to organic discovery of a brand-new, low-authority domain with no backlinks pointing to it.</p>
+    <p class="fix-label">Fix: set up and verify Google Search Console for receptifi.net, submit the sitemap at /sitemap.xml, and use the URL Inspection tool to request indexing on the homepage and the five new service pages directly.</p>
+  </div>
+
+  <div class="fix-card">
+    <span class="rank">#2</span>
+    <h3>GA4 tracks pageviews but no real conversions</h3>
+    <p>Checked the codebase directly: the only GA4 call anywhere is the base <code>gtag('config', ...)</code> on page load. There is no event fired when someone submits the book-a-call form, the one action that actually matters. Right now there is no way to answer "did this SEO work bring in a real lead," which is exactly the failure mode this SOP's Step 1 warns about.</p>
+    <p class="fix-label">Fix: fire a GA4 event (e.g. <code>generate_lead</code>) when the /book form submits successfully, then mark it as a key event in GA4's admin panel.</p>
+  </div>
+
+  <div class="fix-card">
+    <span class="rank">#3</span>
+    <h3>No page on the site has a city in its title tag</h3>
+    <p>Checked all 5 main pages directly. None include a city name in the <code>&lt;title&gt;</code> tag, only "Inland Empire" appears, and only in 3 of 5 meta descriptions. The SOP's own title formula is BEST + keyword + city + service, and city is missing everywhere, which matters directly for local search relevance.</p>
+    <p class="fix-label">Fix: work a city or "Inland Empire" into every page title, not just the meta description.</p>
+  </div>
+
+  <div class="fix-card">
+    <span class="rank">#4</span>
+    <h3>The two highest-value pages have titles and H1s that carry no SEO signal at all</h3>
+    <p><code>/platform</code> (the $3,000/month Systems offer) has the title "Systems | Receptifi" and an H1 reading "We find the channel. We run the fix." <code>/services</code> (the $1,500/month Coaching offer) has the title "Coaching | Receptifi" and an H1 reading "Learn to build it yourself." Neither title nor H1 on either page contains a service keyword or a location. These are your two paid offers and arguably your most important pages, and right now Google has nothing to match them to a real search.</p>
+    <p class="fix-label">Fix: rewrite both titles and H1s around the actual service + city formula, the same pattern already used correctly on the newer /ai-seo and /general-seo pages.</p>
+  </div>
+
+  <div class="fix-card">
+    <span class="rank">#5</span>
+    <h3>Zero real photos anywhere on the entire site</h3>
+    <p>Checked every component for images. There is exactly one image on the whole site, the small logo icon. No team photo, no work/job photos, no before-and-afters. This SOP's swap test (Step 4) and the separate AI SEO SOP both flag real photos as a trust and specificity signal that generic competitor sites skip.</p>
+    <p class="fix-label">Fix: add a real photo of Karmello and, once there's work to show, real job photos. Not stock.</p>
+  </div>
+
+  <h2 class="section-head">What already works</h2>
+
+  <div class="works-card"><p>HTTPS and a single canonical site version. Apex and non-www both 308-redirect cleanly to <code>https://www.receptifi.net</code>, exactly the single-version setup this SOP asks for.</p></div>
+  <div class="works-card"><p>No accidental noindex tags found on any real page checked (home, platform, services, ai-seo, general-seo).</p></div>
+  <div class="works-card"><p>Sitemap.xml exists, is valid XML, and is reachable at a 200 status.</p></div>
+  <div class="works-card"><p>Viewport meta tag is correctly set for mobile.</p></div>
+  <div class="works-card"><p>Exactly one H1 per page on every page checked, no duplicate-H1 bug.</p></div>
+  <div class="works-card"><p>FAQ sections on the new pages use fully visible text, not collapsible accordions, matching the pattern this SOP says tested better.</p></div>
+  <div class="works-card"><p>GA4 is live and confirmed receiving real pageview data (just not conversion events yet, see fix #2).</p></div>
+  <div class="works-card"><p>The newest pages (/ai-seo, /general-seo, /local-seo, /google-ads, /meta-ads) already name real cities in the body copy and most meta descriptions, the gap is the title tags specifically.</p></div>
+
+  <h2 class="section-head">Numbers that matter</h2>
+
+  <div class="bar-row">
+    <div class="bar-label"><span>Pages indexed by Google</span><span>0 of ~12</span></div>
+    <div class="bar-track"><div class="bar-fill" style="width:2%"></div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label"><span>Page titles with a city name</span><span>0 of 5 checked</span></div>
+    <div class="bar-track"><div class="bar-fill" style="width:2%"></div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label"><span>Meta descriptions with a city name</span><span>3 of 5 checked</span></div>
+    <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label"><span>Real (non-logo) photos on the site</span><span>0</span></div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label"><span>GA4 key events configured</span><span>0</span></div>
+    <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+  </div>
+
+  <h2 class="section-head">Full detail by step</h2>
+
+  <details>
+    <summary>Step 1: Measurement</summary>
+    <div class="inner">
+      <ul>
+        <li>Search Console: not checked, no confirmed access or setup. This is very likely the root cause of fix #1.</li>
+        <li>GA4 key events: needs fixing, only pageview tracking fires, no conversion event. See fix #2.</li>
+        <li>Baseline with today's date: not meaningfully possible yet, GA4 was only wired in 2026-11-07, one day of data.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Step 2: Can Google read the site</summary>
+    <div class="inner">
+      <ul>
+        <li><code>site:receptifi.net</code>: 0 results. Needs fixing, see fix #1.</li>
+        <li>robots.txt: returns 404, the file doesn't exist. Not blocking anything, but also not explicitly confirming bot access either.</li>
+        <li>Noindex tags: none found on home, platform, services, ai-seo, general-seo.</li>
+        <li>HTTPS and single version: good, confirmed via redirect chain.</li>
+        <li>404 handling: not stress-tested in this pass.</li>
+        <li>JavaScript rendering: not checked with a full crawl-and-screenshot pass, out of scope for this tool.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Step 3: Money pages</summary>
+    <div class="inner">
+      <ul>
+        <li>Titles: present on all 5 checked, but none include a city. /platform and /services titles carry no keyword either.</li>
+        <li>Meta descriptions: present on all 5, 3 of 5 include "Inland Empire."</li>
+        <li>H1: exactly one per page on all 5 checked. Content quality varies, home/platform/services H1s are pure brand/tagline with no keyword or city, ai-seo/general-seo H1s are topically relevant but still lack a city.</li>
+        <li>FAQ visibility: the AI SEO SOP pages (ai-seo, general-seo, local-seo, google-ads, meta-ads) use always-visible FAQ text, not accordions. Good.</li>
+        <li>Links: nav and footer links checked, all point to real, existing routes. No broken links found.</li>
+        <li>Images: only one image site-wide (the logo), alt="" on it, which is actually correct for a decorative icon sitting next to visible brand text, not a violation.</li>
+        <li>Mobile: viewport tag correct, site is built mobile-first with Tailwind responsive classes throughout, not rendered and visually inspected on an actual device in this pass.</li>
+        <li>Speed: not checked. PageSpeed Insights API returned a quota-exceeded error on this environment's shared key. Run <code>pagespeed.web.dev</code> manually on the real domain for a number.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Step 4: Content quality</summary>
+    <div class="inner">
+      <ul>
+        <li>Swap test: mostly passes, the 5 new service pages and the two offer pages (platform/services) name Receptifi's specific pricing ($3,000/mo, $1,500/mo), the specific five channels, and specific Inland Empire cities, a generic competitor couldn't drop their name in and have it still make sense.</li>
+        <li>Gap: zero real photos anywhere, see fix #5. Photos are part of what makes content un-swappable too.</li>
+        <li>AI-detector scores: not checked, and per this SOP, correctly not a priority.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Step 5: Backlinks</summary>
+    <div class="inner">
+      <ul>
+        <li>Not checked. No backlink-data tool available in this session, and the AI SEO SOP's own competitor research already found no real, active competitor with a live site to compare against in this specific niche and area.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="not-checked-note">
+    Not checked in this pass, don't treat as pass or fail: mobile PageSpeed score, Search Console indexing/query data, a full device-rendered mobile walkthrough, 404/500 error-rate testing, backlink/referring-domain comparison. These need either Search Console access or tools not available here.
+  </div>
+
+</div>
+</body>
+</html>

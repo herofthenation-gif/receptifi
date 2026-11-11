@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, Sparkles, TrendingUp, Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "AI SEO for Local Service Businesses | Receptifi",
+  title: "AI SEO for Local Service Businesses in the Inland Empire | Receptifi",
   description:
     "AI SEO means getting named when someone asks ChatGPT, Perplexity, Gemini, or Google AI Mode who to call. Receptifi helps Inland Empire service businesses show up in AI answers, not just Google.",
 }

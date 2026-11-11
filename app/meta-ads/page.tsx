@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, Share2, TrendingUp, Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Meta Ads for Local Service Businesses | Receptifi",
+  title: "Meta Ads for Local Service Businesses in the Inland Empire | Receptifi",
   description:
     "Facebook and Instagram ads for local service businesses in the Inland Empire. Real job photos, not stock creative, in front of people before they're even searching for you.",
 }

@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { ArrowRight, Search, TrendingUp, Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "General SEO for Local Service Businesses | Receptifi",
+  title: "General SEO for Local Service Businesses in the Inland Empire | Receptifi",
   description:
     "SEO for HVAC, plumbing, electrical, and other local service businesses in the Inland Empire. We rank you for what customers actually search, not just your business name.",
 }
