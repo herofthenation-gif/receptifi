@@ -1,5 +1,6 @@
 import { article, CALENDLY_URL, getVertical, PHYSICAL_ADDRESS, WEBSITE } from "./config";
 import { seoFraming } from "./personalize";
+import { personalNameFrom } from "./email-identity";
 import type { OfferType } from "./offer";
 
 // CAN-SPAM: every commercial email needs a physical postal address and a
@@ -27,51 +28,15 @@ export interface EmailContext {
   email: string;
 }
 
-// Generic role inboxes we scrape off contractor/firm sites — never a person,
-// so greeting one by whatever the local-part happens to spell out reads as
-// broken personalization, not a name.
-const ROLE_INBOX_LOCAL_PARTS = new Set([
-  "info", "contact", "contactus", "hello", "hi", "support", "help", "sales",
-  "admin", "office", "front", "frontdesk", "reception", "receptionist",
-  "billing", "accounts", "accounting", "hr", "jobs", "careers", "marketing",
-  "media", "press", "general", "enquiries", "enquiry", "inquiries", "inquiry",
-  "bookings", "booking", "appointments", "appointment", "team", "staff",
-  "main", "mail", "webmaster", "noreply", "no-reply", "donotreply",
-  "do-not-reply", "orders", "order", "shop", "store", "welcome", "concierge",
-  "reservations", "reservation", "service", "services", "intake",
-  "referrals", "referral", "scheduling", "schedule", "desk", "manager",
-  "management", "owner", "staffing",
-]);
-
-const VOWEL_RE = /[aeiouy]/;
-
 /**
  * A cold-sourced lead has no separate contact-name field, only whatever
- * email the scraper found. If the local-part looks like a role inbox
- * (info@, support@, ...) or isn't name-shaped, fall back to a plain
- * "Hello," rather than greeting a business like it's a person, or a role
- * account by a garbled non-name.
+ * email the scraper found. If it doesn't look like a person (role inbox,
+ * garbled non-name), fall back to a plain "Hello," rather than greeting a
+ * business like it's a person, or a role account by a garbled non-name.
  */
 function greetingFor(email: string): string {
-  const localPart = email.split("@")[0]?.toLowerCase() ?? "";
-  const firstToken = localPart.split(/[._+-]/)[0]?.replace(/\d+$/, "") ?? "";
-
-  if (
-    !firstToken ||
-    ROLE_INBOX_LOCAL_PARTS.has(firstToken) ||
-    // Below 2, nothing name-shaped; above 10, it's almost always a whole
-    // business name mashed into one token (e.g. "grahamplumbinginc",
-    // "realtormrobe"), not a first name.
-    firstToken.length < 2 ||
-    firstToken.length > 10 ||
-    !/^[a-z]+$/.test(firstToken) ||
-    !VOWEL_RE.test(firstToken)
-  ) {
-    return "Hello,";
-  }
-
-  const name = firstToken[0].toUpperCase() + firstToken.slice(1);
-  return `Hi ${name},`;
+  const name = personalNameFrom(email);
+  return name ? `Hi ${name},` : "Hello,";
 }
 
 // Touch-2 voice stat, per vertical. The old template hardcoded the dental

@@ -1,6 +1,8 @@
 // Ports outreach/scrape_emails.py: fetch a business's homepage (+ common
 // contact-page paths) and regex-extract a usable contact email.
 
+import { looksLikePersonalName } from "./email-identity";
+
 const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
 
 const SKIP_DOMAINS = [
@@ -59,6 +61,12 @@ const SKIP_DOMAINS = [
   "moxiworks.com",
   "agentfire.com",
   "moatable.com",
+  // Same failure mode again, property-management/real-estate site builder:
+  // scraped off Mike Dunfee Group's site as support@propertymanagerwebsites.com
+  // (their vendor's support ticket queue, not the business), confirmed 2026-11
+  // when that vendor's auto-reply landed in the Gmail reply-check and got
+  // mismatched as the lead responding.
+  "propertymanagerwebsites.com",
   // Placeholder text left in an unfilled template ("your@email.com"),
   // not a real inbox.
   "email.com",
@@ -108,7 +116,14 @@ async function fetchText(url: string, timeoutMs = 8000): Promise<string | null> 
     const res = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(timeoutMs) });
     if (!res.ok) return null;
     const text = await res.text();
-    return text.slice(0, 50_000); // cap at 50KB
+    // fetch() already downloads the full body regardless of this slice, so a
+    // small cap only throws content away for free. Page-builder sites
+    // (Elementor/Avada/Divi) routinely put 100-400KB of inline CSS/JS before
+    // the footer where the contact email actually lives — a 50KB cap was
+    // missing real, findable emails (confirmed: newageheatingandair.com's
+    // address sat at byte 163,933). Kept as a cap, not removed outright, so a
+    // truly pathological page can't blow up the regex pass.
+    return text.slice(0, 1_000_000);
   } catch {
     return null;
   }
@@ -150,9 +165,17 @@ export async function scrapeContactEmail(websiteUrl: string): Promise<string | n
 
   if (emails.length === 0) return null;
 
-  // Prefer gmail or domain-matching addresses over generic/info@ ones.
-  for (const e of emails) {
-    if (e.includes("@gmail.com") || (baseDomain && e.includes(baseDomain))) return e;
-  }
+  // Reaching the actual decision-maker beats reaching the business in the
+  // abstract: a page that exposes both a role inbox (info@) and a
+  // personal-looking one (sarah@) should send to Sarah, not the front desk.
+  // Ranked: personal + gmail/domain-matching > any gmail/domain-matching >
+  // personal (off-domain, e.g. a Gmail-less personal address on a third
+  // vendor) > first found.
+  const plausible = emails.filter((e) => e.includes("@gmail.com") || (baseDomain && e.includes(baseDomain)));
+  const personalPlausible = plausible.find((e) => looksLikePersonalName(e));
+  if (personalPlausible) return personalPlausible;
+  if (plausible.length) return plausible[0];
+  const personalAny = emails.find((e) => looksLikePersonalName(e));
+  if (personalAny) return personalAny;
   return emails[0];
 }
